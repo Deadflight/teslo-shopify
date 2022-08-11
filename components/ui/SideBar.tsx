@@ -1,6 +1,6 @@
 import Portal from "./Portal";
 import { useContext, useEffect, useRef } from "react";
-import { UiContext } from "@/context/ui";
+import { UiContext } from "context";
 import Link from "next/link";
 import { FaChild, FaRegUserCircle } from "react-icons/fa";
 import { MdOutlineDashboard, MdOutlineCategory } from "react-icons/md";
@@ -97,14 +97,14 @@ export const SideBar = () => {
 			<aside
 				className={`${isSlideIn ? "animate-fade-in" : "animate-fade-out"}
 				${isSideMenuOpen ? "block" : "hidden"}
-				h-screen overflow-hidden backdrop-blur-sm fixed w-screen z-10 backdrop-brightness-50
+				h-screen overflow-hidden backdrop-blur-sm fixed w-screen z-20 backdrop-brightness-50
 				`}
 			>
 				<section
 					ref={cartRef}
 					className={`${isSlideIn ? "animate-slide-in" : "animate-slide-out"}
 					${isSideMenuOpen ? "flex" : "hidden"}
-					h-screen w-64 bg-white flex-col fixed right-0 py-12 top-0 bottom-0
+					w-64 bg-white fixed right-0 py-10 top-0 bottom-0 z-20
 					}`}
 				>
 					<ul>

@@ -1,7 +1,6 @@
 import { UiContext } from "context";
 import Link from "next/link";
-import { useContext, useRef, useEffect } from "react";
-import { FC, useState } from "react";
+import { FC, useState, useContext, useRef, useEffect } from "react";
 
 const navItems = [
 	{

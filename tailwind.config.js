@@ -18,6 +18,7 @@ module.exports = {
 			boxShadow: {
 				cartModal:
 					"rgb(0 0 0 / 20%) 0px 8px 10px -5px, rgb(0 0 0 / 14%) 0px 16px 24px 2px, rgb(0 0 0 / 12%) 0px 6px 30px 5px;",
+				productImage: "rgb(0 0 0 / 5%) 0px 5px 5px",
 			},
 			keyframes: {
 				fadeIn: {

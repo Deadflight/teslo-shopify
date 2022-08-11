@@ -17,6 +17,12 @@ export const GET_ALL_PRODUCTS = gql`
 					url
 					altText
 				}
+				images(first: 2) {
+					nodes {
+						url
+						altText
+					}
+				}
 				sellingPlanGroups(first: 10) {
 					nodes {
 						appName

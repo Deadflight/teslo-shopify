@@ -1,36 +1,30 @@
-import { ShopLayout } from "@/components/layouts";
+import { ShopLayout } from "components/layouts";
 import { useProducts } from "hooks";
-import type { NextPage } from "next";
-import { GetStaticProps } from "next";
-import { GET_ALL_PRODUCTS, storeClient } from "lib/shopify";
-import useSWR, { unstable_serialize, SWRConfig } from "swr";
+import type { NextPage, GetStaticProps } from "next";
+import { GET_ALL_PRODUCTS, storeClient } from "lib";
+import { IFallback, IProducts } from "interfaces";
+import { FullScreenLoading } from "components/ui";
+import { ProductList } from "components/products";
 
 interface Props {
-	fallback: any;
+	fallback: IFallback;
 }
 
-const fetcher = (resource: any, init: any) =>
-	fetch(resource, init).then((res) => res.json());
-
 const Home: NextPage<Props> = ({ fallback }) => {
-	const { data, error } = useSWR("/api/products", fetcher, {
+	const { products, isLoading, isError } = useProducts("/products", {
 		fallback,
 	});
 
+	// if (isError) return <div>Something went wrong</div>;
+
+	// if (isLoading) return <div>Loading...</div>;
+
 	return (
-		<SWRConfig
-			value={{
-				fallback,
-			}}
-		>
-			<ShopLayout title="Teslo - Home" pageDescription="Teslo Home">
-				<h1 className="font-semibold text-3xl md:text-5xl">Teslo Store</h1>
-				<h2 className=" text-xl ">All Products</h2>
-				{data.map((product: any) => (
-					<h3 key={product.title}>{product.title}</h3>
-				))}
-			</ShopLayout>
-		</SWRConfig>
+		<ShopLayout title="Teslo - Home" pageDescription="Teslo Home">
+			<h1 className="font-semibold text-3xl md:text-4xl">Teslo Store</h1>
+			<h2 className=" text-xl ">All Products</h2>
+			{isLoading ? <FullScreenLoading /> : <ProductList products={products} />}
+		</ShopLayout>
 	);
 };
 
@@ -41,7 +35,7 @@ const Home: NextPage<Props> = ({ fallback }) => {
 //- The page must be pre-rendered (for SEO) and be very fast — getStaticProps generates HTML and JSON files, both of which can be cached by a CDN for performance.
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-	const { products } = await storeClient.request(GET_ALL_PRODUCTS);
+	const { products } = await storeClient.request<IProducts>(GET_ALL_PRODUCTS);
 	const { nodes } = products;
 
 	return {

@@ -10,7 +10,6 @@
 	},
 	"dependencies": {
 		"@shopify/shopify-api": "^5.0.1",
-		"axios": "^0.27.2",
 		"graphql": "^16.5.0",
 		"graphql-request": "^4.3.0",
 		"next": "12.2.3",

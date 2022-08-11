@@ -1,5 +1,6 @@
-import { GET_ALL_PRODUCTS, storeClient } from "../../../lib/shopify";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { GET_ALL_PRODUCTS, storeClient } from "../../../lib";
+import { IProducts } from "../../../interfaces";
 
 type Data = {
 	message: string;
@@ -18,7 +19,7 @@ export default function handler(
 }
 
 const getAllProducts = async (req: NextApiRequest, res: NextApiResponse) => {
-	const { products } = await storeClient.request(GET_ALL_PRODUCTS);
+	const { products } = await storeClient.request<IProducts>(GET_ALL_PRODUCTS);
 	const { nodes } = products;
 	return res.status(200).json(nodes);
 };

@@ -2,12 +2,24 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { UiProvider } from "../context";
 import { SWRConfig } from "swr";
+import { IFallback } from "../interfaces/swr";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<UiProvider>
-			<Component {...pageProps} />
-		</UiProvider>
+		<SWRConfig
+			value={{
+				fetcher: async (resource, init) => {
+					return fetch(resource, init).then((res) => res.json());
+				},
+				fallback: {
+					["/api/products"]: pageProps.fallback,
+				},
+			}}
+		>
+			<UiProvider>
+				<Component {...pageProps} />
+			</UiProvider>
+		</SWRConfig>
 	);
 }
 
