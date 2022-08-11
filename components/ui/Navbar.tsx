@@ -36,7 +36,7 @@ export const Navbar: FC = () => {
 	}, [isSearchInputVisible]);
 
 	return (
-		<nav className="w-full flex justify-between px-6 h-16 items-center">
+		<nav className="w-full flex justify-between px-6 h-16 items-center sticky top-0 z-10 left-0 right-0">
 			<Link href="/" passHref>
 				<a className="flex items-center space-x-1">
 					<h6 className="text-xl font-medium">Teslo |</h6>
@@ -69,11 +69,12 @@ export const Navbar: FC = () => {
 								? "hidden"
 								: "block p-2 btn-animated animate-fade-in"
 						}
+						aria-label="Search Icon"
 						onClick={() => handleOpenSearchBar()}
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							className="h-5 w-5 stroke-gray-700"
+							className="h-5 w-5 stroke-gray-500"
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
@@ -100,12 +101,13 @@ export const Navbar: FC = () => {
 							ref={searchRef}
 						/>
 						<button
+							aria-label="Close Search"
 							className="p-2 btn-animated"
 							onClick={() => setIsSearchInputVisible(false)}
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="h-5 w-5"
+								className="h-6 w-6 stroke-gray-500"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
@@ -121,10 +123,10 @@ export const Navbar: FC = () => {
 					</div>
 				</li>
 				<li>
-					<button className="p-2 btn-animated">
+					<button className="p-2 btn-animated" aria-label="Cart Icon">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							className="h-5 w-5 stroke-gray-700"
+							className="h-6 w-6 stroke-gray-500"
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"

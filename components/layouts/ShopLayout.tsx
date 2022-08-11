@@ -28,7 +28,7 @@ export const ShopLayout: FC<Props> = ({
 				<Navbar />
 			</header>
 
-			<main>{children}</main>
+			<main className="px-6 md:px-8">{children}</main>
 			<footer></footer>
 		</>
 	);
