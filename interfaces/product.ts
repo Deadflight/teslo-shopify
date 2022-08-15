@@ -1,3 +1,6 @@
+export interface ICollection {
+	collection: IProducts;
+}
 export interface IProducts {
 	products: {
 		nodes: IProduct[];

@@ -5,12 +5,15 @@ import { FC, useState, useContext, useRef, useEffect } from "react";
 const navItems = [
 	{
 		name: "Men",
+		path: "/category/men",
 	},
 	{
 		name: "Women",
+		path: "/category/women",
 	},
 	{
 		name: "Kids",
+		path: "/category/kid",
 	},
 ];
 
@@ -52,7 +55,7 @@ export const Navbar: FC = () => {
 			>
 				{navItems.map((item) => (
 					<li key={item.name} className="space-x-1">
-						<Link href="/" passHref>
+						<Link href={item.path} passHref>
 							<a className="font-medium text-sm py-1 px-3 btn-animated text-black opacity-80">
 								{item.name}
 							</a>

@@ -35,6 +35,9 @@ export const ProductCard: FC<Props> = ({ product }) => {
 						priority
 						placeholder="blur"
 						blurDataURL={product.featuredImage.url}
+						style={{
+							borderRadius: "10px",
+						}}
 					/>
 				</div>
 				<p className="font-bold">{product.title}</p>

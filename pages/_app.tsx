@@ -11,9 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				fetcher: async (resource, init) => {
 					return fetch(resource, init).then((res) => res.json());
 				},
-				fallback: {
-					["/api/products"]: pageProps.fallback,
-				},
+				fallback: pageProps.fallback,
 			}}
 		>
 			<UiProvider>

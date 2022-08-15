@@ -32,17 +32,17 @@ const clientNavItems = [
 const categoryNavItems = [
 	{
 		name: "Men",
-		href: "/",
+		href: "/category/men",
 		icon: <IoIosMan className="h-6 w-6 text-gray-500" />,
 	},
 	{
 		name: "Women",
-		href: "/",
+		href: "/category/women",
 		icon: <IoIosWoman className="h-6 w-6 text-gray-500" />,
 	},
 	{
 		name: "Kid",
-		href: "/",
+		href: "/category/kid",
 		icon: <FaChild className="h-6 w-6 text-gray-500" />,
 	},
 ];

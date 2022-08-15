@@ -11,10 +11,7 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ fallback }) => {
-	const { products, isLoading, isError } = useProducts("/products", {
-		fallback,
-	});
-
+	const { products, isLoading, isError } = useProducts("/products", fallback);
 	// if (isError) return <div>Something went wrong</div>;
 
 	// if (isLoading) return <div>Loading...</div>;

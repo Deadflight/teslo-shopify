@@ -1,0 +1,92 @@
+import { ProductList } from "components/products";
+import { FullScreenLoading } from "components/ui";
+import { useProducts } from "hooks";
+import { ICollection, IFallback, IProducts } from "interfaces";
+import { GET_ALL_PRODUCTS, ProductsByCollection, storeClient } from "lib";
+import { GetStaticProps, NextPage } from "next";
+import { GetStaticPaths } from "next";
+import { ShopLayout } from "../../components/layouts/ShopLayout";
+
+interface Props {
+	fallback: IFallback;
+	gender: string;
+}
+
+const CategoryPage: NextPage<Props> = ({ fallback, gender }) => {
+	const { products, isError, isLoading } = useProducts(
+		`/products/collection?gender=${gender}`,
+		fallback
+	);
+
+	return (
+		<ShopLayout
+			title={`Teslo Shop - ${gender}`}
+			pageDescription={`Teslo Shop - ${gender}`}
+		>
+			<h1 className="font-semibold text-3xl md:text-4xl">Teslo Store</h1>
+			<h2 className=" text-xl ">All Products</h2>
+			{isLoading ? <FullScreenLoading /> : <ProductList products={products} />}
+		</ShopLayout>
+	);
+};
+
+// You should use getStaticPaths if you’re statically pre-rendering pages that use dynamic routes
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	const categories = [
+		{
+			gender: "men",
+		},
+		{
+			gender: "women",
+		},
+		{
+			gender: "kid",
+		},
+	];
+
+	return {
+		paths: categories.map(({ gender }) => ({
+			params: {
+				gender,
+			},
+		})),
+		fallback: false,
+	};
+};
+
+// You should use getStaticProps when:
+//- The data required to render the page is available at build time ahead of a user’s request.
+//- The data comes from a headless CMS.
+//- The data can be publicly cached (not user-specific).
+//- The page must be pre-rendered (for SEO) and be very fast — getStaticProps generates HTML and JSON files, both of which can be cached by a CDN for performance.
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const { gender } = params as { gender: string };
+
+	// const collectionName = gender + "-collection";
+
+	const { collection } = await storeClient.request<ICollection>(
+		ProductsByCollection,
+		{
+			handle: gender,
+		}
+	);
+
+	const { products } = collection;
+	const { nodes } = products;
+
+	// const { products } = collection;
+	// const { nodes } = products;
+
+	return {
+		props: {
+			fallback: {
+				[`/api/products/collection?gender=${gender}`]: nodes,
+			},
+			gender,
+		},
+	};
+};
+
+export default CategoryPage;
