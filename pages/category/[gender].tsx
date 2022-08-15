@@ -1,8 +1,8 @@
 import { ProductList } from "components/products";
 import { FullScreenLoading } from "components/ui";
 import { useProducts } from "hooks";
-import { ICollection, IFallback, IProducts } from "interfaces";
-import { GET_ALL_PRODUCTS, ProductsByCollection, storeClient } from "lib";
+import { ICollection, IFallback } from "interfaces";
+import { ProductsByCollection, storeClient } from "lib";
 import { GetStaticProps, NextPage } from "next";
 import { GetStaticPaths } from "next";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
@@ -64,6 +64,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { gender } = params as { gender: string };
 
+	// By default shopify add '-collection' to the end of the collection name
 	// const collectionName = gender + "-collection";
 
 	const { collection } = await storeClient.request<ICollection>(
@@ -75,9 +76,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	const { products } = collection;
 	const { nodes } = products;
-
-	// const { products } = collection;
-	// const { nodes } = products;
 
 	return {
 		props: {
