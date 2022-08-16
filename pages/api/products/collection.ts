@@ -2,11 +2,7 @@ import { ICollection, IProduct } from "interfaces";
 import { ProductsByCollection, storeClient } from "lib";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type Data =
-	| {
-			message: string;
-	  }
-	| IProduct[];
+type Data = { message: string } | IProduct[];
 
 export default function handler(
 	req: NextApiRequest,

@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { FC, ReactNode } from "react";
 import { Navbar, SideBar } from "../ui";
-import Portal from "../ui/Portal";
 
 interface Props {
 	title: string;
