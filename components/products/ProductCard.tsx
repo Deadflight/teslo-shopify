@@ -14,6 +14,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
 		() => (isHovered ? product.images.nodes[1] : product.images.nodes[0]),
 		[isHovered, product.images]
 	);
+
 	return (
 		<Link
 			href={`/product/${product.handle}`}
@@ -22,10 +23,19 @@ export const ProductCard: FC<Props> = ({ product }) => {
 		>
 			<a className="space-y-1">
 				<div
-					className="shadow-productImage"
+					className="shadow-productImage relative"
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}
 				>
+					<div
+						className={
+							!product.availableForSale
+								? "absolute z-10 whitespace-nowrap h-8 rounded-2xl bg-black text-white text-sm inline-flex items-center justify-center top-2 left-2"
+								: "hidden"
+						}
+					>
+						<span className="px-3">Not available</span>
+					</div>
 					<Image
 						src={productImage.url}
 						alt={product.featuredImage.altText || product.description}

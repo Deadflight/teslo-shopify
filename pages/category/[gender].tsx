@@ -18,10 +18,12 @@ const CategoryPage: NextPage<Props> = ({ fallback, gender }) => {
 		fallback
 	);
 
+	const TitlePage = gender.charAt(0).toUpperCase() + gender.slice(1);
+
 	return (
 		<ShopLayout
-			title={`Teslo Shop - ${gender}`}
-			pageDescription={`Teslo Shop - ${gender}`}
+			title={`Teslo Shop - ${TitlePage}`}
+			pageDescription={`Teslo Shop - ${TitlePage}`}
 		>
 			<h1 className="font-semibold text-3xl md:text-4xl">Teslo Store</h1>
 			<h2 className=" text-xl ">All Products</h2>

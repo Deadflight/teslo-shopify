@@ -1,5 +1,6 @@
 import { UiContext } from "context";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FC, useState, useContext, useRef, useEffect } from "react";
 
 const navItems = [
@@ -20,6 +21,10 @@ const navItems = [
 export const Navbar: FC = () => {
 	const [isSearchInputVisible, setIsSearchInputVisible] = useState(false);
 	const searchRef = useRef<any>(null);
+	const [searchTerm, setSearchTerm] = useState("");
+	const { push, asPath } = useRouter();
+
+	const router = useRouter();
 
 	const { toggleSideMenu } = useContext(UiContext);
 
@@ -36,6 +41,11 @@ export const Navbar: FC = () => {
 			searchRef.current.focus();
 		}
 	}, [isSearchInputVisible]);
+
+	const handleSearch = () => {
+		if (searchTerm.trim().length === 0) return;
+		push(`/search/${searchTerm}`);
+	};
 
 	return (
 		<nav className="w-full flex justify-between px-6 h-16 items-center sticky top-0 z-10 left-0 right-0">
@@ -56,7 +66,11 @@ export const Navbar: FC = () => {
 				{navItems.map((item) => (
 					<li key={item.name} className="space-x-1">
 						<Link href={item.path} passHref>
-							<a className="font-medium text-sm py-1 px-3 btn-animated text-black opacity-80">
+							<a
+								className={`font-medium text-sm py-1 px-3 btn-animated text-black opacity-80 ${
+									asPath === item.path ? "bg-black text-white" : ""
+								}`}
+							>
 								{item.name}
 							</a>
 						</Link>
@@ -101,6 +115,9 @@ export const Navbar: FC = () => {
 							type="search"
 							placeholder="Search..."
 							ref={searchRef}
+							onBlur={() => setIsSearchInputVisible(false)}
+							onChange={(e) => setSearchTerm(e.target.value)}
+							onKeyDown={(e) => (e.key === "Enter" ? handleSearch() : null)}
 						/>
 						<button
 							aria-label="Close Search"
