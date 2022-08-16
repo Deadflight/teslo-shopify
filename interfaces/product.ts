@@ -18,6 +18,7 @@ export interface IProduct {
 	priceRange: PriceRange;
 	description: string;
 	featuredImage: FeaturedImage;
+	availableForSale: boolean;
 	images: INodeImage;
 	sellingPlanGroups: SellingPlanGroups;
 	seo: SEO;
