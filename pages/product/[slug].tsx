@@ -1,22 +1,28 @@
 import { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import { ShopLayout } from "components/layouts";
 import { GET_ALL_PRODUCTS_HANDLE, storeClient } from "lib";
-import { IProducts } from "interfaces";
+import { IFallback, IProducts } from "interfaces";
 import { GET_PRODUCT_BY_HANDLE } from "../../lib/shopify/queries";
-import { IProductHandle } from "../../interfaces/product";
+import { IProductHandle, IProduct } from "../../interfaces/product";
+import { useProduct, useProducts } from "hooks";
 
 interface Props {
-	product: IProductHandle;
+	fallback: IFallback;
+	slug: string;
 }
 
-const ProductPage: NextPage<Props> = ({ product }) => {
-	console.log(product);
+const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
+	const { product, isError, isLoading } = useProduct(
+		`/products/slug?slug=${slug}`,
+		fallback
+	);
+
 	return (
 		<ShopLayout
 			title={"Teslo - ProductPage"}
 			pageDescription={"Teslo - ProductPage"}
 		>
-			<p>Product</p>
+			<p>{product.title}</p>
 		</ShopLayout>
 	);
 };
@@ -65,7 +71,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	return {
 		props: {
-			product,
+			fallback: {
+				[`/api/products/slug?slug=${slug}`]: product,
+			},
+			slug,
 		},
 	};
 };

@@ -10,13 +10,13 @@ export default function handler(
 ) {
 	switch (req.method) {
 		case "GET":
-			return getPRODUCTS_BY_COLLECTION(req, res);
+			return getProductsByCollection(req, res);
 		default:
 			return res.status(500).json({ message: "Method not allowed" });
 	}
 }
 
-const getPRODUCTS_BY_COLLECTION = async (
+const getProductsByCollection = async (
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) => {
