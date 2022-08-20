@@ -1,5 +1,5 @@
 import { ICollection, IProduct } from "interfaces";
-import { ProductsByCollection, storeClient } from "lib";
+import { PRODUCTS_BY_COLLECTION, storeClient } from "lib";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = { message: string } | IProduct[];
@@ -10,13 +10,13 @@ export default function handler(
 ) {
 	switch (req.method) {
 		case "GET":
-			return getProductsByCollection(req, res);
+			return getPRODUCTS_BY_COLLECTION(req, res);
 		default:
 			return res.status(500).json({ message: "Method not allowed" });
 	}
 }
 
-const getProductsByCollection = async (
+const getPRODUCTS_BY_COLLECTION = async (
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) => {
@@ -25,7 +25,7 @@ const getProductsByCollection = async (
 	// const collectionName = gender + "-collection";
 
 	const { collection } = await storeClient.request<ICollection>(
-		ProductsByCollection,
+		PRODUCTS_BY_COLLECTION,
 		{
 			handle: gender,
 		}

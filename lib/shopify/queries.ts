@@ -2,7 +2,7 @@ import { gql } from "graphql-request";
 
 export const GET_ALL_PRODUCTS = gql`
 	query getAllProducts {
-		products(first: 10) {
+		products(first: 50) {
 			nodes {
 				availableForSale
 				title
@@ -45,10 +45,10 @@ export const GET_ALL_PRODUCTS = gql`
 					description
 					title
 				}
-				variants(first: 10) {
+				variants(first: 50) {
 					nodes {
 						id
-						sellingPlanAllocations(first: 10) {
+						sellingPlanAllocations(first: 50) {
 							nodes {
 								checkoutChargeAmount {
 									amount
@@ -86,10 +86,10 @@ export const GET_ALL_PRODUCTS = gql`
 	}
 `;
 
-export const ProductsByCollection = gql`
+export const PRODUCTS_BY_COLLECTION = gql`
 	query AllProducts($handle: String!) {
 		collection(handle: $handle) {
-			products(first: 10) {
+			products(first: 50) {
 				nodes {
 					availableForSale
 					title
@@ -174,7 +174,7 @@ export const ProductsByCollection = gql`
 	}
 `;
 
-export const SearchProduct = gql`
+export const SEARCH_PRODUCT = gql`
 	query searchProduct($term: String!) {
 		products(first: 50, query: $term) {
 			nodes {
