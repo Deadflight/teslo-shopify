@@ -24,8 +24,6 @@ export const Navbar: FC = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const { push, asPath } = useRouter();
 
-	const router = useRouter();
-
 	const { toggleSideMenu } = useContext(UiContext);
 
 	const handleOpenSearchBar = () => {
@@ -67,8 +65,8 @@ export const Navbar: FC = () => {
 					<li key={item.name} className="space-x-1">
 						<Link href={item.path} passHref>
 							<a
-								className={`font-medium text-sm py-1 px-3 btn-animated text-black opacity-80 ${
-									asPath === item.path ? "bg-black text-white" : ""
+								className={`font-medium text-sm py-1 px-3 btn-animated opacity-80 ${
+									asPath === item.path ? "bg-black text-white" : "text-black"
 								}`}
 							>
 								{item.name}

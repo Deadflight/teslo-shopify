@@ -20,13 +20,16 @@ const CategoryPage: NextPage<Props> = ({ fallback, gender }) => {
 
 	const TitlePage = gender.charAt(0).toUpperCase() + gender.slice(1);
 
+	const productsFor =
+		TitlePage === "Men" ? "him" : TitlePage === "Women" ? "her" : "kids";
+
 	return (
 		<ShopLayout
 			title={`Teslo Shop - ${TitlePage}`}
 			pageDescription={`Teslo Shop - ${TitlePage}`}
 		>
-			<h1 className="font-semibold text-3xl md:text-4xl">Teslo Store</h1>
-			<h2 className=" text-xl ">All Products</h2>
+			<h1 className="font-semibold text-3xl md:text-4xl">{TitlePage}</h1>
+			<h2 className=" text-xl ">Products for {productsFor}</h2>
 			{isLoading ? <FullScreenLoading /> : <ProductList products={products} />}
 		</ShopLayout>
 	);

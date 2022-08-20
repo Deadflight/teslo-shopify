@@ -1,5 +1,5 @@
 import Portal from "./Portal";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { UiContext } from "context";
 import Link from "next/link";
 import { FaChild, FaRegUserCircle } from "react-icons/fa";
@@ -10,6 +10,7 @@ import {
 	HiOutlineUserGroup,
 } from "react-icons/hi";
 import { IoIosMan, IoIosWoman } from "react-icons/io";
+import { useRouter } from "next/router";
 
 const clientNavItems = [
 	{
@@ -73,6 +74,14 @@ const adminNavItems = [
 export const SideBar = () => {
 	const { isSideMenuOpen, isSlideIn, toggleSideMenu } = useContext(UiContext);
 	const cartRef = useRef<any>(null);
+	const [searchTerm, setSearchTerm] = useState("");
+	const { push } = useRouter();
+
+	const handleSearch = () => {
+		if (searchTerm.trim().length === 0) return;
+		toggleSideMenu();
+		push(`/search/${searchTerm}`);
+	};
 
 	// Close the side menu when the user clicks outside of it
 	useEffect(() => {
@@ -119,6 +128,8 @@ export const SideBar = () => {
 									className="border-gray-300 bg-white h-10 rounded-lg focus:outline-none leading-3"
 									type="search"
 									placeholder="Search..."
+									onChange={(e) => setSearchTerm(e.target.value)}
+									onKeyDown={(e) => (e.key === "Enter" ? handleSearch() : null)}
 								/>
 								<button className="p-2 btn-animated">
 									<svg
