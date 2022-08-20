@@ -1,16 +1,22 @@
 import { ShopLayout } from "components/layouts";
 import { ProductList } from "components/products";
-import { ICollection, IProduct, IProducts } from "interfaces";
+import { useProducts } from "hooks";
+import { IFallback, IProducts } from "interfaces";
 import { storeClient, SearchProduct, GET_ALL_PRODUCTS } from "lib";
 import { NextPage, GetServerSideProps } from "next";
 
 interface Props {
-	products: IProduct[];
+	fallback: IFallback;
 	foundProducts: boolean;
 	query: string;
 }
 
-const SearchPage: NextPage<Props> = ({ products, foundProducts, query }) => {
+const SearchPage: NextPage<Props> = ({ fallback, foundProducts, query }) => {
+	const { products, isError, isLoading } = useProducts(
+		`/products/search?query=${query}`,
+		fallback
+	);
+
 	return (
 		<ShopLayout
 			title={"Teslo Shop - Search"}
@@ -58,8 +64,10 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
 		return {
 			props: {
-				products: nodes,
-				foundProducts: false,
+				fallback: {
+					[`/api/products/search?query=${query}`]: nodes,
+				},
+				foundProducts: true,
 				query,
 			},
 		};
@@ -69,7 +77,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
 	return {
 		props: {
-			products: nodes,
+			fallback: {
+				[`/api/products/search?query=${query}`]: nodes,
+			},
 			foundProducts: true,
 			query,
 		},
