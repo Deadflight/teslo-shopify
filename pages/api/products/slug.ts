@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { GET_ALL_PRODUCTS, storeClient, GET_PRODUCT_BY_HANDLE } from "lib";
-import { IProduct, IProducts, IProductHandle } from "interfaces";
+import { storeClient, GET_PRODUCT_BY_HANDLE } from "lib";
+import { IProduct, IProductHandle } from "interfaces";
 
 type Data =
 	| {

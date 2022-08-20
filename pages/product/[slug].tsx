@@ -1,10 +1,13 @@
 import { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import { ShopLayout } from "components/layouts";
-import { GET_ALL_PRODUCTS_HANDLE, storeClient } from "lib";
-import { IFallback, IProducts } from "interfaces";
-import { GET_PRODUCT_BY_HANDLE } from "../../lib/shopify/queries";
-import { IProductHandle, IProduct } from "../../interfaces/product";
-import { useProduct, useProducts } from "hooks";
+import {
+	GET_ALL_PRODUCTS_HANDLE,
+	storeClient,
+	GET_PRODUCT_BY_HANDLE,
+} from "lib";
+import { IFallback, IProducts, IProductHandle } from "interfaces";
+import { useProduct } from "hooks";
+import { ProductSlider } from "components/products";
 
 interface Props {
 	fallback: IFallback;
@@ -17,12 +20,21 @@ const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
 		fallback
 	);
 
+	console.log(product);
+
 	return (
 		<ShopLayout
 			title={"Teslo - ProductPage"}
 			pageDescription={"Teslo - ProductPage"}
 		>
-			<p>{product.title}</p>
+			<section className="flex space-y-8 flex-col md:flex-row">
+				<div className="w-full md:w-[55%]">
+					<ProductSlider images={product.images} />
+				</div>
+				<article className="w-full md:w-[45%]">
+					<h1 className="text-2xl font-bold text-center">{product.title}</h1>
+				</article>
+			</section>
 		</ShopLayout>
 	);
 };

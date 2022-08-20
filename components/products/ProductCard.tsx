@@ -42,6 +42,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
 						layout="responsive"
 						width={400}
 						height={400}
+						quality={100}
 						priority
 						placeholder="blur"
 						blurDataURL={product.featuredImage.url}

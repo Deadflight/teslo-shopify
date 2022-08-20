@@ -1,0 +1,23 @@
+.slick-next {
+	right: 8px;
+	display: "block";
+	background: "transparent";
+	color: "black";
+}
+.slick-prev {
+	display: "block";
+	background: "transparent";
+	color: "black";
+	left: 0;
+}
+
+.slick-prev:before,
+.slick-next:before {
+	font-family: "slick";
+	font-size: 30px;
+	line-height: 1;
+	opacity: 0.75;
+	color: black;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
