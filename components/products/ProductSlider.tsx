@@ -18,11 +18,9 @@ const CustomPrevArrow = (props: any) => {
 			className={className + " " + styles["slick-prev"]}
 			style={{
 				...style,
-				left: 0,
 				display: "block",
 				zIndex: 1,
 				background: "transparent",
-				fontSize: "30px",
 				color: "black",
 			}}
 			onClick={onClick}
@@ -38,7 +36,6 @@ const CustomNextArrow = (props: any) => {
 			className={className + " " + styles["slick-next"]}
 			style={{
 				...style,
-				right: 0,
 				display: "block",
 				background: "transparent",
 				color: "black",
