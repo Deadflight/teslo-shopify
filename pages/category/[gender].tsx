@@ -3,9 +3,8 @@ import { FullScreenLoading } from "components/ui";
 import { useProducts } from "hooks";
 import { ICollection, IFallback } from "interfaces";
 import { ProductsByCollection, storeClient } from "lib";
-import { GetStaticProps, NextPage } from "next";
-import { GetStaticPaths } from "next";
-import { ShopLayout } from "../../components/layouts/ShopLayout";
+import { GetStaticProps, NextPage, GetStaticPaths } from "next";
+import { ShopLayout } from "components/layouts";
 
 interface Props {
 	fallback: IFallback;
@@ -20,13 +19,16 @@ const CategoryPage: NextPage<Props> = ({ fallback, gender }) => {
 
 	const TitlePage = gender.charAt(0).toUpperCase() + gender.slice(1);
 
+	const productsFor =
+		TitlePage === "Men" ? "him" : TitlePage === "Women" ? "her" : "kids";
+
 	return (
 		<ShopLayout
 			title={`Teslo Shop - ${TitlePage}`}
 			pageDescription={`Teslo Shop - ${TitlePage}`}
 		>
-			<h1 className="font-semibold text-3xl md:text-4xl">Teslo Store</h1>
-			<h2 className=" text-xl ">All Products</h2>
+			<h1 className="font-semibold text-3xl md:text-4xl">{TitlePage}</h1>
+			<h2 className=" text-xl ">Products for {productsFor}</h2>
 			{isLoading ? <FullScreenLoading /> : <ProductList products={products} />}
 		</ShopLayout>
 	);
