@@ -1,3 +1,5 @@
+import { Interface } from "readline";
+
 export interface ICollection {
 	collection: IProducts;
 }
@@ -9,6 +11,10 @@ export interface IProducts {
 
 export interface INodeProduct {
 	nodes: IProduct[];
+}
+
+export interface IProductHandle {
+	product: IProduct;
 }
 
 export interface IProduct {
