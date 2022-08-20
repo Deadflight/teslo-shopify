@@ -68,6 +68,7 @@ export const ProductSlider: FC<Props> = ({ images }) => {
 						width={1200}
 						height={1200}
 						quality={100}
+						priority
 					/>
 				</div>
 			))}
