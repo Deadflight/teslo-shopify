@@ -1,4 +1,4 @@
-import { ICollection, IProduct, IProducts } from "interfaces";
+import { IProduct, IProducts } from "interfaces";
 import { GET_ALL_PRODUCTS, SearchProduct, storeClient } from "lib";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -37,16 +37,4 @@ const searchProductByTitle = async (
 	const { nodes } = products;
 
 	return res.status(200).json(nodes);
-
-	// // const collectionName = gender + "-collection";
-
-	// const { collection } = await storeClient.request<ICollection>(
-	// 	ProductsByCollection,
-	// 	{
-	// 		handle: gender,
-	// 	}
-	// );
-	// const { products } = collection;
-	// const { nodes } = products;
-	// return res.status(200).json(nodes);
 };

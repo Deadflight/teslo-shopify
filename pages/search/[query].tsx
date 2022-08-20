@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 				fallback: {
 					[`/api/products/search?query=${query}`]: nodes,
 				},
-				foundProducts: true,
+				foundProducts: false,
 				query,
 			},
 		};

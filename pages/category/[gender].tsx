@@ -3,9 +3,8 @@ import { FullScreenLoading } from "components/ui";
 import { useProducts } from "hooks";
 import { ICollection, IFallback } from "interfaces";
 import { ProductsByCollection, storeClient } from "lib";
-import { GetStaticProps, NextPage } from "next";
-import { GetStaticPaths } from "next";
-import { ShopLayout } from "../../components/layouts/ShopLayout";
+import { GetStaticProps, NextPage, GetStaticPaths } from "next";
+import { ShopLayout } from "components/layouts";
 
 interface Props {
 	fallback: IFallback;
