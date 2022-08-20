@@ -10,8 +10,6 @@ interface Props {
 export const ProductCard: FC<Props> = ({ product }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
-	const [isImageLoaded, setIsImageLoaded] = useState(false);
-
 	const productImage = useMemo(
 		() => (isHovered ? product.images.nodes[1] : product.images.nodes[0]),
 		[isHovered, product.images]
@@ -50,7 +48,6 @@ export const ProductCard: FC<Props> = ({ product }) => {
 						style={{
 							borderRadius: "10px",
 						}}
-						onLoad={() => setIsImageLoaded(true)}
 					/>
 				</div>
 				<p className="font-bold">{product.title}</p>
