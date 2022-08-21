@@ -43,7 +43,7 @@ const categoryNavItems = [
 	},
 	{
 		name: "Kid",
-		href: "/category/kid",
+		href: "/category/kids",
 		icon: <FaChild className="h-6 w-6 text-gray-500" />,
 	},
 ];
@@ -83,6 +83,11 @@ export const SideBar = () => {
 		push(`/search/${searchTerm}`);
 	};
 
+	const handlePush = (href: string) => {
+		toggleSideMenu();
+		push(href);
+	};
+
 	// Close the side menu when the user clicks outside of it
 	useEffect(() => {
 		const checkIfClickedOutside = (e: MouseEvent) => {
@@ -113,10 +118,10 @@ export const SideBar = () => {
 					ref={cartRef}
 					className={`${isSlideIn ? "animate-slide-in" : "animate-slide-out"}
 					${isSideMenuOpen ? "flex" : "hidden"}
-					w-64 bg-white fixed right-0 py-10 top-0 bottom-0 z-20
+					w-64 bg-white fixed right-0 py-10 top-0 bottom-0 z-20 overflow-y-auto
 					}`}
 				>
-					<ul>
+					<ul className="">
 						<li className="py-2 px-4">
 							<div
 								className={
@@ -154,23 +159,25 @@ export const SideBar = () => {
 
 						{categoryNavItems.map((item) => (
 							<li className="sidebar-item md:hidden" key={item.name}>
-								<Link href={item.href} passHref>
-									<a className="flex items-center space-x-10">
-										{item.icon}
-										<p>{item.name}</p>
-									</a>
-								</Link>
+								<button
+									className="flex items-center space-x-10 border-none"
+									onClick={() => handlePush(item.href)}
+								>
+									{item.icon}
+									<p>{item.name}</p>
+								</button>
 							</li>
 						))}
 
 						{clientNavItems.map((item) => (
 							<li className="sidebar-item" key={item.name}>
-								<Link href={item.href} passHref>
-									<a className="flex items-center space-x-10">
-										{item.icon}
-										<p>{item.name}</p>
-									</a>
-								</Link>
+								<button
+									className="flex items-center space-x-10 border-none"
+									onClick={() => handlePush(item.href)}
+								>
+									{item.icon}
+									<p>{item.name}</p>
+								</button>
 							</li>
 						))}
 
@@ -182,12 +189,13 @@ export const SideBar = () => {
 						</li>
 						{adminNavItems.map((item) => (
 							<li className="sidebar-item" key={item.name}>
-								<Link href={item.href} passHref>
-									<a className="flex items-center space-x-10">
-										{item.icon}
-										<p>{item.name}</p>
-									</a>
-								</Link>
+								<button
+									className="flex items-center space-x-10 border-none"
+									onClick={() => handlePush(item.href)}
+								>
+									{item.icon}
+									<p>{item.name}</p>
+								</button>
 							</li>
 						))}
 					</ul>

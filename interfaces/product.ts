@@ -11,6 +11,10 @@ export interface INodeProduct {
 	nodes: IProduct[];
 }
 
+export interface IProductHandle {
+	product: IProduct;
+}
+
 export interface IProduct {
 	title: string;
 	handle: string;
@@ -81,6 +85,9 @@ export interface VariantsNode {
 	id: string;
 	sellingPlanAllocations: SellingPlanAllocations;
 	priceV2: MaxVariantPrice;
+	title: string;
+	availableForSale: boolean;
+	quantityAvailable: number;
 }
 
 export interface SellingPlanAllocations {
@@ -98,5 +105,5 @@ export interface PriceAdjustment {
 	compareAtPrice: MaxVariantPrice;
 	perDeliveryPrice: MaxVariantPrice;
 	price: MaxVariantPrice;
-	unitPrice: null;
+	unitPrice: number | null;
 }

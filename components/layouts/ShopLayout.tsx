@@ -22,7 +22,7 @@ export const ShopLayout: FC<Props> = ({
 				<meta name="description" content={pageDescription} />
 			</Head>
 
-			<header>
+			<header className="top-0 sticky z-10">
 				<SideBar />
 				<Navbar />
 			</header>

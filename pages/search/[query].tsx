@@ -2,7 +2,7 @@ import { ShopLayout } from "components/layouts";
 import { ProductList } from "components/products";
 import { useProducts } from "hooks";
 import { IFallback, IProducts } from "interfaces";
-import { storeClient, SearchProduct, GET_ALL_PRODUCTS } from "lib";
+import { storeClient, SEARCH_PRODUCT, GET_ALL_PRODUCTS } from "lib";
 import { NextPage, GetServerSideProps } from "next";
 
 interface Props {
@@ -20,7 +20,7 @@ const SearchPage: NextPage<Props> = ({ fallback, foundProducts, query }) => {
 	return (
 		<ShopLayout
 			title={"Teslo Shop - Search"}
-			pageDescription={"Teslo Shop - Search Page"}
+			pageDescription={"Teslo Shop Search Page"}
 		>
 			<h1 className="font-semibold text-3xl md:text-4xl">Search products</h1>
 			{foundProducts ? (
@@ -54,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	}
 
 	//Query without spaces
-	const { products } = await storeClient.request<IProducts>(SearchProduct, {
+	const { products } = await storeClient.request<IProducts>(SEARCH_PRODUCT, {
 		term: `title:${query}*`,
 	});
 

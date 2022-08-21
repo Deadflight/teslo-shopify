@@ -14,7 +14,7 @@ const navItems = [
 	},
 	{
 		name: "Kids",
-		path: "/category/kid",
+		path: "/category/kids",
 	},
 ];
 
@@ -46,7 +46,7 @@ export const Navbar: FC = () => {
 	};
 
 	return (
-		<nav className="w-full flex justify-between px-6 h-16 items-center sticky top-0 z-10 left-0 right-0">
+		<nav className="w-full flex justify-between px-6 h-16 items-center z-10 bg-white">
 			<Link href="/" passHref>
 				<a className="flex items-center space-x-1">
 					<h6 className="text-xl font-medium">Teslo |</h6>

@@ -1,5 +1,5 @@
 import { IProduct, IProducts } from "interfaces";
-import { GET_ALL_PRODUCTS, SearchProduct, storeClient } from "lib";
+import { GET_ALL_PRODUCTS, SEARCH_PRODUCT, storeClient } from "lib";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = { message: string } | IProduct[];
@@ -10,20 +10,20 @@ export default function handler(
 ) {
 	switch (req.method) {
 		case "GET":
-			return searchProductByTitle(req, res);
+			return searchProduct(req, res);
 		default:
 			return res.status(500).json({ message: "Method not allowed" });
 	}
 }
 
-const searchProductByTitle = async (
+const searchProduct = async (
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) => {
 	const { query = "" } = req.query as { query: string };
 
 	//Query without spaces
-	const { products } = await storeClient.request<IProducts>(SearchProduct, {
+	const { products } = await storeClient.request<IProducts>(SEARCH_PRODUCT, {
 		term: `title:${query}*`,
 	});
 

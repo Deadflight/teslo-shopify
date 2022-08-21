@@ -2,7 +2,7 @@ import { ProductList } from "components/products";
 import { FullScreenLoading } from "components/ui";
 import { useProducts } from "hooks";
 import { ICollection, IFallback } from "interfaces";
-import { ProductsByCollection, storeClient } from "lib";
+import { PRODUCTS_BY_COLLECTION, storeClient } from "lib";
 import { GetStaticProps, NextPage, GetStaticPaths } from "next";
 import { ShopLayout } from "components/layouts";
 
@@ -45,7 +45,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 			gender: "women",
 		},
 		{
-			gender: "kid",
+			gender: "kids",
 		},
 	];
 
@@ -72,7 +72,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	// const collectionName = gender + "-collection";
 
 	const { collection } = await storeClient.request<ICollection>(
-		ProductsByCollection,
+		PRODUCTS_BY_COLLECTION,
 		{
 			handle: gender,
 		}
