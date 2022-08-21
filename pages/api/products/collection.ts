@@ -1,12 +1,8 @@
 import { ICollection, IProduct } from "interfaces";
-import { ProductsByCollection, storeClient } from "lib";
+import { PRODUCTS_BY_COLLECTION, storeClient } from "lib";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type Data =
-	| {
-			message: string;
-	  }
-	| IProduct[];
+type Data = { message: string } | IProduct[];
 
 export default function handler(
 	req: NextApiRequest,
@@ -29,7 +25,7 @@ const getProductsByCollection = async (
 	// const collectionName = gender + "-collection";
 
 	const { collection } = await storeClient.request<ICollection>(
-		ProductsByCollection,
+		PRODUCTS_BY_COLLECTION,
 		{
 			handle: gender,
 		}

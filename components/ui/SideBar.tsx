@@ -1,5 +1,5 @@
 import Portal from "./Portal";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { UiContext } from "context";
 import Link from "next/link";
 import { FaChild, FaRegUserCircle } from "react-icons/fa";
@@ -10,6 +10,7 @@ import {
 	HiOutlineUserGroup,
 } from "react-icons/hi";
 import { IoIosMan, IoIosWoman } from "react-icons/io";
+import { useRouter } from "next/router";
 
 const clientNavItems = [
 	{
@@ -42,7 +43,7 @@ const categoryNavItems = [
 	},
 	{
 		name: "Kid",
-		href: "/category/kid",
+		href: "/category/kids",
 		icon: <FaChild className="h-6 w-6 text-gray-500" />,
 	},
 ];
@@ -73,6 +74,19 @@ const adminNavItems = [
 export const SideBar = () => {
 	const { isSideMenuOpen, isSlideIn, toggleSideMenu } = useContext(UiContext);
 	const cartRef = useRef<any>(null);
+	const [searchTerm, setSearchTerm] = useState("");
+	const { push } = useRouter();
+
+	const handleSearch = () => {
+		if (searchTerm.trim().length === 0) return;
+		toggleSideMenu();
+		push(`/search/${searchTerm}`);
+	};
+
+	const handlePush = (href: string) => {
+		toggleSideMenu();
+		push(href);
+	};
 
 	// Close the side menu when the user clicks outside of it
 	useEffect(() => {
@@ -104,10 +118,10 @@ export const SideBar = () => {
 					ref={cartRef}
 					className={`${isSlideIn ? "animate-slide-in" : "animate-slide-out"}
 					${isSideMenuOpen ? "flex" : "hidden"}
-					w-64 bg-white fixed right-0 py-10 top-0 bottom-0 z-20
+					w-64 bg-white fixed right-0 py-10 top-0 bottom-0 z-20 overflow-y-auto
 					}`}
 				>
-					<ul>
+					<ul className="">
 						<li className="py-2 px-4">
 							<div
 								className={
@@ -119,6 +133,8 @@ export const SideBar = () => {
 									className="border-gray-300 bg-white h-10 rounded-lg focus:outline-none leading-3"
 									type="search"
 									placeholder="Search..."
+									onChange={(e) => setSearchTerm(e.target.value)}
+									onKeyDown={(e) => (e.key === "Enter" ? handleSearch() : null)}
 								/>
 								<button className="p-2 btn-animated">
 									<svg
@@ -143,23 +159,25 @@ export const SideBar = () => {
 
 						{categoryNavItems.map((item) => (
 							<li className="sidebar-item md:hidden" key={item.name}>
-								<Link href={item.href} passHref>
-									<a className="flex items-center space-x-10">
-										{item.icon}
-										<p>{item.name}</p>
-									</a>
-								</Link>
+								<button
+									className="flex items-center space-x-10 border-none"
+									onClick={() => handlePush(item.href)}
+								>
+									{item.icon}
+									<p>{item.name}</p>
+								</button>
 							</li>
 						))}
 
 						{clientNavItems.map((item) => (
 							<li className="sidebar-item" key={item.name}>
-								<Link href={item.href} passHref>
-									<a className="flex items-center space-x-10">
-										{item.icon}
-										<p>{item.name}</p>
-									</a>
-								</Link>
+								<button
+									className="flex items-center space-x-10 border-none"
+									onClick={() => handlePush(item.href)}
+								>
+									{item.icon}
+									<p>{item.name}</p>
+								</button>
 							</li>
 						))}
 
@@ -171,12 +189,13 @@ export const SideBar = () => {
 						</li>
 						{adminNavItems.map((item) => (
 							<li className="sidebar-item" key={item.name}>
-								<Link href={item.href} passHref>
-									<a className="flex items-center space-x-10">
-										{item.icon}
-										<p>{item.name}</p>
-									</a>
-								</Link>
+								<button
+									className="flex items-center space-x-10 border-none"
+									onClick={() => handlePush(item.href)}
+								>
+									{item.icon}
+									<p>{item.name}</p>
+								</button>
 							</li>
 						))}
 					</ul>
