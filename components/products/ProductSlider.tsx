@@ -49,10 +49,12 @@ export const ProductSlider: FC<Props> = ({ images }) => {
 	const settings = {
 		dots: true,
 		infinite: true,
-		speed: 500,
+		speed: 750,
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		arrows: true,
+		autoplay: true,
+		autoplaySpeed: 5000,
 		nextArrow: <CustomNextArrow />,
 		prevArrow: <CustomPrevArrow />,
 	};
@@ -65,8 +67,8 @@ export const ProductSlider: FC<Props> = ({ images }) => {
 						src={image.url}
 						alt={image.altText}
 						layout="responsive"
-						width={1200}
-						height={1200}
+						width={600}
+						height={600}
 						quality={100}
 						priority
 					/>

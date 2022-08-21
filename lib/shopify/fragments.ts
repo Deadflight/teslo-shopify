@@ -46,6 +46,9 @@ export const PRODUCT_FRAGMENT = gql`
 		variants(first: 10) {
 			nodes {
 				id
+				availableForSale
+				title
+				quantityAvailable
 				sellingPlanAllocations(first: 10) {
 					nodes {
 						checkoutChargeAmount {

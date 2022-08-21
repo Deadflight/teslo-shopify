@@ -1,5 +1,3 @@
-import { Interface } from "readline";
-
 export interface ICollection {
 	collection: IProducts;
 }
@@ -87,6 +85,9 @@ export interface VariantsNode {
 	id: string;
 	sellingPlanAllocations: SellingPlanAllocations;
 	priceV2: MaxVariantPrice;
+	title: string;
+	availableForSale: boolean;
+	quantityAvailable: number;
 }
 
 export interface SellingPlanAllocations {
@@ -104,5 +105,5 @@ export interface PriceAdjustment {
 	compareAtPrice: MaxVariantPrice;
 	perDeliveryPrice: MaxVariantPrice;
 	price: MaxVariantPrice;
-	unitPrice: null;
+	unitPrice: number | null;
 }
