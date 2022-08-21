@@ -43,7 +43,7 @@ const categoryNavItems = [
 	},
 	{
 		name: "Kid",
-		href: "/category/kid",
+		href: "/category/kids",
 		icon: <FaChild className="h-6 w-6 text-gray-500" />,
 	},
 ];

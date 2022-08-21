@@ -14,7 +14,7 @@ const navItems = [
 	},
 	{
 		name: "Kids",
-		path: "/category/kid",
+		path: "/category/kids",
 	},
 ];
 

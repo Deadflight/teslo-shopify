@@ -45,7 +45,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 			gender: "women",
 		},
 		{
-			gender: "kid",
+			gender: "kids",
 		},
 	];
 
