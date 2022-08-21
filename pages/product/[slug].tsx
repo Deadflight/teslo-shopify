@@ -84,7 +84,7 @@ const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
 						{currency.format(Number(product.priceRange.maxVariantPrice.amount))}
 					</h2>
 
-					<div className="space-y-3 mt-6">
+					<div className="space-y-4 mt-6">
 						<span className=" font-medium text-sm">Quantity</span>
 						<ItemCounter
 							currentValue={tempCartProduct.quantity}
@@ -118,6 +118,11 @@ const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
 									: "Add to cart"
 								: "Out of stock"}
 						</button>
+
+						<div className="mt-2">
+							<h3 className="font-medium text-sm">Description</h3>
+							<p className="text-sm font-normal">{product.description}</p>
+						</div>
 					</div>
 				</article>
 			</section>
