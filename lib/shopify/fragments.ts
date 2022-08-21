@@ -1,5 +1,45 @@
 import { gql } from "graphql-request";
 
+export const PRODUCT_VARIANT_FRAGMENT = gql`
+	fragment ProductVariant on ProductVariant {
+		id
+		availableForSale
+		title
+		quantityAvailable
+		sellingPlanAllocations(first: 50) {
+			nodes {
+				checkoutChargeAmount {
+					amount
+				}
+				sellingPlan {
+					name
+					id
+				}
+				remainingBalanceChargeAmount {
+					amount
+				}
+				priceAdjustments {
+					compareAtPrice {
+						amount
+					}
+					perDeliveryPrice {
+						amount
+					}
+					price {
+						amount
+					}
+					unitPrice {
+						amount
+					}
+				}
+			}
+		}
+		priceV2 {
+			amount
+		}
+	}
+`;
+
 export const PRODUCT_FRAGMENT = gql`
 	fragment Product on Product {
 		availableForSale
@@ -22,11 +62,11 @@ export const PRODUCT_FRAGMENT = gql`
 				altText
 			}
 		}
-		sellingPlanGroups(first: 10) {
+		sellingPlanGroups(first: 50) {
 			nodes {
 				appName
 				name
-				sellingPlans(first: 10) {
+				sellingPlans(first: 50) {
 					nodes {
 						name
 						id
@@ -43,44 +83,11 @@ export const PRODUCT_FRAGMENT = gql`
 			description
 			title
 		}
-		variants(first: 10) {
+		variants(first: 50) {
 			nodes {
-				id
-				availableForSale
-				title
-				quantityAvailable
-				sellingPlanAllocations(first: 10) {
-					nodes {
-						checkoutChargeAmount {
-							amount
-						}
-						sellingPlan {
-							name
-							id
-						}
-						remainingBalanceChargeAmount {
-							amount
-						}
-						priceAdjustments {
-							compareAtPrice {
-								amount
-							}
-							perDeliveryPrice {
-								amount
-							}
-							price {
-								amount
-							}
-							unitPrice {
-								amount
-							}
-						}
-					}
-				}
-				priceV2 {
-					amount
-				}
+				...ProductVariant
 			}
 		}
 	}
+	${PRODUCT_VARIANT_FRAGMENT}
 `;
