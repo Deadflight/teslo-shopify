@@ -1,0 +1,86 @@
+query getAllProducts {
+	products(first: 50) {
+		nodes {
+			availableForSale
+			title
+			handle
+			id
+			priceRange {
+				maxVariantPrice {
+					amount
+				}
+			}
+			description
+			featuredImage {
+				url
+				altText
+			}
+			images(first: 2) {
+				nodes {
+					url
+					altText
+				}
+			}
+			sellingPlanGroups(first: 50) {
+				nodes {
+					appName
+					name
+					sellingPlans(first: 50) {
+						nodes {
+							name
+							id
+							description
+						}
+					}
+					options {
+						name
+						values
+					}
+				}
+			}
+			seo {
+				description
+				title
+			}
+			variants(first: 50) {
+				nodes {
+					id
+					availableForSale
+					title
+					quantityAvailable
+					sellingPlanAllocations(first: 50) {
+						nodes {
+							checkoutChargeAmount {
+								amount
+							}
+							sellingPlan {
+								name
+								id
+							}
+							remainingBalanceChargeAmount {
+								amount
+							}
+							priceAdjustments {
+								compareAtPrice {
+									amount
+								}
+								perDeliveryPrice {
+									amount
+								}
+								price {
+									amount
+								}
+								unitPrice {
+									amount
+								}
+							}
+						}
+					}
+					priceV2 {
+						amount
+					}
+				}
+			}
+		}
+	}
+}

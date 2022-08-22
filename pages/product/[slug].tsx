@@ -61,6 +61,7 @@ const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
 			quantityAvailable: variantSizes.quantityAvailable,
 			quantity: 1,
 			availableForSale: variantSizes.availableForSale,
+			price: variantSizes.priceV2.amount,
 		}));
 	};
 

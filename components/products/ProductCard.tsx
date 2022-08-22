@@ -29,7 +29,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
 				>
 					<div
 						className={
-							!product.availableForSale
+							!product.totalInventory
 								? "absolute z-10 whitespace-nowrap h-8 rounded-2xl bg-black text-white text-sm inline-flex items-center justify-center top-2 left-2"
 								: "hidden"
 						}

@@ -1,4 +1,15 @@
-import { VariantsNode } from "./product";
+export interface ICart {
+	attributes: IAtribute[];
+	cost: ICost;
+	checkoutUrl: string;
+}
+
+export interface IAtribute {
+	key: string;
+	value: string;
+}
+
+export interface ICost {}
 
 export interface ICartProduct {
 	id: string;

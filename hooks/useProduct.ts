@@ -1,3 +1,4 @@
+import { Product } from "lib/shopify/graphql";
 import useSWR, { SWRConfiguration } from "swr";
 // import { IProduct } from '../interfaces';
 import { IProduct } from "../interfaces/product";
@@ -7,7 +8,7 @@ import { IProduct } from "../interfaces/product";
 export const useProduct = (url: string, config: SWRConfiguration = {}) => {
 	// const { data, error } = useSWR<IProduct[]>(`/api${ url }`, fetcher, config );
 
-	const { data, error } = useSWR<IProduct>(`/api${url}`, config);
+	const { data, error } = useSWR<Product>(`/api${url}`, config);
 
 	if (error) {
 		throw new Error(error);
