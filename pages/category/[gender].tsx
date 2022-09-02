@@ -1,21 +1,24 @@
-import { ProductList } from "components/products";
-import { FullScreenLoading } from "components/ui";
-import { useProducts } from "hooks";
-import { ICollection, IFallback } from "interfaces";
-import { PRODUCTS_BY_COLLECTION, storeClient } from "lib";
 import { GetStaticProps, NextPage, GetStaticPaths } from "next";
 import { ShopLayout } from "components/layouts";
+import { sdkSWR } from "lib";
+import Error from "next/error";
+import { ProductList } from "components/products";
 
 interface Props {
-	fallback: IFallback;
 	gender: string;
 }
 
-const CategoryPage: NextPage<Props> = ({ fallback, gender }) => {
-	const { products, isError, isLoading } = useProducts(
-		`/products/collection?gender=${gender}`,
-		fallback
+const CategoryPage: NextPage<Props> = ({ gender }) => {
+	const { data, error } = sdkSWR.useGetProductsByCollection(
+		[`/api/products/collection?gender=${gender}`],
+		{
+			handle: gender,
+		}
 	);
+
+	if (error || !data) {
+		return <Error statusCode={500} />;
+	}
 
 	const TitlePage = gender.charAt(0).toUpperCase() + gender.slice(1);
 
@@ -29,7 +32,7 @@ const CategoryPage: NextPage<Props> = ({ fallback, gender }) => {
 		>
 			<h1 className="font-semibold text-3xl md:text-4xl">{TitlePage}</h1>
 			<h2 className=" text-xl ">Products for {productsFor}</h2>
-			{isLoading ? <FullScreenLoading /> : <ProductList products={products} />}
+			<ProductList products={data?.collection?.products.nodes!} />
 		</ShopLayout>
 	);
 };
@@ -71,21 +74,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	// By default shopify add '-collection' to the end of the collection name
 	// const collectionName = gender + "-collection";
 
-	const { collection } = await storeClient.request<ICollection>(
-		PRODUCTS_BY_COLLECTION,
-		{
-			handle: gender,
-		}
-	);
+	const genderInitialData = await sdkSWR.getProductsByCollection({
+		handle: gender,
+	});
 
-	const { products } = collection;
-	const { nodes } = products;
+	if (!genderInitialData.collection)
+		return {
+			redirect: {
+				destination: "/",
+				permanent: false,
+			},
+		};
 
 	return {
 		props: {
-			fallback: {
-				[`/api/products/collection?gender=${gender}`]: nodes,
-			},
+			fallbackData: genderInitialData,
 			gender,
 		},
 	};

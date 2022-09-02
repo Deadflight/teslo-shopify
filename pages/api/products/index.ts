@@ -1,12 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { GET_ALL_PRODUCTS, storeClient } from "lib";
-import { IProduct, IProducts } from "interfaces";
+import { GetAllProductsQuery, sdkSWR } from "lib";
 
 type Data =
 	| {
 			message: string;
 	  }
-	| IProduct[];
+	| GetAllProductsQuery;
 
 export default function handler(
 	req: NextApiRequest,
@@ -21,7 +20,7 @@ export default function handler(
 }
 
 const getProducts = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-	const { products } = await storeClient.request<IProducts>(GET_ALL_PRODUCTS);
-	const { nodes } = products;
-	return res.status(200).json(nodes);
+	const products = await sdkSWR.getAllProducts();
+
+	return res.status(200).json(products);
 };

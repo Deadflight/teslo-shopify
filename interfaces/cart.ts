@@ -1,15 +1,12 @@
 export interface ICart {
-	attributes: IAtribute[];
-	cost: ICost;
-	checkoutUrl: string;
+	isLoaded: boolean;
+	isCartEmpty: boolean;
+	cart: ICartProduct[];
+	numberOfItems: number;
+	subTotal: number;
+	tax: number;
+	total: number;
 }
-
-export interface IAtribute {
-	key: string;
-	value: string;
-}
-
-export interface ICost {}
 
 export interface ICartProduct {
 	id: string;

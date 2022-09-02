@@ -1,13 +1,13 @@
-import { INodeImage } from "interfaces";
 import { FC } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Image from "next/image";
+import NextImage from "next/image";
 import styles from "./productslider.module.css";
+import { ImageFragment } from "lib";
 
 interface Props {
-	images: INodeImage;
+	images: ImageFragment[];
 }
 
 const CustomPrevArrow = (props: any) => {
@@ -61,11 +61,11 @@ export const ProductSlider: FC<Props> = ({ images }) => {
 
 	return (
 		<Slider {...settings}>
-			{images.nodes.map((image) => (
-				<div key={image.url} className="">
-					<Image
+			{images.map((image) => (
+				<div key={image.url} className="w-full">
+					<NextImage
 						src={image.url}
-						alt={image.altText}
+						alt={image?.altText! || "Teslo Product Image"}
 						layout="responsive"
 						width={600}
 						height={600}

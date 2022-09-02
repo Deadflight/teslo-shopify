@@ -4,18 +4,13 @@ schema:
       headers:
         Content-Type: application/json
         X-Shopify-Storefront-Access-Token: 9a6f1c65072eddae6abdcf11a10e7fce
-documents: "lib/shopify/queries.ts"
+documents: "lib/shopify/queries/*.ts"
 generates:
   lib/shopify/generated.ts:
     plugins:
-      - "typescript"
-      - "typescript-operations"
+      - typescript
+      - typescript-operations
       - typescript-graphql-request
       - plugin-typescript-swr
     config:
       rawRequest: false
-      autogenSWRKey: true
-      typesPrefix: IShopify
-  ./graphql.schema.json:
-    plugins:
-      - "introspection"

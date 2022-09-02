@@ -28,11 +28,11 @@ export const ItemCounter: FC<Props> = ({
 
 	return (
 		<div className="flex items-center space-x-6">
-			<button onClick={() => addOrRemove(-1)}>
+			<button onClick={() => addOrRemove(-1)} aria-label="Minus Button">
 				<AiOutlineMinusCircle className="h-6 w-6 text-gray-500" />
 			</button>
 			<p>{currentValue}</p>
-			<button onClick={() => addOrRemove(+1)}>
+			<button onClick={() => addOrRemove(+1)} aria-label="Plus Button">
 				<AiOutlinePlusCircle className="h-6 w-6 text-gray-500" />
 			</button>
 		</div>

@@ -1,11 +1,11 @@
-import { IProduct } from "interfaces";
+import { ProductFragment } from "lib";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useMemo, useState } from "react";
 import { currency } from "utils";
 
 interface Props {
-	product: IProduct;
+	product: ProductFragment;
 }
 export const ProductCard: FC<Props> = ({ product }) => {
 	const [isHovered, setIsHovered] = useState(false);
@@ -38,14 +38,14 @@ export const ProductCard: FC<Props> = ({ product }) => {
 					</div>
 					<Image
 						src={productImage.url}
-						alt={product.featuredImage.altText || product.description}
+						alt={product.featuredImage?.altText || product.description || ""}
 						layout="responsive"
 						width={400}
 						height={400}
 						quality={100}
 						priority
 						placeholder="blur"
-						blurDataURL={product.featuredImage.url}
+						blurDataURL={product.featuredImage?.url}
 						style={{
 							borderRadius: "10px",
 						}}

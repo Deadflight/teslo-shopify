@@ -1,26 +1,21 @@
 import { ShopLayout } from "components/layouts";
-import { useProducts } from "hooks";
 import type { NextPage, GetStaticProps } from "next";
-import { GET_ALL_PRODUCTS, storeClient } from "lib";
-import { IFallback, IProducts } from "interfaces";
-import { FullScreenLoading } from "components/ui";
 import { ProductList } from "components/products";
+import { sdkSWR } from "lib";
+import Error from "next/error";
 
-interface Props {
-	fallback: IFallback;
-}
+const Home: NextPage = () => {
+	const { data, error } = sdkSWR.useGetAllProducts([`/api/products`], {});
 
-const Home: NextPage<Props> = ({ fallback }) => {
-	const { products, isLoading, isError } = useProducts("/products", fallback);
-	// if (isError) return <div>Something went wrong</div>;
-
-	// if (isLoading) return <div>Loading...</div>;
+	if (error) {
+		return <Error statusCode={500} />;
+	}
 
 	return (
 		<ShopLayout title="Teslo - Home" pageDescription="Teslo Home">
 			<h1 className="font-semibold text-3xl md:text-4xl">Teslo Store</h1>
 			<h2 className=" text-xl ">All Products</h2>
-			{isLoading ? <FullScreenLoading /> : <ProductList products={products} />}
+			<ProductList products={data?.products.nodes!} />
 		</ShopLayout>
 	);
 };
@@ -32,14 +27,11 @@ const Home: NextPage<Props> = ({ fallback }) => {
 //- The page must be pre-rendered (for SEO) and be very fast — getStaticProps generates HTML and JSON files, both of which can be cached by a CDN for performance.
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-	const { products } = await storeClient.request<IProducts>(GET_ALL_PRODUCTS);
-	const { nodes } = products;
+	const initialData = await sdkSWR.getAllProducts();
 
 	return {
 		props: {
-			fallback: {
-				"/api/products": nodes,
-			},
+			fallbackData: initialData,
 		},
 	};
 };

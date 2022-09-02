@@ -28,7 +28,7 @@ export type Scalars = {
  * Versions are commonly referred to by their handle (for example, `2021-10`).
  *
  */
-export type IShopifyApiVersion = {
+export type ApiVersion = {
   __typename?: 'ApiVersion';
   /** The human-readable name of the version. */
   displayName: Scalars['String'];
@@ -39,7 +39,7 @@ export type IShopifyApiVersion = {
 };
 
 /** Details about the gift card used on the checkout. */
-export type IShopifyAppliedGiftCard = IShopifyNode & {
+export type AppliedGiftCard = Node & {
   __typename?: 'AppliedGiftCard';
   /**
    * The amount that was taken from the gift card by applying it.
@@ -47,36 +47,36 @@ export type IShopifyAppliedGiftCard = IShopifyNode & {
    */
   amountUsed: Scalars['Money'];
   /** The amount that was taken from the gift card by applying it. */
-  amountUsedV2: IShopifyMoneyV2;
+  amountUsedV2: MoneyV2;
   /**
    * The amount left on the gift card.
    * @deprecated Use `balanceV2` instead
    */
   balance: Scalars['Money'];
   /** The amount left on the gift card. */
-  balanceV2: IShopifyMoneyV2;
+  balanceV2: MoneyV2;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** The last characters of the gift card. */
   lastCharacters: Scalars['String'];
   /** The amount that was applied to the checkout in its currency. */
-  presentmentAmountUsed: IShopifyMoneyV2;
+  presentmentAmountUsed: MoneyV2;
 };
 
 /** An article in an online store blog. */
-export type IShopifyArticle = IShopifyHasMetafields & IShopifyNode & IShopifyOnlineStorePublishable & {
+export type Article = HasMetafields & Node & OnlineStorePublishable & {
   __typename?: 'Article';
   /**
    * The article's author.
    * @deprecated Use `authorV2` instead
    */
-  author: IShopifyArticleAuthor;
+  author: ArticleAuthor;
   /** The article's author. */
-  authorV2?: Maybe<IShopifyArticleAuthor>;
+  authorV2?: Maybe<ArticleAuthor>;
   /** The blog that the article belongs to. */
-  blog: IShopifyBlog;
+  blog: Blog;
   /** List of comments posted on the article. */
-  comments: IShopifyCommentConnection;
+  comments: CommentConnection;
   /** Stripped content of the article, single line with HTML tags removed. */
   content: Scalars['String'];
   /** The content of the article, complete with HTML formatting. */
@@ -93,20 +93,20 @@ export type IShopifyArticle = IShopifyHasMetafields & IShopifyNode & IShopifyOnl
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** The image associated with the article. */
-  image?: Maybe<IShopifyImage>;
+  image?: Maybe<Image>;
   /** Returns a metafield found by namespace and key. */
-  metafield?: Maybe<IShopifyMetafield>;
+  metafield?: Maybe<Metafield>;
   /**
    * The metafields associated with the resource matching the supplied list of namespaces and keys.
    *
    */
-  metafields: Array<Maybe<IShopifyMetafield>>;
+  metafields: Array<Maybe<Metafield>>;
   /** The URL used for viewing the resource on the shop's Online Store. Returns `null` if the resource is currently not published to the Online Store sales channel. */
   onlineStoreUrl?: Maybe<Scalars['URL']>;
   /** The date and time when the article was published. */
   publishedAt: Scalars['DateTime'];
   /** The article’s SEO information. */
-  seo?: Maybe<IShopifySeo>;
+  seo?: Maybe<Seo>;
   /** A categorization that a article can be tagged with. */
   tags: Array<Scalars['String']>;
   /** The article’s name. */
@@ -115,7 +115,7 @@ export type IShopifyArticle = IShopifyHasMetafields & IShopifyNode & IShopifyOnl
 
 
 /** An article in an online store blog. */
-export type IShopifyArticleCommentsArgs = {
+export type ArticleCommentsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -125,31 +125,31 @@ export type IShopifyArticleCommentsArgs = {
 
 
 /** An article in an online store blog. */
-export type IShopifyArticleContentArgs = {
+export type ArticleContentArgs = {
   truncateAt?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** An article in an online store blog. */
-export type IShopifyArticleExcerptArgs = {
+export type ArticleExcerptArgs = {
   truncateAt?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** An article in an online store blog. */
-export type IShopifyArticleMetafieldArgs = {
+export type ArticleMetafieldArgs = {
   key: Scalars['String'];
   namespace: Scalars['String'];
 };
 
 
 /** An article in an online store blog. */
-export type IShopifyArticleMetafieldsArgs = {
-  identifiers: Array<IShopifyHasMetafieldsIdentifier>;
+export type ArticleMetafieldsArgs = {
+  identifiers: Array<HasMetafieldsIdentifier>;
 };
 
 /** The author of an article. */
-export type IShopifyArticleAuthor = {
+export type ArticleAuthor = {
   __typename?: 'ArticleAuthor';
   /** The author's bio. */
   bio?: Maybe<Scalars['String']>;
@@ -167,30 +167,30 @@ export type IShopifyArticleAuthor = {
  * An auto-generated type for paginating through multiple Articles.
  *
  */
-export type IShopifyArticleConnection = {
+export type ArticleConnection = {
   __typename?: 'ArticleConnection';
   /** A list of edges. */
-  edges: Array<IShopifyArticleEdge>;
+  edges: Array<ArticleEdge>;
   /** A list of the nodes contained in ArticleEdge. */
-  nodes: Array<IShopifyArticle>;
+  nodes: Array<Article>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one Article and a cursor during pagination.
  *
  */
-export type IShopifyArticleEdge = {
+export type ArticleEdge = {
   __typename?: 'ArticleEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of ArticleEdge. */
-  node: IShopifyArticle;
+  node: Article;
 };
 
 /** The set of valid sort keys for the Article query. */
-export enum IShopifyArticleSortKeys {
+export enum ArticleSortKeys {
   /** Sort by the `author` value. */
   Author = 'AUTHOR',
   /** Sort by the `blog_title` value. */
@@ -212,7 +212,7 @@ export enum IShopifyArticleSortKeys {
 }
 
 /** Represents a generic custom attribute. */
-export type IShopifyAttribute = {
+export type Attribute = {
   __typename?: 'Attribute';
   /** Key or name of the attribute. */
   key: Scalars['String'];
@@ -221,7 +221,7 @@ export type IShopifyAttribute = {
 };
 
 /** Specifies the input fields required for an attribute. */
-export type IShopifyAttributeInput = {
+export type AttributeInput = {
   /** Key or name of the attribute. */
   key: Scalars['String'];
   /** Value of the attribute. */
@@ -232,22 +232,22 @@ export type IShopifyAttributeInput = {
  * Automatic discount applications capture the intentions of a discount that was automatically applied.
  *
  */
-export type IShopifyAutomaticDiscountApplication = IShopifyDiscountApplication & {
+export type AutomaticDiscountApplication = DiscountApplication & {
   __typename?: 'AutomaticDiscountApplication';
   /** The method by which the discount's value is allocated to its entitled items. */
-  allocationMethod: IShopifyDiscountApplicationAllocationMethod;
+  allocationMethod: DiscountApplicationAllocationMethod;
   /** Which lines of targetType that the discount is allocated over. */
-  targetSelection: IShopifyDiscountApplicationTargetSelection;
+  targetSelection: DiscountApplicationTargetSelection;
   /** The type of line that the discount is applicable towards. */
-  targetType: IShopifyDiscountApplicationTargetType;
+  targetType: DiscountApplicationTargetType;
   /** The title of the application. */
   title: Scalars['String'];
   /** The value of the discount application. */
-  value: IShopifyPricingValue;
+  value: PricingValue;
 };
 
 /** A collection of available shipping rates for a checkout. */
-export type IShopifyAvailableShippingRates = {
+export type AvailableShippingRates = {
   __typename?: 'AvailableShippingRates';
   /**
    * Whether or not the shipping rates are ready.
@@ -257,18 +257,18 @@ export type IShopifyAvailableShippingRates = {
    */
   ready: Scalars['Boolean'];
   /** The fetched shipping rates. `null` until the `ready` field is `true`. */
-  shippingRates?: Maybe<Array<IShopifyShippingRate>>;
+  shippingRates?: Maybe<Array<ShippingRate>>;
 };
 
 /** An online store blog. */
-export type IShopifyBlog = IShopifyHasMetafields & IShopifyNode & IShopifyOnlineStorePublishable & {
+export type Blog = HasMetafields & Node & OnlineStorePublishable & {
   __typename?: 'Blog';
   /** Find an article by its handle. */
-  articleByHandle?: Maybe<IShopifyArticle>;
+  articleByHandle?: Maybe<Article>;
   /** List of the blog's articles. */
-  articles: IShopifyArticleConnection;
+  articles: ArticleConnection;
   /** The authors who have contributed to the blog. */
-  authors: Array<IShopifyArticleAuthor>;
+  authors: Array<ArticleAuthor>;
   /**
    * A human-friendly unique string for the Blog automatically generated from its title.
    *
@@ -277,79 +277,79 @@ export type IShopifyBlog = IShopifyHasMetafields & IShopifyNode & IShopifyOnline
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** Returns a metafield found by namespace and key. */
-  metafield?: Maybe<IShopifyMetafield>;
+  metafield?: Maybe<Metafield>;
   /**
    * The metafields associated with the resource matching the supplied list of namespaces and keys.
    *
    */
-  metafields: Array<Maybe<IShopifyMetafield>>;
+  metafields: Array<Maybe<Metafield>>;
   /** The URL used for viewing the resource on the shop's Online Store. Returns `null` if the resource is currently not published to the Online Store sales channel. */
   onlineStoreUrl?: Maybe<Scalars['URL']>;
   /** The blog's SEO information. */
-  seo?: Maybe<IShopifySeo>;
+  seo?: Maybe<Seo>;
   /** The blogs’s title. */
   title: Scalars['String'];
 };
 
 
 /** An online store blog. */
-export type IShopifyBlogArticleByHandleArgs = {
+export type BlogArticleByHandleArgs = {
   handle: Scalars['String'];
 };
 
 
 /** An online store blog. */
-export type IShopifyBlogArticlesArgs = {
+export type BlogArticlesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   query?: InputMaybe<Scalars['String']>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyArticleSortKeys>;
+  sortKey?: InputMaybe<ArticleSortKeys>;
 };
 
 
 /** An online store blog. */
-export type IShopifyBlogMetafieldArgs = {
+export type BlogMetafieldArgs = {
   key: Scalars['String'];
   namespace: Scalars['String'];
 };
 
 
 /** An online store blog. */
-export type IShopifyBlogMetafieldsArgs = {
-  identifiers: Array<IShopifyHasMetafieldsIdentifier>;
+export type BlogMetafieldsArgs = {
+  identifiers: Array<HasMetafieldsIdentifier>;
 };
 
 /**
  * An auto-generated type for paginating through multiple Blogs.
  *
  */
-export type IShopifyBlogConnection = {
+export type BlogConnection = {
   __typename?: 'BlogConnection';
   /** A list of edges. */
-  edges: Array<IShopifyBlogEdge>;
+  edges: Array<BlogEdge>;
   /** A list of the nodes contained in BlogEdge. */
-  nodes: Array<IShopifyBlog>;
+  nodes: Array<Blog>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one Blog and a cursor during pagination.
  *
  */
-export type IShopifyBlogEdge = {
+export type BlogEdge = {
   __typename?: 'BlogEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of BlogEdge. */
-  node: IShopifyBlog;
+  node: Blog;
 };
 
 /** The set of valid sort keys for the Blog query. */
-export enum IShopifyBlogSortKeys {
+export enum BlogSortKeys {
   /** Sort by the `handle` value. */
   Handle = 'HANDLE',
   /** Sort by the `id` value. */
@@ -365,7 +365,7 @@ export enum IShopifyBlogSortKeys {
 }
 
 /** Card brand, such as Visa or Mastercard, which can be used for payments. */
-export enum IShopifyCardBrand {
+export enum CardBrand {
   /** American Express. */
   AmericanExpress = 'AMERICAN_EXPRESS',
   /** Diners Club. */
@@ -381,38 +381,38 @@ export enum IShopifyCardBrand {
 }
 
 /** A cart represents the merchandise that a buyer intends to purchase, and the estimated cost associated with the cart. To learn how to interact with a cart during a customer's session, refer to [Manage a cart with the Storefront API](https://shopify.dev/api/examples/cart). */
-export type IShopifyCart = IShopifyNode & {
+export type Cart = Node & {
   __typename?: 'Cart';
   /** An attribute associated with the cart. */
-  attribute?: Maybe<IShopifyAttribute>;
+  attribute?: Maybe<Attribute>;
   /** The attributes associated with the cart. Attributes are represented as key-value pairs. */
-  attributes: Array<IShopifyAttribute>;
+  attributes: Array<Attribute>;
   /** Information about the buyer that is interacting with the cart. */
-  buyerIdentity: IShopifyCartBuyerIdentity;
+  buyerIdentity: CartBuyerIdentity;
   /** The URL of the checkout for the cart. */
   checkoutUrl: Scalars['URL'];
   /** The estimated costs that the buyer will pay at checkout. The costs are subject to change and changes will be reflected at checkout. The `cost` field uses the `buyerIdentity` field to determine [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-cart). */
-  cost: IShopifyCartCost;
+  cost: CartCost;
   /** The date and time when the cart was created. */
   createdAt: Scalars['DateTime'];
   /** The delivery groups available for the cart, based on the default address of the logged-in customer. */
-  deliveryGroups: IShopifyCartDeliveryGroupConnection;
+  deliveryGroups: CartDeliveryGroupConnection;
   /** The discounts that have been applied to the entire cart. */
-  discountAllocations: Array<IShopifyCartDiscountAllocation>;
+  discountAllocations: Array<CartDiscountAllocation>;
   /**
    * The case-insensitive discount codes that the customer added at checkout.
    *
    */
-  discountCodes: Array<IShopifyCartDiscountCode>;
+  discountCodes: Array<CartDiscountCode>;
   /**
    * The estimated costs that the buyer will pay at checkout. The estimated costs are subject to change and changes will be reflected at checkout. The `estimatedCost` field uses the `buyerIdentity` field to determine [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-cart).
    * @deprecated Use `cost` instead
    */
-  estimatedCost: IShopifyCartEstimatedCost;
+  estimatedCost: CartEstimatedCost;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** A list of lines containing information about the items the customer intends to purchase. */
-  lines: IShopifyCartLineConnection;
+  lines: CartLineConnection;
   /** A note that is associated with the cart. For example, the note can be a personalized message to the buyer. */
   note?: Maybe<Scalars['String']>;
   /** The total number of items in the cart. */
@@ -423,13 +423,13 @@ export type IShopifyCart = IShopifyNode & {
 
 
 /** A cart represents the merchandise that a buyer intends to purchase, and the estimated cost associated with the cart. To learn how to interact with a cart during a customer's session, refer to [Manage a cart with the Storefront API](https://shopify.dev/api/examples/cart). */
-export type IShopifyCartAttributeArgs = {
+export type CartAttributeArgs = {
   key: Scalars['String'];
 };
 
 
 /** A cart represents the merchandise that a buyer intends to purchase, and the estimated cost associated with the cart. To learn how to interact with a cart during a customer's session, refer to [Manage a cart with the Storefront API](https://shopify.dev/api/examples/cart). */
-export type IShopifyCartDeliveryGroupsArgs = {
+export type CartDeliveryGroupsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -439,7 +439,7 @@ export type IShopifyCartDeliveryGroupsArgs = {
 
 
 /** A cart represents the merchandise that a buyer intends to purchase, and the estimated cost associated with the cart. To learn how to interact with a cart during a customer's session, refer to [Manage a cart with the Storefront API](https://shopify.dev/api/examples/cart). */
-export type IShopifyCartLinesArgs = {
+export type CartLinesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -448,30 +448,30 @@ export type IShopifyCartLinesArgs = {
 };
 
 /** Return type for `cartAttributesUpdate` mutation. */
-export type IShopifyCartAttributesUpdatePayload = {
+export type CartAttributesUpdatePayload = {
   __typename?: 'CartAttributesUpdatePayload';
   /** The updated cart. */
-  cart?: Maybe<IShopifyCart>;
+  cart?: Maybe<Cart>;
   /** The list of errors that occurred from executing the mutation. */
-  userErrors: Array<IShopifyCartUserError>;
+  userErrors: Array<CartUserError>;
 };
 
 /** The discounts automatically applied to the cart line based on prerequisites that have been met. */
-export type IShopifyCartAutomaticDiscountAllocation = IShopifyCartDiscountAllocation & {
+export type CartAutomaticDiscountAllocation = CartDiscountAllocation & {
   __typename?: 'CartAutomaticDiscountAllocation';
   /** The discounted amount that has been applied to the cart line. */
-  discountedAmount: IShopifyMoneyV2;
+  discountedAmount: MoneyV2;
   /** The title of the allocated discount. */
   title: Scalars['String'];
 };
 
 /** Represents information about the buyer that is interacting with the cart. */
-export type IShopifyCartBuyerIdentity = {
+export type CartBuyerIdentity = {
   __typename?: 'CartBuyerIdentity';
   /** The country where the buyer is located. */
-  countryCode?: Maybe<IShopifyCountryCode>;
+  countryCode?: Maybe<CountryCode>;
   /** The customer account associated with the cart. */
-  customer?: Maybe<IShopifyCustomer>;
+  customer?: Maybe<Customer>;
   /** The email address of the buyer that is interacting with the cart. */
   email?: Maybe<Scalars['String']>;
   /** The phone number of the buyer that is interacting with the cart. */
@@ -485,9 +485,9 @@ export type IShopifyCartBuyerIdentity = {
  * and should match the customer's shipping address.
  *
  */
-export type IShopifyCartBuyerIdentityInput = {
+export type CartBuyerIdentityInput = {
   /** The country where the buyer is located. */
-  countryCode?: InputMaybe<IShopifyCountryCode>;
+  countryCode?: InputMaybe<CountryCode>;
   /** The access token used to identify the customer associated with the cart. */
   customerAccessToken?: InputMaybe<Scalars['String']>;
   /** The email address of the buyer that is interacting with the cart. */
@@ -497,21 +497,21 @@ export type IShopifyCartBuyerIdentityInput = {
 };
 
 /** Return type for `cartBuyerIdentityUpdate` mutation. */
-export type IShopifyCartBuyerIdentityUpdatePayload = {
+export type CartBuyerIdentityUpdatePayload = {
   __typename?: 'CartBuyerIdentityUpdatePayload';
   /** The updated cart. */
-  cart?: Maybe<IShopifyCart>;
+  cart?: Maybe<Cart>;
   /** The list of errors that occurred from executing the mutation. */
-  userErrors: Array<IShopifyCartUserError>;
+  userErrors: Array<CartUserError>;
 };
 
 /** The discount that has been applied to the cart line using a discount code. */
-export type IShopifyCartCodeDiscountAllocation = IShopifyCartDiscountAllocation & {
+export type CartCodeDiscountAllocation = CartDiscountAllocation & {
   __typename?: 'CartCodeDiscountAllocation';
   /** The code used to apply the discount. */
   code: Scalars['String'];
   /** The discounted amount that has been applied to the cart line. */
-  discountedAmount: IShopifyMoneyV2;
+  discountedAmount: MoneyV2;
 };
 
 /**
@@ -520,62 +520,62 @@ export type IShopifyCartCodeDiscountAllocation = IShopifyCartDiscountAllocation 
  * [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-cart).
  *
  */
-export type IShopifyCartCost = {
+export type CartCost = {
   __typename?: 'CartCost';
   /** The estimated amount, before taxes and discounts, for the customer to pay at checkout. The checkout charge amount doesn't include any deferred payments that'll be paid at a later date. If the cart has no deferred payments, then the checkout charge amount is equivalent to `subtotalAmount`. */
-  checkoutChargeAmount: IShopifyMoneyV2;
+  checkoutChargeAmount: MoneyV2;
   /** The amount, before taxes and cart-level discounts, for the customer to pay. */
-  subtotalAmount: IShopifyMoneyV2;
+  subtotalAmount: MoneyV2;
   /** Whether the subtotal amount is estimated. */
   subtotalAmountEstimated: Scalars['Boolean'];
   /** The total amount for the customer to pay. */
-  totalAmount: IShopifyMoneyV2;
+  totalAmount: MoneyV2;
   /** Whether the total amount is estimated. */
   totalAmountEstimated: Scalars['Boolean'];
   /** The duty amount for the customer to pay at checkout. */
-  totalDutyAmount?: Maybe<IShopifyMoneyV2>;
+  totalDutyAmount?: Maybe<MoneyV2>;
   /** Whether the total duty amount is estimated. */
   totalDutyAmountEstimated: Scalars['Boolean'];
   /** The tax amount for the customer to pay at checkout. */
-  totalTaxAmount?: Maybe<IShopifyMoneyV2>;
+  totalTaxAmount?: Maybe<MoneyV2>;
   /** Whether the total tax amount is estimated. */
   totalTaxAmountEstimated: Scalars['Boolean'];
 };
 
 /** Return type for `cartCreate` mutation. */
-export type IShopifyCartCreatePayload = {
+export type CartCreatePayload = {
   __typename?: 'CartCreatePayload';
   /** The new cart. */
-  cart?: Maybe<IShopifyCart>;
+  cart?: Maybe<Cart>;
   /** The list of errors that occurred from executing the mutation. */
-  userErrors: Array<IShopifyCartUserError>;
+  userErrors: Array<CartUserError>;
 };
 
 /** The discounts automatically applied to the cart line based on prerequisites that have been met. */
-export type IShopifyCartCustomDiscountAllocation = IShopifyCartDiscountAllocation & {
+export type CartCustomDiscountAllocation = CartDiscountAllocation & {
   __typename?: 'CartCustomDiscountAllocation';
   /** The discounted amount that has been applied to the cart line. */
-  discountedAmount: IShopifyMoneyV2;
+  discountedAmount: MoneyV2;
   /** The title of the allocated discount. */
   title: Scalars['String'];
 };
 
 /** Information about the options available for one or more line items to be delivered to a specific address. */
-export type IShopifyCartDeliveryGroup = {
+export type CartDeliveryGroup = {
   __typename?: 'CartDeliveryGroup';
   /** A list of cart lines for the delivery group. */
-  cartLines: IShopifyCartLineConnection;
+  cartLines: CartLineConnection;
   /** The destination address for the delivery group. */
-  deliveryAddress: IShopifyMailingAddress;
+  deliveryAddress: MailingAddress;
   /** The delivery options available for the delivery group. */
-  deliveryOptions: Array<IShopifyCartDeliveryOption>;
+  deliveryOptions: Array<CartDeliveryOption>;
   /** The ID for the delivery group. */
   id: Scalars['ID'];
 };
 
 
 /** Information about the options available for one or more line items to be delivered to a specific address. */
-export type IShopifyCartDeliveryGroupCartLinesArgs = {
+export type CartDeliveryGroupCartLinesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -587,51 +587,51 @@ export type IShopifyCartDeliveryGroupCartLinesArgs = {
  * An auto-generated type for paginating through multiple CartDeliveryGroups.
  *
  */
-export type IShopifyCartDeliveryGroupConnection = {
+export type CartDeliveryGroupConnection = {
   __typename?: 'CartDeliveryGroupConnection';
   /** A list of edges. */
-  edges: Array<IShopifyCartDeliveryGroupEdge>;
+  edges: Array<CartDeliveryGroupEdge>;
   /** A list of the nodes contained in CartDeliveryGroupEdge. */
-  nodes: Array<IShopifyCartDeliveryGroup>;
+  nodes: Array<CartDeliveryGroup>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one CartDeliveryGroup and a cursor during pagination.
  *
  */
-export type IShopifyCartDeliveryGroupEdge = {
+export type CartDeliveryGroupEdge = {
   __typename?: 'CartDeliveryGroupEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of CartDeliveryGroupEdge. */
-  node: IShopifyCartDeliveryGroup;
+  node: CartDeliveryGroup;
 };
 
 /** Information about a delivery option. */
-export type IShopifyCartDeliveryOption = {
+export type CartDeliveryOption = {
   __typename?: 'CartDeliveryOption';
   /** The code of the delivery option. */
   code?: Maybe<Scalars['String']>;
   /** The method for the delivery option. */
-  deliveryMethodType: IShopifyDeliveryMethodType;
+  deliveryMethodType: DeliveryMethodType;
   /** The description of the delivery option. */
   description?: Maybe<Scalars['String']>;
   /** The estimated cost for the delivery option. */
-  estimatedCost: IShopifyMoneyV2;
+  estimatedCost: MoneyV2;
   /** The title of the delivery option. */
   title?: Maybe<Scalars['String']>;
 };
 
 /** The discounts that have been applied to the cart line. */
-export type IShopifyCartDiscountAllocation = {
+export type CartDiscountAllocation = {
   /** The discounted amount that has been applied to the cart line. */
-  discountedAmount: IShopifyMoneyV2;
+  discountedAmount: MoneyV2;
 };
 
 /** The discount codes applied to the cart. */
-export type IShopifyCartDiscountCode = {
+export type CartDiscountCode = {
   __typename?: 'CartDiscountCode';
   /** Whether the discount code is applicable to the cart's current contents. */
   applicable: Scalars['Boolean'];
@@ -640,16 +640,16 @@ export type IShopifyCartDiscountCode = {
 };
 
 /** Return type for `cartDiscountCodesUpdate` mutation. */
-export type IShopifyCartDiscountCodesUpdatePayload = {
+export type CartDiscountCodesUpdatePayload = {
   __typename?: 'CartDiscountCodesUpdatePayload';
   /** The updated cart. */
-  cart?: Maybe<IShopifyCart>;
+  cart?: Maybe<Cart>;
   /** The list of errors that occurred from executing the mutation. */
-  userErrors: Array<IShopifyCartUserError>;
+  userErrors: Array<CartUserError>;
 };
 
 /** Possible error codes that can be returned by `CartUserError`. */
-export enum IShopifyCartErrorCode {
+export enum CartErrorCode {
   /** The input value is invalid. */
   Invalid = 'INVALID',
   /** Merchandise line was not found in cart. */
@@ -668,66 +668,66 @@ export enum IShopifyCartErrorCode {
  * [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-cart).
  *
  */
-export type IShopifyCartEstimatedCost = {
+export type CartEstimatedCost = {
   __typename?: 'CartEstimatedCost';
   /** The estimated amount, before taxes and discounts, for the customer to pay at checkout. The checkout charge amount doesn't include any deferred payments that'll be paid at a later date. If the cart has no deferred payments, then the checkout charge amount is equivalent to`subtotal_amount`. */
-  checkoutChargeAmount: IShopifyMoneyV2;
+  checkoutChargeAmount: MoneyV2;
   /** The estimated amount, before taxes and discounts, for the customer to pay. */
-  subtotalAmount: IShopifyMoneyV2;
+  subtotalAmount: MoneyV2;
   /** The estimated total amount for the customer to pay. */
-  totalAmount: IShopifyMoneyV2;
+  totalAmount: MoneyV2;
   /** The estimated duty amount for the customer to pay at checkout. */
-  totalDutyAmount?: Maybe<IShopifyMoneyV2>;
+  totalDutyAmount?: Maybe<MoneyV2>;
   /** The estimated tax amount for the customer to pay at checkout. */
-  totalTaxAmount?: Maybe<IShopifyMoneyV2>;
+  totalTaxAmount?: Maybe<MoneyV2>;
 };
 
 /** Specifies the input fields to create a cart. */
-export type IShopifyCartInput = {
+export type CartInput = {
   /** An array of key-value pairs that contains additional information about the cart. */
-  attributes?: InputMaybe<Array<IShopifyAttributeInput>>;
+  attributes?: InputMaybe<Array<AttributeInput>>;
   /** The customer associated with the cart. Used to determine [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-checkout). Buyer identity should match the customer's shipping address. */
-  buyerIdentity?: InputMaybe<IShopifyCartBuyerIdentityInput>;
+  buyerIdentity?: InputMaybe<CartBuyerIdentityInput>;
   /**
    * The case-insensitive discount codes that the customer added at checkout.
    *
    */
   discountCodes?: InputMaybe<Array<Scalars['String']>>;
   /** A list of merchandise lines to add to the cart. */
-  lines?: InputMaybe<Array<IShopifyCartLineInput>>;
+  lines?: InputMaybe<Array<CartLineInput>>;
   /** A note that is associated with the cart. For example, the note can be a personalized message to the buyer. */
   note?: InputMaybe<Scalars['String']>;
 };
 
 /** Represents information about the merchandise in the cart. */
-export type IShopifyCartLine = IShopifyNode & {
+export type CartLine = Node & {
   __typename?: 'CartLine';
   /** An attribute associated with the cart line. */
-  attribute?: Maybe<IShopifyAttribute>;
+  attribute?: Maybe<Attribute>;
   /** The attributes associated with the cart line. Attributes are represented as key-value pairs. */
-  attributes: Array<IShopifyAttribute>;
+  attributes: Array<Attribute>;
   /** The cost of the merchandise that the buyer will pay for at checkout. The costs are subject to change and changes will be reflected at checkout. */
-  cost: IShopifyCartLineCost;
+  cost: CartLineCost;
   /** The discounts that have been applied to the cart line. */
-  discountAllocations: Array<IShopifyCartDiscountAllocation>;
+  discountAllocations: Array<CartDiscountAllocation>;
   /**
    * The estimated cost of the merchandise that the buyer will pay for at checkout. The estimated costs are subject to change and changes will be reflected at checkout.
    * @deprecated Use `cost` instead
    */
-  estimatedCost: IShopifyCartLineEstimatedCost;
+  estimatedCost: CartLineEstimatedCost;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** The merchandise that the buyer intends to purchase. */
-  merchandise: IShopifyMerchandise;
+  merchandise: Merchandise;
   /** The quantity of the merchandise that the customer intends to purchase. */
   quantity: Scalars['Int'];
   /** The selling plan associated with the cart line and the effect that each selling plan has on variants when they're purchased. */
-  sellingPlanAllocation?: Maybe<IShopifySellingPlanAllocation>;
+  sellingPlanAllocation?: Maybe<SellingPlanAllocation>;
 };
 
 
 /** Represents information about the merchandise in the cart. */
-export type IShopifyCartLineAttributeArgs = {
+export type CartLineAttributeArgs = {
   key: Scalars['String'];
 };
 
@@ -735,58 +735,58 @@ export type IShopifyCartLineAttributeArgs = {
  * An auto-generated type for paginating through multiple CartLines.
  *
  */
-export type IShopifyCartLineConnection = {
+export type CartLineConnection = {
   __typename?: 'CartLineConnection';
   /** A list of edges. */
-  edges: Array<IShopifyCartLineEdge>;
+  edges: Array<CartLineEdge>;
   /** A list of the nodes contained in CartLineEdge. */
-  nodes: Array<IShopifyCartLine>;
+  nodes: Array<CartLine>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /** The cost of the merchandise line that the buyer will pay at checkout. */
-export type IShopifyCartLineCost = {
+export type CartLineCost = {
   __typename?: 'CartLineCost';
   /** The amount of the merchandise line. */
-  amountPerQuantity: IShopifyMoneyV2;
+  amountPerQuantity: MoneyV2;
   /** The compare at amount of the merchandise line. */
-  compareAtAmountPerQuantity?: Maybe<IShopifyMoneyV2>;
+  compareAtAmountPerQuantity?: Maybe<MoneyV2>;
   /** The cost of the merchandise line before line-level discounts. */
-  subtotalAmount: IShopifyMoneyV2;
+  subtotalAmount: MoneyV2;
   /** The total cost of the merchandise line. */
-  totalAmount: IShopifyMoneyV2;
+  totalAmount: MoneyV2;
 };
 
 /**
  * An auto-generated type which holds one CartLine and a cursor during pagination.
  *
  */
-export type IShopifyCartLineEdge = {
+export type CartLineEdge = {
   __typename?: 'CartLineEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of CartLineEdge. */
-  node: IShopifyCartLine;
+  node: CartLine;
 };
 
 /** The estimated cost of the merchandise line that the buyer will pay at checkout. */
-export type IShopifyCartLineEstimatedCost = {
+export type CartLineEstimatedCost = {
   __typename?: 'CartLineEstimatedCost';
   /** The amount of the merchandise line. */
-  amount: IShopifyMoneyV2;
+  amount: MoneyV2;
   /** The compare at amount of the merchandise line. */
-  compareAtAmount?: Maybe<IShopifyMoneyV2>;
+  compareAtAmount?: Maybe<MoneyV2>;
   /** The estimated cost of the merchandise line before discounts. */
-  subtotalAmount: IShopifyMoneyV2;
+  subtotalAmount: MoneyV2;
   /** The estimated total cost of the merchandise line. */
-  totalAmount: IShopifyMoneyV2;
+  totalAmount: MoneyV2;
 };
 
 /** Specifies the input fields to create a merchandise line on a cart. */
-export type IShopifyCartLineInput = {
+export type CartLineInput = {
   /** An array of key-value pairs that contains additional information about the merchandise line. */
-  attributes?: InputMaybe<Array<IShopifyAttributeInput>>;
+  attributes?: InputMaybe<Array<AttributeInput>>;
   /** The identifier of the merchandise that the buyer intends to purchase. */
   merchandiseId: Scalars['ID'];
   /** The quantity of the merchandise. */
@@ -796,9 +796,9 @@ export type IShopifyCartLineInput = {
 };
 
 /** Specifies the input fields to update a line item on a cart. */
-export type IShopifyCartLineUpdateInput = {
+export type CartLineUpdateInput = {
   /** An array of key-value pairs that contains additional information about the merchandise line. */
-  attributes?: InputMaybe<Array<IShopifyAttributeInput>>;
+  attributes?: InputMaybe<Array<AttributeInput>>;
   /** The identifier of the merchandise line. */
   id: Scalars['ID'];
   /** The identifier of the merchandise for the line item. */
@@ -810,46 +810,46 @@ export type IShopifyCartLineUpdateInput = {
 };
 
 /** Return type for `cartLinesAdd` mutation. */
-export type IShopifyCartLinesAddPayload = {
+export type CartLinesAddPayload = {
   __typename?: 'CartLinesAddPayload';
   /** The updated cart. */
-  cart?: Maybe<IShopifyCart>;
+  cart?: Maybe<Cart>;
   /** The list of errors that occurred from executing the mutation. */
-  userErrors: Array<IShopifyCartUserError>;
+  userErrors: Array<CartUserError>;
 };
 
 /** Return type for `cartLinesRemove` mutation. */
-export type IShopifyCartLinesRemovePayload = {
+export type CartLinesRemovePayload = {
   __typename?: 'CartLinesRemovePayload';
   /** The updated cart. */
-  cart?: Maybe<IShopifyCart>;
+  cart?: Maybe<Cart>;
   /** The list of errors that occurred from executing the mutation. */
-  userErrors: Array<IShopifyCartUserError>;
+  userErrors: Array<CartUserError>;
 };
 
 /** Return type for `cartLinesUpdate` mutation. */
-export type IShopifyCartLinesUpdatePayload = {
+export type CartLinesUpdatePayload = {
   __typename?: 'CartLinesUpdatePayload';
   /** The updated cart. */
-  cart?: Maybe<IShopifyCart>;
+  cart?: Maybe<Cart>;
   /** The list of errors that occurred from executing the mutation. */
-  userErrors: Array<IShopifyCartUserError>;
+  userErrors: Array<CartUserError>;
 };
 
 /** Return type for `cartNoteUpdate` mutation. */
-export type IShopifyCartNoteUpdatePayload = {
+export type CartNoteUpdatePayload = {
   __typename?: 'CartNoteUpdatePayload';
   /** The updated cart. */
-  cart?: Maybe<IShopifyCart>;
+  cart?: Maybe<Cart>;
   /** The list of errors that occurred from executing the mutation. */
-  userErrors: Array<IShopifyCartUserError>;
+  userErrors: Array<CartUserError>;
 };
 
 /** Represents an error that happens during execution of a cart mutation. */
-export type IShopifyCartUserError = IShopifyDisplayableError & {
+export type CartUserError = DisplayableError & {
   __typename?: 'CartUserError';
   /** The error code. */
-  code?: Maybe<IShopifyCartErrorCode>;
+  code?: Maybe<CartErrorCode>;
   /** The path to the input field that caused the error. */
   field?: Maybe<Array<Scalars['String']>>;
   /** The error message. */
@@ -857,41 +857,41 @@ export type IShopifyCartUserError = IShopifyDisplayableError & {
 };
 
 /** A container for all the information required to checkout items and pay. */
-export type IShopifyCheckout = IShopifyNode & {
+export type Checkout = Node & {
   __typename?: 'Checkout';
   /** The gift cards used on the checkout. */
-  appliedGiftCards: Array<IShopifyAppliedGiftCard>;
+  appliedGiftCards: Array<AppliedGiftCard>;
   /**
    * The available shipping rates for this Checkout.
    * Should only be used when checkout `requiresShipping` is `true` and
    * the shipping address is valid.
    *
    */
-  availableShippingRates?: Maybe<IShopifyAvailableShippingRates>;
+  availableShippingRates?: Maybe<AvailableShippingRates>;
   /** The identity of the customer associated with the checkout. */
-  buyerIdentity: IShopifyCheckoutBuyerIdentity;
+  buyerIdentity: CheckoutBuyerIdentity;
   /** The date and time when the checkout was completed. */
   completedAt?: Maybe<Scalars['DateTime']>;
   /** The date and time when the checkout was created. */
   createdAt: Scalars['DateTime'];
   /** The currency code for the checkout. */
-  currencyCode: IShopifyCurrencyCode;
+  currencyCode: CurrencyCode;
   /** A list of extra information that is added to the checkout. */
-  customAttributes: Array<IShopifyAttribute>;
+  customAttributes: Array<Attribute>;
   /** Discounts that have been applied on the checkout. */
-  discountApplications: IShopifyDiscountApplicationConnection;
+  discountApplications: DiscountApplicationConnection;
   /** The email attached to this checkout. */
   email?: Maybe<Scalars['String']>;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** A list of line item objects, each one containing information about an item in the checkout. */
-  lineItems: IShopifyCheckoutLineItemConnection;
+  lineItems: CheckoutLineItemConnection;
   /** The sum of all the prices of all the items in the checkout. Duties, taxes, shipping and discounts excluded. */
-  lineItemsSubtotalPrice: IShopifyMoneyV2;
+  lineItemsSubtotalPrice: MoneyV2;
   /** The note associated with the checkout. */
   note?: Maybe<Scalars['String']>;
   /** The resulting order from a paid checkout. */
-  order?: Maybe<IShopifyOrder>;
+  order?: Maybe<Order>;
   /** The Order Status Page for this Checkout, null when checkout is not completed. */
   orderStatusUrl?: Maybe<Scalars['URL']>;
   /**
@@ -900,7 +900,7 @@ export type IShopifyCheckout = IShopifyNode & {
    */
   paymentDue: Scalars['Money'];
   /** The amount left to be paid. This is equal to the cost of the line items, duties, taxes, and shipping, minus discounts and gift cards. */
-  paymentDueV2: IShopifyMoneyV2;
+  paymentDueV2: MoneyV2;
   /**
    * Whether or not the Checkout is ready and can be completed. Checkouts may
    * have asynchronous operations that can take time to finish. If you want
@@ -912,41 +912,41 @@ export type IShopifyCheckout = IShopifyNode & {
   /** States whether or not the fulfillment requires shipping. */
   requiresShipping: Scalars['Boolean'];
   /** The shipping address to where the line items will be shipped. */
-  shippingAddress?: Maybe<IShopifyMailingAddress>;
+  shippingAddress?: Maybe<MailingAddress>;
   /**
    * The discounts that have been allocated onto the shipping line by discount applications.
    *
    */
-  shippingDiscountAllocations: Array<IShopifyDiscountAllocation>;
+  shippingDiscountAllocations: Array<DiscountAllocation>;
   /** Once a shipping rate is selected by the customer it is transitioned to a `shipping_line` object. */
-  shippingLine?: Maybe<IShopifyShippingRate>;
+  shippingLine?: Maybe<ShippingRate>;
   /**
    * Price of the checkout before shipping and taxes.
    * @deprecated Use `subtotalPriceV2` instead
    */
   subtotalPrice: Scalars['Money'];
   /** The price at checkout before duties, shipping, and taxes. */
-  subtotalPriceV2: IShopifyMoneyV2;
+  subtotalPriceV2: MoneyV2;
   /** Whether the checkout is tax exempt. */
   taxExempt: Scalars['Boolean'];
   /** Whether taxes are included in the line item and shipping line prices. */
   taxesIncluded: Scalars['Boolean'];
   /** The sum of all the duties applied to the line items in the checkout. */
-  totalDuties?: Maybe<IShopifyMoneyV2>;
+  totalDuties?: Maybe<MoneyV2>;
   /**
    * The sum of all the prices of all the items in the checkout, taxes and discounts included.
    * @deprecated Use `totalPriceV2` instead
    */
   totalPrice: Scalars['Money'];
   /** The sum of all the prices of all the items in the checkout, including duties, taxes, and discounts. */
-  totalPriceV2: IShopifyMoneyV2;
+  totalPriceV2: MoneyV2;
   /**
    * The sum of all the taxes applied to the line items and shipping lines in the checkout.
    * @deprecated Use `totalTaxV2` instead
    */
   totalTax: Scalars['Money'];
   /** The sum of all the taxes applied to the line items and shipping lines in the checkout. */
-  totalTaxV2: IShopifyMoneyV2;
+  totalTaxV2: MoneyV2;
   /** The date and time when the checkout was last updated. */
   updatedAt: Scalars['DateTime'];
   /** The url pointing to the checkout accessible from the web. */
@@ -955,7 +955,7 @@ export type IShopifyCheckout = IShopifyNode & {
 
 
 /** A container for all the information required to checkout items and pay. */
-export type IShopifyCheckoutDiscountApplicationsArgs = {
+export type CheckoutDiscountApplicationsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -965,7 +965,7 @@ export type IShopifyCheckoutDiscountApplicationsArgs = {
 
 
 /** A container for all the information required to checkout items and pay. */
-export type IShopifyCheckoutLineItemsArgs = {
+export type CheckoutLineItemsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -974,7 +974,7 @@ export type IShopifyCheckoutLineItemsArgs = {
 };
 
 /** Specifies the fields required to update a checkout's attributes. */
-export type IShopifyCheckoutAttributesUpdateV2Input = {
+export type CheckoutAttributesUpdateV2Input = {
   /**
    * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
    * The required attributes are city, province, and country.
@@ -984,91 +984,91 @@ export type IShopifyCheckoutAttributesUpdateV2Input = {
    */
   allowPartialAddresses?: InputMaybe<Scalars['Boolean']>;
   /** A list of extra information that is added to the checkout. */
-  customAttributes?: InputMaybe<Array<IShopifyAttributeInput>>;
+  customAttributes?: InputMaybe<Array<AttributeInput>>;
   /** The text of an optional note that a shop owner can attach to the checkout. */
   note?: InputMaybe<Scalars['String']>;
 };
 
 /** Return type for `checkoutAttributesUpdateV2` mutation. */
-export type IShopifyCheckoutAttributesUpdateV2Payload = {
+export type CheckoutAttributesUpdateV2Payload = {
   __typename?: 'CheckoutAttributesUpdateV2Payload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** The identity of the customer associated with the checkout. */
-export type IShopifyCheckoutBuyerIdentity = {
+export type CheckoutBuyerIdentity = {
   __typename?: 'CheckoutBuyerIdentity';
   /** The country code for the checkout. For example, `CA`. */
-  countryCode?: Maybe<IShopifyCountryCode>;
+  countryCode?: Maybe<CountryCode>;
 };
 
 /** Specifies the identity of the customer associated with the checkout. */
-export type IShopifyCheckoutBuyerIdentityInput = {
+export type CheckoutBuyerIdentityInput = {
   /**
    * The country code of one of the shop's
    * [enabled countries](https://help.shopify.com/en/manual/payments/shopify-payments/multi-currency/setup).
    * For example, `CA`. Including this field creates a checkout in the specified country's currency.
    *
    */
-  countryCode: IShopifyCountryCode;
+  countryCode: CountryCode;
 };
 
 /** Return type for `checkoutCompleteFree` mutation. */
-export type IShopifyCheckoutCompleteFreePayload = {
+export type CheckoutCompleteFreePayload = {
   __typename?: 'CheckoutCompleteFreePayload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutCompleteWithCreditCardV2` mutation. */
-export type IShopifyCheckoutCompleteWithCreditCardV2Payload = {
+export type CheckoutCompleteWithCreditCardV2Payload = {
   __typename?: 'CheckoutCompleteWithCreditCardV2Payload';
   /** The checkout on which the payment was applied. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /** A representation of the attempted payment. */
-  payment?: Maybe<IShopifyPayment>;
+  payment?: Maybe<Payment>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutCompleteWithTokenizedPaymentV3` mutation. */
-export type IShopifyCheckoutCompleteWithTokenizedPaymentV3Payload = {
+export type CheckoutCompleteWithTokenizedPaymentV3Payload = {
   __typename?: 'CheckoutCompleteWithTokenizedPaymentV3Payload';
   /** The checkout on which the payment was applied. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /** A representation of the attempted payment. */
-  payment?: Maybe<IShopifyPayment>;
+  payment?: Maybe<Payment>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Specifies the fields required to create a checkout. */
-export type IShopifyCheckoutCreateInput = {
+export type CheckoutCreateInput = {
   /**
    * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
    * The required attributes are city, province, and country.
@@ -1077,109 +1077,109 @@ export type IShopifyCheckoutCreateInput = {
    */
   allowPartialAddresses?: InputMaybe<Scalars['Boolean']>;
   /** The identity of the customer associated with the checkout. */
-  buyerIdentity?: InputMaybe<IShopifyCheckoutBuyerIdentityInput>;
+  buyerIdentity?: InputMaybe<CheckoutBuyerIdentityInput>;
   /** A list of extra information that is added to the checkout. */
-  customAttributes?: InputMaybe<Array<IShopifyAttributeInput>>;
+  customAttributes?: InputMaybe<Array<AttributeInput>>;
   /** The email with which the customer wants to checkout. */
   email?: InputMaybe<Scalars['String']>;
   /** A list of line item objects, each one containing information about an item in the checkout. */
-  lineItems?: InputMaybe<Array<IShopifyCheckoutLineItemInput>>;
+  lineItems?: InputMaybe<Array<CheckoutLineItemInput>>;
   /** The text of an optional note that a shop owner can attach to the checkout. */
   note?: InputMaybe<Scalars['String']>;
   /** The shipping address to where the line items will be shipped. */
-  shippingAddress?: InputMaybe<IShopifyMailingAddressInput>;
+  shippingAddress?: InputMaybe<MailingAddressInput>;
 };
 
 /** Return type for `checkoutCreate` mutation. */
-export type IShopifyCheckoutCreatePayload = {
+export type CheckoutCreatePayload = {
   __typename?: 'CheckoutCreatePayload';
   /** The new checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /** The checkout queue token. Available only to selected stores. */
   queueToken?: Maybe<Scalars['String']>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutCustomerAssociateV2` mutation. */
-export type IShopifyCheckoutCustomerAssociateV2Payload = {
+export type CheckoutCustomerAssociateV2Payload = {
   __typename?: 'CheckoutCustomerAssociateV2Payload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /** The associated customer object. */
-  customer?: Maybe<IShopifyCustomer>;
+  customer?: Maybe<Customer>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutCustomerDisassociateV2` mutation. */
-export type IShopifyCheckoutCustomerDisassociateV2Payload = {
+export type CheckoutCustomerDisassociateV2Payload = {
   __typename?: 'CheckoutCustomerDisassociateV2Payload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutDiscountCodeApplyV2` mutation. */
-export type IShopifyCheckoutDiscountCodeApplyV2Payload = {
+export type CheckoutDiscountCodeApplyV2Payload = {
   __typename?: 'CheckoutDiscountCodeApplyV2Payload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutDiscountCodeRemove` mutation. */
-export type IShopifyCheckoutDiscountCodeRemovePayload = {
+export type CheckoutDiscountCodeRemovePayload = {
   __typename?: 'CheckoutDiscountCodeRemovePayload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutEmailUpdateV2` mutation. */
-export type IShopifyCheckoutEmailUpdateV2Payload = {
+export type CheckoutEmailUpdateV2Payload = {
   __typename?: 'CheckoutEmailUpdateV2Payload';
   /** The checkout object with the updated email. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Possible error codes that can be returned by `CheckoutUserError`. */
-export enum IShopifyCheckoutErrorCode {
+export enum CheckoutErrorCode {
   /** Checkout is already completed. */
   AlreadyCompleted = 'ALREADY_COMPLETED',
   /** Input email contains an invalid domain name. */
@@ -1269,40 +1269,40 @@ export enum IShopifyCheckoutErrorCode {
 }
 
 /** Return type for `checkoutGiftCardRemoveV2` mutation. */
-export type IShopifyCheckoutGiftCardRemoveV2Payload = {
+export type CheckoutGiftCardRemoveV2Payload = {
   __typename?: 'CheckoutGiftCardRemoveV2Payload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutGiftCardsAppend` mutation. */
-export type IShopifyCheckoutGiftCardsAppendPayload = {
+export type CheckoutGiftCardsAppendPayload = {
   __typename?: 'CheckoutGiftCardsAppendPayload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** A single line item in the checkout, grouped by variant and attributes. */
-export type IShopifyCheckoutLineItem = IShopifyNode & {
+export type CheckoutLineItem = Node & {
   __typename?: 'CheckoutLineItem';
   /** Extra information in the form of an array of Key-Value pairs about the line item. */
-  customAttributes: Array<IShopifyAttribute>;
+  customAttributes: Array<Attribute>;
   /** The discounts that have been allocated onto the checkout line item by discount applications. */
-  discountAllocations: Array<IShopifyDiscountAllocation>;
+  discountAllocations: Array<DiscountAllocation>;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** The quantity of the line item. */
@@ -1310,41 +1310,41 @@ export type IShopifyCheckoutLineItem = IShopifyNode & {
   /** Title of the line item. Defaults to the product's title. */
   title: Scalars['String'];
   /** Unit price of the line item. */
-  unitPrice?: Maybe<IShopifyMoneyV2>;
+  unitPrice?: Maybe<MoneyV2>;
   /** Product variant of the line item. */
-  variant?: Maybe<IShopifyProductVariant>;
+  variant?: Maybe<ProductVariant>;
 };
 
 /**
  * An auto-generated type for paginating through multiple CheckoutLineItems.
  *
  */
-export type IShopifyCheckoutLineItemConnection = {
+export type CheckoutLineItemConnection = {
   __typename?: 'CheckoutLineItemConnection';
   /** A list of edges. */
-  edges: Array<IShopifyCheckoutLineItemEdge>;
+  edges: Array<CheckoutLineItemEdge>;
   /** A list of the nodes contained in CheckoutLineItemEdge. */
-  nodes: Array<IShopifyCheckoutLineItem>;
+  nodes: Array<CheckoutLineItem>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one CheckoutLineItem and a cursor during pagination.
  *
  */
-export type IShopifyCheckoutLineItemEdge = {
+export type CheckoutLineItemEdge = {
   __typename?: 'CheckoutLineItemEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of CheckoutLineItemEdge. */
-  node: IShopifyCheckoutLineItem;
+  node: CheckoutLineItem;
 };
 
 /** Specifies the input fields to create a line item on a checkout. */
-export type IShopifyCheckoutLineItemInput = {
+export type CheckoutLineItemInput = {
   /** Extra information in the form of an array of Key-Value pairs about the line item. */
-  customAttributes?: InputMaybe<Array<IShopifyAttributeInput>>;
+  customAttributes?: InputMaybe<Array<AttributeInput>>;
   /** The quantity of the line item. */
   quantity: Scalars['Int'];
   /** The identifier of the product variant for the line item. */
@@ -1352,9 +1352,9 @@ export type IShopifyCheckoutLineItemInput = {
 };
 
 /** Specifies the input fields to update a line item on the checkout. */
-export type IShopifyCheckoutLineItemUpdateInput = {
+export type CheckoutLineItemUpdateInput = {
   /** Extra information in the form of an array of Key-Value pairs about the line item. */
-  customAttributes?: InputMaybe<Array<IShopifyAttributeInput>>;
+  customAttributes?: InputMaybe<Array<AttributeInput>>;
   /** The identifier of the line item. */
   id?: InputMaybe<Scalars['ID']>;
   /** The quantity of the line item. */
@@ -1364,89 +1364,89 @@ export type IShopifyCheckoutLineItemUpdateInput = {
 };
 
 /** Return type for `checkoutLineItemsAdd` mutation. */
-export type IShopifyCheckoutLineItemsAddPayload = {
+export type CheckoutLineItemsAddPayload = {
   __typename?: 'CheckoutLineItemsAddPayload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutLineItemsRemove` mutation. */
-export type IShopifyCheckoutLineItemsRemovePayload = {
+export type CheckoutLineItemsRemovePayload = {
   __typename?: 'CheckoutLineItemsRemovePayload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutLineItemsReplace` mutation. */
-export type IShopifyCheckoutLineItemsReplacePayload = {
+export type CheckoutLineItemsReplacePayload = {
   __typename?: 'CheckoutLineItemsReplacePayload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  userErrors: Array<IShopifyCheckoutUserError>;
+  userErrors: Array<CheckoutUserError>;
 };
 
 /** Return type for `checkoutLineItemsUpdate` mutation. */
-export type IShopifyCheckoutLineItemsUpdatePayload = {
+export type CheckoutLineItemsUpdatePayload = {
   __typename?: 'CheckoutLineItemsUpdatePayload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutShippingAddressUpdateV2` mutation. */
-export type IShopifyCheckoutShippingAddressUpdateV2Payload = {
+export type CheckoutShippingAddressUpdateV2Payload = {
   __typename?: 'CheckoutShippingAddressUpdateV2Payload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `checkoutShippingLineUpdate` mutation. */
-export type IShopifyCheckoutShippingLineUpdatePayload = {
+export type CheckoutShippingLineUpdatePayload = {
   __typename?: 'CheckoutShippingLineUpdatePayload';
   /** The updated checkout object. */
-  checkout?: Maybe<IShopifyCheckout>;
+  checkout?: Maybe<Checkout>;
   /** The list of errors that occurred from executing the mutation. */
-  checkoutUserErrors: Array<IShopifyCheckoutUserError>;
+  checkoutUserErrors: Array<CheckoutUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Represents an error that happens during execution of a checkout mutation. */
-export type IShopifyCheckoutUserError = IShopifyDisplayableError & {
+export type CheckoutUserError = DisplayableError & {
   __typename?: 'CheckoutUserError';
   /** The error code. */
-  code?: Maybe<IShopifyCheckoutErrorCode>;
+  code?: Maybe<CheckoutErrorCode>;
   /** The path to the input field that caused the error. */
   field?: Maybe<Array<Scalars['String']>>;
   /** The error message. */
@@ -1454,7 +1454,7 @@ export type IShopifyCheckoutUserError = IShopifyDisplayableError & {
 };
 
 /** A collection represents a grouping of products that a shop owner can create to organize them or make their shops easier to browse. */
-export type IShopifyCollection = IShopifyHasMetafields & IShopifyNode & IShopifyOnlineStorePublishable & {
+export type Collection = HasMetafields & Node & OnlineStorePublishable & {
   __typename?: 'Collection';
   /** Stripped description of the collection, single line with HTML tags removed. */
   description: Scalars['String'];
@@ -1469,20 +1469,20 @@ export type IShopifyCollection = IShopifyHasMetafields & IShopifyNode & IShopify
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** Image associated with the collection. */
-  image?: Maybe<IShopifyImage>;
+  image?: Maybe<Image>;
   /** Returns a metafield found by namespace and key. */
-  metafield?: Maybe<IShopifyMetafield>;
+  metafield?: Maybe<Metafield>;
   /**
    * The metafields associated with the resource matching the supplied list of namespaces and keys.
    *
    */
-  metafields: Array<Maybe<IShopifyMetafield>>;
+  metafields: Array<Maybe<Metafield>>;
   /** The URL used for viewing the resource on the shop's Online Store. Returns `null` if the resource is currently not published to the Online Store sales channel. */
   onlineStoreUrl?: Maybe<Scalars['URL']>;
   /** List of products in the collection. */
-  products: IShopifyProductConnection;
+  products: ProductConnection;
   /** The collection's SEO information. */
-  seo: IShopifySeo;
+  seo: Seo;
   /** The collection’s name. Limit of 255 characters. */
   title: Scalars['String'];
   /** The date and time when the collection was last modified. */
@@ -1491,63 +1491,63 @@ export type IShopifyCollection = IShopifyHasMetafields & IShopifyNode & IShopify
 
 
 /** A collection represents a grouping of products that a shop owner can create to organize them or make their shops easier to browse. */
-export type IShopifyCollectionDescriptionArgs = {
+export type CollectionDescriptionArgs = {
   truncateAt?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** A collection represents a grouping of products that a shop owner can create to organize them or make their shops easier to browse. */
-export type IShopifyCollectionMetafieldArgs = {
+export type CollectionMetafieldArgs = {
   key: Scalars['String'];
   namespace: Scalars['String'];
 };
 
 
 /** A collection represents a grouping of products that a shop owner can create to organize them or make their shops easier to browse. */
-export type IShopifyCollectionMetafieldsArgs = {
-  identifiers: Array<IShopifyHasMetafieldsIdentifier>;
+export type CollectionMetafieldsArgs = {
+  identifiers: Array<HasMetafieldsIdentifier>;
 };
 
 
 /** A collection represents a grouping of products that a shop owner can create to organize them or make their shops easier to browse. */
-export type IShopifyCollectionProductsArgs = {
+export type CollectionProductsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
-  filters?: InputMaybe<Array<IShopifyProductFilter>>;
+  filters?: InputMaybe<Array<ProductFilter>>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyProductCollectionSortKeys>;
+  sortKey?: InputMaybe<ProductCollectionSortKeys>;
 };
 
 /**
  * An auto-generated type for paginating through multiple Collections.
  *
  */
-export type IShopifyCollectionConnection = {
+export type CollectionConnection = {
   __typename?: 'CollectionConnection';
   /** A list of edges. */
-  edges: Array<IShopifyCollectionEdge>;
+  edges: Array<CollectionEdge>;
   /** A list of the nodes contained in CollectionEdge. */
-  nodes: Array<IShopifyCollection>;
+  nodes: Array<Collection>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one Collection and a cursor during pagination.
  *
  */
-export type IShopifyCollectionEdge = {
+export type CollectionEdge = {
   __typename?: 'CollectionEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of CollectionEdge. */
-  node: IShopifyCollection;
+  node: Collection;
 };
 
 /** The set of valid sort keys for the Collection query. */
-export enum IShopifyCollectionSortKeys {
+export enum CollectionSortKeys {
   /** Sort by the `id` value. */
   Id = 'ID',
   /**
@@ -1563,10 +1563,10 @@ export enum IShopifyCollectionSortKeys {
 }
 
 /** A comment on an article. */
-export type IShopifyComment = IShopifyNode & {
+export type Comment = Node & {
   __typename?: 'Comment';
   /** The comment’s author. */
-  author: IShopifyCommentAuthor;
+  author: CommentAuthor;
   /** Stripped content of the comment, single line with HTML tags removed. */
   content: Scalars['String'];
   /** The content of the comment, complete with HTML formatting. */
@@ -1577,12 +1577,12 @@ export type IShopifyComment = IShopifyNode & {
 
 
 /** A comment on an article. */
-export type IShopifyCommentContentArgs = {
+export type CommentContentArgs = {
   truncateAt?: InputMaybe<Scalars['Int']>;
 };
 
 /** The author of a comment. */
-export type IShopifyCommentAuthor = {
+export type CommentAuthor = {
   __typename?: 'CommentAuthor';
   /** The author's email. */
   email: Scalars['String'];
@@ -1594,41 +1594,41 @@ export type IShopifyCommentAuthor = {
  * An auto-generated type for paginating through multiple Comments.
  *
  */
-export type IShopifyCommentConnection = {
+export type CommentConnection = {
   __typename?: 'CommentConnection';
   /** A list of edges. */
-  edges: Array<IShopifyCommentEdge>;
+  edges: Array<CommentEdge>;
   /** A list of the nodes contained in CommentEdge. */
-  nodes: Array<IShopifyComment>;
+  nodes: Array<Comment>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one Comment and a cursor during pagination.
  *
  */
-export type IShopifyCommentEdge = {
+export type CommentEdge = {
   __typename?: 'CommentEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of CommentEdge. */
-  node: IShopifyComment;
+  node: Comment;
 };
 
 /** A country. */
-export type IShopifyCountry = {
+export type Country = {
   __typename?: 'Country';
   /** The languages available for the country. */
-  availableLanguages: Array<IShopifyLanguage>;
+  availableLanguages: Array<Language>;
   /** The currency of the country. */
-  currency: IShopifyCurrency;
+  currency: Currency;
   /** The ISO code of the country. */
-  isoCode: IShopifyCountryCode;
+  isoCode: CountryCode;
   /** The name of the country. */
   name: Scalars['String'];
   /** The unit system used in the country. */
-  unitSystem: IShopifyUnitSystem;
+  unitSystem: UnitSystem;
 };
 
 /**
@@ -1638,7 +1638,7 @@ export type IShopifyCountry = {
  * and the territories associated with the United States of America are represented by the country code `US`.
  *
  */
-export enum IShopifyCountryCode {
+export enum CountryCode {
   /** Ascension Island. */
   Ac = 'AC',
   /** Andorra. */
@@ -2132,7 +2132,7 @@ export enum IShopifyCountryCode {
 }
 
 /** Credit card information used for a payment. */
-export type IShopifyCreditCard = {
+export type CreditCard = {
   __typename?: 'CreditCard';
   /** The brand of the credit card. */
   brand?: Maybe<Scalars['String']>;
@@ -2157,13 +2157,13 @@ export type IShopifyCreditCard = {
  * a Shopify vaulted credit card payment.
  *
  */
-export type IShopifyCreditCardPaymentInputV2 = {
+export type CreditCardPaymentInputV2 = {
   /** The billing address for the payment. */
-  billingAddress: IShopifyMailingAddressInput;
+  billingAddress: MailingAddressInput;
   /** A unique client generated key used to avoid duplicate charges. When a duplicate payment is found, the original is returned instead of creating a new one. For more information, refer to [Idempotent requests](https://shopify.dev/api/usage/idempotent-requests). */
   idempotencyKey: Scalars['String'];
   /** The amount and currency of the payment. */
-  paymentAmount: IShopifyMoneyInput;
+  paymentAmount: MoneyInput;
   /** Executes the payment in test mode if possible. Defaults to `false`. */
   test?: InputMaybe<Scalars['Boolean']>;
   /** The ID returned by Shopify's Card Vault. */
@@ -2171,7 +2171,7 @@ export type IShopifyCreditCardPaymentInputV2 = {
 };
 
 /** The part of the image that should remain after cropping. */
-export enum IShopifyCropRegion {
+export enum CropRegion {
   /** Keep the bottom of the image. */
   Bottom = 'BOTTOM',
   /** Keep the center of the image. */
@@ -2185,10 +2185,10 @@ export enum IShopifyCropRegion {
 }
 
 /** A currency. */
-export type IShopifyCurrency = {
+export type Currency = {
   __typename?: 'Currency';
   /** The ISO code of the currency. */
-  isoCode: IShopifyCurrencyCode;
+  isoCode: CurrencyCode;
   /** The name of the currency. */
   name: Scalars['String'];
   /** The symbol of the currency. */
@@ -2200,7 +2200,7 @@ export type IShopifyCurrency = {
  * and non-standard codes.
  *
  */
-export enum IShopifyCurrencyCode {
+export enum CurrencyCode {
   /** United Arab Emirates Dirham (AED). */
   Aed = 'AED',
   /** Afghan Afghani (AFN). */
@@ -2535,16 +2535,16 @@ export enum IShopifyCurrencyCode {
 }
 
 /** A customer represents a customer account with the shop. Customer accounts store contact information for the customer, saving logged-in customers the trouble of having to provide it at every checkout. */
-export type IShopifyCustomer = IShopifyHasMetafields & {
+export type Customer = HasMetafields & {
   __typename?: 'Customer';
   /** Indicates whether the customer has consented to be sent marketing material via email. */
   acceptsMarketing: Scalars['Boolean'];
   /** A list of addresses for the customer. */
-  addresses: IShopifyMailingAddressConnection;
+  addresses: MailingAddressConnection;
   /** The date and time when the customer was created. */
   createdAt: Scalars['DateTime'];
   /** The customer’s default address. */
-  defaultAddress?: Maybe<IShopifyMailingAddress>;
+  defaultAddress?: Maybe<MailingAddress>;
   /** The customer’s name, email or phone number. */
   displayName: Scalars['String'];
   /** The customer’s email address. */
@@ -2554,18 +2554,18 @@ export type IShopifyCustomer = IShopifyHasMetafields & {
   /** A unique identifier for the customer. */
   id: Scalars['ID'];
   /** The customer's most recently updated, incomplete checkout. */
-  lastIncompleteCheckout?: Maybe<IShopifyCheckout>;
+  lastIncompleteCheckout?: Maybe<Checkout>;
   /** The customer’s last name. */
   lastName?: Maybe<Scalars['String']>;
   /** Returns a metafield found by namespace and key. */
-  metafield?: Maybe<IShopifyMetafield>;
+  metafield?: Maybe<Metafield>;
   /**
    * The metafields associated with the resource matching the supplied list of namespaces and keys.
    *
    */
-  metafields: Array<Maybe<IShopifyMetafield>>;
+  metafields: Array<Maybe<Metafield>>;
   /** The orders associated with the customer. */
-  orders: IShopifyOrderConnection;
+  orders: OrderConnection;
   /** The customer’s phone number. */
   phone?: Maybe<Scalars['String']>;
   /**
@@ -2580,7 +2580,7 @@ export type IShopifyCustomer = IShopifyHasMetafields & {
 
 
 /** A customer represents a customer account with the shop. Customer accounts store contact information for the customer, saving logged-in customers the trouble of having to provide it at every checkout. */
-export type IShopifyCustomerAddressesArgs = {
+export type CustomerAddressesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -2590,31 +2590,31 @@ export type IShopifyCustomerAddressesArgs = {
 
 
 /** A customer represents a customer account with the shop. Customer accounts store contact information for the customer, saving logged-in customers the trouble of having to provide it at every checkout. */
-export type IShopifyCustomerMetafieldArgs = {
+export type CustomerMetafieldArgs = {
   key: Scalars['String'];
   namespace: Scalars['String'];
 };
 
 
 /** A customer represents a customer account with the shop. Customer accounts store contact information for the customer, saving logged-in customers the trouble of having to provide it at every checkout. */
-export type IShopifyCustomerMetafieldsArgs = {
-  identifiers: Array<IShopifyHasMetafieldsIdentifier>;
+export type CustomerMetafieldsArgs = {
+  identifiers: Array<HasMetafieldsIdentifier>;
 };
 
 
 /** A customer represents a customer account with the shop. Customer accounts store contact information for the customer, saving logged-in customers the trouble of having to provide it at every checkout. */
-export type IShopifyCustomerOrdersArgs = {
+export type CustomerOrdersArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   query?: InputMaybe<Scalars['String']>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyOrderSortKeys>;
+  sortKey?: InputMaybe<OrderSortKeys>;
 };
 
 /** A CustomerAccessToken represents the unique token required to make modifications to the customer object. */
-export type IShopifyCustomerAccessToken = {
+export type CustomerAccessToken = {
   __typename?: 'CustomerAccessToken';
   /** The customer’s access token. */
   accessToken: Scalars['String'];
@@ -2623,7 +2623,7 @@ export type IShopifyCustomerAccessToken = {
 };
 
 /** Specifies the input fields required to create a customer access token. */
-export type IShopifyCustomerAccessTokenCreateInput = {
+export type CustomerAccessTokenCreateInput = {
   /** The email associated to the customer. */
   email: Scalars['String'];
   /** The login password to be used by the customer. */
@@ -2631,61 +2631,61 @@ export type IShopifyCustomerAccessTokenCreateInput = {
 };
 
 /** Return type for `customerAccessTokenCreate` mutation. */
-export type IShopifyCustomerAccessTokenCreatePayload = {
+export type CustomerAccessTokenCreatePayload = {
   __typename?: 'CustomerAccessTokenCreatePayload';
   /** The newly created customer access token object. */
-  customerAccessToken?: Maybe<IShopifyCustomerAccessToken>;
+  customerAccessToken?: Maybe<CustomerAccessToken>;
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `customerAccessTokenCreateWithMultipass` mutation. */
-export type IShopifyCustomerAccessTokenCreateWithMultipassPayload = {
+export type CustomerAccessTokenCreateWithMultipassPayload = {
   __typename?: 'CustomerAccessTokenCreateWithMultipassPayload';
   /** An access token object associated with the customer. */
-  customerAccessToken?: Maybe<IShopifyCustomerAccessToken>;
+  customerAccessToken?: Maybe<CustomerAccessToken>;
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
 };
 
 /** Return type for `customerAccessTokenDelete` mutation. */
-export type IShopifyCustomerAccessTokenDeletePayload = {
+export type CustomerAccessTokenDeletePayload = {
   __typename?: 'CustomerAccessTokenDeletePayload';
   /** The destroyed access token. */
   deletedAccessToken?: Maybe<Scalars['String']>;
   /** ID of the destroyed customer access token. */
   deletedCustomerAccessTokenId?: Maybe<Scalars['String']>;
   /** The list of errors that occurred from executing the mutation. */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `customerAccessTokenRenew` mutation. */
-export type IShopifyCustomerAccessTokenRenewPayload = {
+export type CustomerAccessTokenRenewPayload = {
   __typename?: 'CustomerAccessTokenRenewPayload';
   /** The renewed customer access token object. */
-  customerAccessToken?: Maybe<IShopifyCustomerAccessToken>;
+  customerAccessToken?: Maybe<CustomerAccessToken>;
   /** The list of errors that occurred from executing the mutation. */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `customerActivateByUrl` mutation. */
-export type IShopifyCustomerActivateByUrlPayload = {
+export type CustomerActivateByUrlPayload = {
   __typename?: 'CustomerActivateByUrlPayload';
   /** The customer that was activated. */
-  customer?: Maybe<IShopifyCustomer>;
+  customer?: Maybe<Customer>;
   /** A new customer access token for the customer. */
-  customerAccessToken?: Maybe<IShopifyCustomerAccessToken>;
+  customerAccessToken?: Maybe<CustomerAccessToken>;
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
 };
 
 /** Specifies the input fields required to activate a customer. */
-export type IShopifyCustomerActivateInput = {
+export type CustomerActivateInput = {
   /** The activation token required to activate the customer. */
   activationToken: Scalars['String'];
   /** New password that will be set during activation. */
@@ -2693,65 +2693,65 @@ export type IShopifyCustomerActivateInput = {
 };
 
 /** Return type for `customerActivate` mutation. */
-export type IShopifyCustomerActivatePayload = {
+export type CustomerActivatePayload = {
   __typename?: 'CustomerActivatePayload';
   /** The customer object. */
-  customer?: Maybe<IShopifyCustomer>;
+  customer?: Maybe<Customer>;
   /** A newly created customer access token object for the customer. */
-  customerAccessToken?: Maybe<IShopifyCustomerAccessToken>;
+  customerAccessToken?: Maybe<CustomerAccessToken>;
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `customerAddressCreate` mutation. */
-export type IShopifyCustomerAddressCreatePayload = {
+export type CustomerAddressCreatePayload = {
   __typename?: 'CustomerAddressCreatePayload';
   /** The new customer address object. */
-  customerAddress?: Maybe<IShopifyMailingAddress>;
+  customerAddress?: Maybe<MailingAddress>;
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `customerAddressDelete` mutation. */
-export type IShopifyCustomerAddressDeletePayload = {
+export type CustomerAddressDeletePayload = {
   __typename?: 'CustomerAddressDeletePayload';
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
   /** ID of the deleted customer address. */
   deletedCustomerAddressId?: Maybe<Scalars['String']>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `customerAddressUpdate` mutation. */
-export type IShopifyCustomerAddressUpdatePayload = {
+export type CustomerAddressUpdatePayload = {
   __typename?: 'CustomerAddressUpdatePayload';
   /** The customer’s updated mailing address. */
-  customerAddress?: Maybe<IShopifyMailingAddress>;
+  customerAddress?: Maybe<MailingAddress>;
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** The fields required to create a new customer. */
-export type IShopifyCustomerCreateInput = {
+export type CustomerCreateInput = {
   /** Indicates whether the customer has consented to be sent marketing material via email. */
   acceptsMarketing?: InputMaybe<Scalars['Boolean']>;
   /** The customer’s email. */
@@ -2772,35 +2772,35 @@ export type IShopifyCustomerCreateInput = {
 };
 
 /** Return type for `customerCreate` mutation. */
-export type IShopifyCustomerCreatePayload = {
+export type CustomerCreatePayload = {
   __typename?: 'CustomerCreatePayload';
   /** The created customer object. */
-  customer?: Maybe<IShopifyCustomer>;
+  customer?: Maybe<Customer>;
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `customerDefaultAddressUpdate` mutation. */
-export type IShopifyCustomerDefaultAddressUpdatePayload = {
+export type CustomerDefaultAddressUpdatePayload = {
   __typename?: 'CustomerDefaultAddressUpdatePayload';
   /** The updated customer object. */
-  customer?: Maybe<IShopifyCustomer>;
+  customer?: Maybe<Customer>;
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Possible error codes that can be returned by `CustomerUserError`. */
-export enum IShopifyCustomerErrorCode {
+export enum CustomerErrorCode {
   /** Customer already enabled. */
   AlreadyEnabled = 'ALREADY_ENABLED',
   /** Input email contains an invalid domain name. */
@@ -2834,35 +2834,35 @@ export enum IShopifyCustomerErrorCode {
 }
 
 /** Return type for `customerRecover` mutation. */
-export type IShopifyCustomerRecoverPayload = {
+export type CustomerRecoverPayload = {
   __typename?: 'CustomerRecoverPayload';
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Return type for `customerResetByUrl` mutation. */
-export type IShopifyCustomerResetByUrlPayload = {
+export type CustomerResetByUrlPayload = {
   __typename?: 'CustomerResetByUrlPayload';
   /** The customer object which was reset. */
-  customer?: Maybe<IShopifyCustomer>;
+  customer?: Maybe<Customer>;
   /** A newly created customer access token object for the customer. */
-  customerAccessToken?: Maybe<IShopifyCustomerAccessToken>;
+  customerAccessToken?: Maybe<CustomerAccessToken>;
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Specifies the fields required to reset a customer’s password. */
-export type IShopifyCustomerResetInput = {
+export type CustomerResetInput = {
   /** New password that will be set as part of the reset password process. */
   password: Scalars['String'];
   /** The reset token required to reset the customer’s password. */
@@ -2870,23 +2870,23 @@ export type IShopifyCustomerResetInput = {
 };
 
 /** Return type for `customerReset` mutation. */
-export type IShopifyCustomerResetPayload = {
+export type CustomerResetPayload = {
   __typename?: 'CustomerResetPayload';
   /** The customer object which was reset. */
-  customer?: Maybe<IShopifyCustomer>;
+  customer?: Maybe<Customer>;
   /** A newly created customer access token object for the customer. */
-  customerAccessToken?: Maybe<IShopifyCustomerAccessToken>;
+  customerAccessToken?: Maybe<CustomerAccessToken>;
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Specifies the fields required to update the Customer information. */
-export type IShopifyCustomerUpdateInput = {
+export type CustomerUpdateInput = {
   /** Indicates whether the customer has consented to be sent marketing material via email. */
   acceptsMarketing?: InputMaybe<Scalars['Boolean']>;
   /** The customer’s email. */
@@ -2907,30 +2907,30 @@ export type IShopifyCustomerUpdateInput = {
 };
 
 /** Return type for `customerUpdate` mutation. */
-export type IShopifyCustomerUpdatePayload = {
+export type CustomerUpdatePayload = {
   __typename?: 'CustomerUpdatePayload';
   /** The updated customer object. */
-  customer?: Maybe<IShopifyCustomer>;
+  customer?: Maybe<Customer>;
   /**
    * The newly created customer access token. If the customer's password is updated, all previous access tokens
    * (including the one used to perform this mutation) become invalid, and a new token is generated.
    *
    */
-  customerAccessToken?: Maybe<IShopifyCustomerAccessToken>;
+  customerAccessToken?: Maybe<CustomerAccessToken>;
   /** The list of errors that occurred from executing the mutation. */
-  customerUserErrors: Array<IShopifyCustomerUserError>;
+  customerUserErrors: Array<CustomerUserError>;
   /**
    * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
-  userErrors: Array<IShopifyUserError>;
+  userErrors: Array<UserError>;
 };
 
 /** Represents an error that happens during execution of a customer mutation. */
-export type IShopifyCustomerUserError = IShopifyDisplayableError & {
+export type CustomerUserError = DisplayableError & {
   __typename?: 'CustomerUserError';
   /** The error code. */
-  code?: Maybe<IShopifyCustomerErrorCode>;
+  code?: Maybe<CustomerErrorCode>;
   /** The path to the input field that caused the error. */
   field?: Maybe<Array<Scalars['String']>>;
   /** The error message. */
@@ -2938,7 +2938,7 @@ export type IShopifyCustomerUserError = IShopifyDisplayableError & {
 };
 
 /** List of different delivery method types. */
-export enum IShopifyDeliveryMethodType {
+export enum DeliveryMethodType {
   /** Local Delivery. */
   Local = 'LOCAL',
   /** None. */
@@ -2954,7 +2954,7 @@ export enum IShopifyDeliveryMethodType {
 }
 
 /** Digital wallet, such as Apple Pay, which can be used for accelerated checkouts. */
-export enum IShopifyDigitalWallet {
+export enum DigitalWallet {
   /** Android Pay. */
   AndroidPay = 'ANDROID_PAY',
   /** Apple Pay. */
@@ -2969,12 +2969,12 @@ export enum IShopifyDigitalWallet {
  * An amount discounting the line that has been allocated by a discount.
  *
  */
-export type IShopifyDiscountAllocation = {
+export type DiscountAllocation = {
   __typename?: 'DiscountAllocation';
   /** Amount of discount allocated. */
-  allocatedAmount: IShopifyMoneyV2;
+  allocatedAmount: MoneyV2;
   /** The discount this allocated amount originated from. */
-  discountApplication: IShopifyDiscountApplication;
+  discountApplication: DiscountApplication;
 };
 
 /**
@@ -2982,19 +2982,19 @@ export type IShopifyDiscountAllocation = {
  * the time of application.
  *
  */
-export type IShopifyDiscountApplication = {
+export type DiscountApplication = {
   /** The method by which the discount's value is allocated to its entitled items. */
-  allocationMethod: IShopifyDiscountApplicationAllocationMethod;
+  allocationMethod: DiscountApplicationAllocationMethod;
   /** Which lines of targetType that the discount is allocated over. */
-  targetSelection: IShopifyDiscountApplicationTargetSelection;
+  targetSelection: DiscountApplicationTargetSelection;
   /** The type of line that the discount is applicable towards. */
-  targetType: IShopifyDiscountApplicationTargetType;
+  targetType: DiscountApplicationTargetType;
   /** The value of the discount application. */
-  value: IShopifyPricingValue;
+  value: PricingValue;
 };
 
 /** The method by which the discount's value is allocated onto its entitled lines. */
-export enum IShopifyDiscountApplicationAllocationMethod {
+export enum DiscountApplicationAllocationMethod {
   /** The value is spread across all entitled lines. */
   Across = 'ACROSS',
   /** The value is applied onto every entitled line. */
@@ -3010,26 +3010,26 @@ export enum IShopifyDiscountApplicationAllocationMethod {
  * An auto-generated type for paginating through multiple DiscountApplications.
  *
  */
-export type IShopifyDiscountApplicationConnection = {
+export type DiscountApplicationConnection = {
   __typename?: 'DiscountApplicationConnection';
   /** A list of edges. */
-  edges: Array<IShopifyDiscountApplicationEdge>;
+  edges: Array<DiscountApplicationEdge>;
   /** A list of the nodes contained in DiscountApplicationEdge. */
-  nodes: Array<IShopifyDiscountApplication>;
+  nodes: Array<DiscountApplication>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one DiscountApplication and a cursor during pagination.
  *
  */
-export type IShopifyDiscountApplicationEdge = {
+export type DiscountApplicationEdge = {
   __typename?: 'DiscountApplicationEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of DiscountApplicationEdge. */
-  node: IShopifyDiscountApplication;
+  node: DiscountApplication;
 };
 
 /**
@@ -3039,7 +3039,7 @@ export type IShopifyDiscountApplicationEdge = {
  * The value `ALL`, combined with a `targetType` of `SHIPPING_LINE`, applies the discount on all shipping lines.
  *
  */
-export enum IShopifyDiscountApplicationTargetSelection {
+export enum DiscountApplicationTargetSelection {
   /** The discount is allocated onto all the lines. */
   All = 'ALL',
   /** The discount is allocated onto only the lines that it's entitled for. */
@@ -3052,7 +3052,7 @@ export enum IShopifyDiscountApplicationTargetSelection {
  * The type of line (i.e. line item or shipping line) on an order that the discount is applicable towards.
  *
  */
-export enum IShopifyDiscountApplicationTargetType {
+export enum DiscountApplicationTargetType {
   /** The discount applies onto line items. */
   LineItem = 'LINE_ITEM',
   /** The discount applies onto shipping lines. */
@@ -3064,24 +3064,24 @@ export enum IShopifyDiscountApplicationTargetType {
  * the time that it is applied.
  *
  */
-export type IShopifyDiscountCodeApplication = IShopifyDiscountApplication & {
+export type DiscountCodeApplication = DiscountApplication & {
   __typename?: 'DiscountCodeApplication';
   /** The method by which the discount's value is allocated to its entitled items. */
-  allocationMethod: IShopifyDiscountApplicationAllocationMethod;
+  allocationMethod: DiscountApplicationAllocationMethod;
   /** Specifies whether the discount code was applied successfully. */
   applicable: Scalars['Boolean'];
   /** The string identifying the discount code that was used at the time of application. */
   code: Scalars['String'];
   /** Which lines of targetType that the discount is allocated over. */
-  targetSelection: IShopifyDiscountApplicationTargetSelection;
+  targetSelection: DiscountApplicationTargetSelection;
   /** The type of line that the discount is applicable towards. */
-  targetType: IShopifyDiscountApplicationTargetType;
+  targetType: DiscountApplicationTargetType;
   /** The value of the discount application. */
-  value: IShopifyPricingValue;
+  value: PricingValue;
 };
 
 /** Represents an error in the input of a mutation. */
-export type IShopifyDisplayableError = {
+export type DisplayableError = {
   /** The path to the input field that caused the error. */
   field?: Maybe<Array<Scalars['String']>>;
   /** The error message. */
@@ -3089,7 +3089,7 @@ export type IShopifyDisplayableError = {
 };
 
 /** Represents a web address. */
-export type IShopifyDomain = {
+export type Domain = {
   __typename?: 'Domain';
   /** The host name of the domain (eg: `example.com`). */
   host: Scalars['String'];
@@ -3100,7 +3100,7 @@ export type IShopifyDomain = {
 };
 
 /** Represents a video hosted outside of Shopify. */
-export type IShopifyExternalVideo = IShopifyMedia & IShopifyNode & {
+export type ExternalVideo = Media & Node & {
   __typename?: 'ExternalVideo';
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>;
@@ -3112,28 +3112,28 @@ export type IShopifyExternalVideo = IShopifyMedia & IShopifyNode & {
    */
   embeddedUrl: Scalars['URL'];
   /** The host of the external video. */
-  host: IShopifyMediaHost;
+  host: MediaHost;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** The media content type. */
-  mediaContentType: IShopifyMediaContentType;
+  mediaContentType: MediaContentType;
   /** The origin URL of the video on the respective host. */
   originUrl: Scalars['URL'];
   /** The preview image for the media. */
-  previewImage?: Maybe<IShopifyImage>;
+  previewImage?: Maybe<Image>;
 };
 
 /** A filter that is supported on the parent field. */
-export type IShopifyFilter = {
+export type Filter = {
   __typename?: 'Filter';
   /** A unique identifier. */
   id: Scalars['String'];
   /** A human-friendly string for this filter. */
   label: Scalars['String'];
   /** An enumeration that denotes the type of data this filter represents. */
-  type: IShopifyFilterType;
+  type: FilterType;
   /** The list of values for this filter. */
-  values: Array<IShopifyFilterValue>;
+  values: Array<FilterValue>;
 };
 
 /**
@@ -3143,7 +3143,7 @@ export type IShopifyFilter = {
  * (https://shopify.dev/api/examples/filter-products).
  *
  */
-export enum IShopifyFilterType {
+export enum FilterType {
   /** A boolean value. */
   Boolean = 'BOOLEAN',
   /** A list of selectable values. */
@@ -3153,7 +3153,7 @@ export enum IShopifyFilterType {
 }
 
 /** A selectable value within a filter. */
-export type IShopifyFilterValue = {
+export type FilterValue = {
   __typename?: 'FilterValue';
   /** The number of results that match this filter value. */
   count: Scalars['Int'];
@@ -3171,10 +3171,10 @@ export type IShopifyFilterValue = {
 };
 
 /** Represents a single fulfillment in an order. */
-export type IShopifyFulfillment = {
+export type Fulfillment = {
   __typename?: 'Fulfillment';
   /** List of the fulfillment's line items. */
-  fulfillmentLineItems: IShopifyFulfillmentLineItemConnection;
+  fulfillmentLineItems: FulfillmentLineItemConnection;
   /** The name of the tracking company. */
   trackingCompany?: Maybe<Scalars['String']>;
   /**
@@ -3182,12 +3182,12 @@ export type IShopifyFulfillment = {
    * such as the tracking number and tracking URL.
    *
    */
-  trackingInfo: Array<IShopifyFulfillmentTrackingInfo>;
+  trackingInfo: Array<FulfillmentTrackingInfo>;
 };
 
 
 /** Represents a single fulfillment in an order. */
-export type IShopifyFulfillmentFulfillmentLineItemsArgs = {
+export type FulfillmentFulfillmentLineItemsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -3197,15 +3197,15 @@ export type IShopifyFulfillmentFulfillmentLineItemsArgs = {
 
 
 /** Represents a single fulfillment in an order. */
-export type IShopifyFulfillmentTrackingInfoArgs = {
+export type FulfillmentTrackingInfoArgs = {
   first?: InputMaybe<Scalars['Int']>;
 };
 
 /** Represents a single line item in a fulfillment. There is at most one fulfillment line item for each order line item. */
-export type IShopifyFulfillmentLineItem = {
+export type FulfillmentLineItem = {
   __typename?: 'FulfillmentLineItem';
   /** The associated order's line item. */
-  lineItem: IShopifyOrderLineItem;
+  lineItem: OrderLineItem;
   /** The amount fulfilled in this fulfillment. */
   quantity: Scalars['Int'];
 };
@@ -3214,30 +3214,30 @@ export type IShopifyFulfillmentLineItem = {
  * An auto-generated type for paginating through multiple FulfillmentLineItems.
  *
  */
-export type IShopifyFulfillmentLineItemConnection = {
+export type FulfillmentLineItemConnection = {
   __typename?: 'FulfillmentLineItemConnection';
   /** A list of edges. */
-  edges: Array<IShopifyFulfillmentLineItemEdge>;
+  edges: Array<FulfillmentLineItemEdge>;
   /** A list of the nodes contained in FulfillmentLineItemEdge. */
-  nodes: Array<IShopifyFulfillmentLineItem>;
+  nodes: Array<FulfillmentLineItem>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one FulfillmentLineItem and a cursor during pagination.
  *
  */
-export type IShopifyFulfillmentLineItemEdge = {
+export type FulfillmentLineItemEdge = {
   __typename?: 'FulfillmentLineItemEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of FulfillmentLineItemEdge. */
-  node: IShopifyFulfillmentLineItem;
+  node: FulfillmentLineItem;
 };
 
 /** Tracking information associated with the fulfillment. */
-export type IShopifyFulfillmentTrackingInfo = {
+export type FulfillmentTrackingInfo = {
   __typename?: 'FulfillmentTrackingInfo';
   /** The tracking number of the fulfillment. */
   number?: Maybe<Scalars['String']>;
@@ -3246,7 +3246,7 @@ export type IShopifyFulfillmentTrackingInfo = {
 };
 
 /** The generic file resource lets you manage files in a merchant’s store. Generic files include any file that doesn’t fit into a designated type such as image or video. Example: PDF, JSON. */
-export type IShopifyGenericFile = IShopifyNode & {
+export type GenericFile = Node & {
   __typename?: 'GenericFile';
   /** A word or phrase to indicate the contents of a file. */
   alt?: Maybe<Scalars['String']>;
@@ -3257,13 +3257,13 @@ export type IShopifyGenericFile = IShopifyNode & {
   /** The size of the original file in bytes. */
   originalFileSize?: Maybe<Scalars['Int']>;
   /** The preview image for the file. */
-  previewImage?: Maybe<IShopifyImage>;
+  previewImage?: Maybe<Image>;
   /** The URL of the file. */
   url?: Maybe<Scalars['URL']>;
 };
 
 /** Used to specify a geographical location. */
-export type IShopifyGeoCoordinateInput = {
+export type GeoCoordinateInput = {
   /** The coordinate's latitude value. */
   latitude: Scalars['Float'];
   /** The coordinate's longitude value. */
@@ -3271,31 +3271,31 @@ export type IShopifyGeoCoordinateInput = {
 };
 
 /** Represents information about the metafields associated to the specified resource. */
-export type IShopifyHasMetafields = {
+export type HasMetafields = {
   /** Returns a metafield found by namespace and key. */
-  metafield?: Maybe<IShopifyMetafield>;
+  metafield?: Maybe<Metafield>;
   /**
    * The metafields associated with the resource matching the supplied list of namespaces and keys.
    *
    */
-  metafields: Array<Maybe<IShopifyMetafield>>;
+  metafields: Array<Maybe<Metafield>>;
 };
 
 
 /** Represents information about the metafields associated to the specified resource. */
-export type IShopifyHasMetafieldsMetafieldArgs = {
+export type HasMetafieldsMetafieldArgs = {
   key: Scalars['String'];
   namespace: Scalars['String'];
 };
 
 
 /** Represents information about the metafields associated to the specified resource. */
-export type IShopifyHasMetafieldsMetafieldsArgs = {
-  identifiers: Array<IShopifyHasMetafieldsIdentifier>;
+export type HasMetafieldsMetafieldsArgs = {
+  identifiers: Array<HasMetafieldsIdentifier>;
 };
 
 /** Identifies a metafield on an owner resource by namespace and key. */
-export type IShopifyHasMetafieldsIdentifier = {
+export type HasMetafieldsIdentifier = {
   /** The identifier for the metafield. */
   key: Scalars['String'];
   /** A container for a set of metafields. */
@@ -3303,7 +3303,7 @@ export type IShopifyHasMetafieldsIdentifier = {
 };
 
 /** Represents an image resource. */
-export type IShopifyImage = {
+export type Image = {
   __typename?: 'Image';
   /** A word or phrase to share the nature or contents of an image. */
   altText?: Maybe<Scalars['String']>;
@@ -3350,36 +3350,36 @@ export type IShopifyImage = {
 
 
 /** Represents an image resource. */
-export type IShopifyImageTransformedSrcArgs = {
-  crop?: InputMaybe<IShopifyCropRegion>;
+export type ImageTransformedSrcArgs = {
+  crop?: InputMaybe<CropRegion>;
   maxHeight?: InputMaybe<Scalars['Int']>;
   maxWidth?: InputMaybe<Scalars['Int']>;
-  preferredContentType?: InputMaybe<IShopifyImageContentType>;
+  preferredContentType?: InputMaybe<ImageContentType>;
   scale?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Represents an image resource. */
-export type IShopifyImageUrlArgs = {
-  transform?: InputMaybe<IShopifyImageTransformInput>;
+export type ImageUrlArgs = {
+  transform?: InputMaybe<ImageTransformInput>;
 };
 
 /**
  * An auto-generated type for paginating through multiple Images.
  *
  */
-export type IShopifyImageConnection = {
+export type ImageConnection = {
   __typename?: 'ImageConnection';
   /** A list of edges. */
-  edges: Array<IShopifyImageEdge>;
+  edges: Array<ImageEdge>;
   /** A list of the nodes contained in ImageEdge. */
-  nodes: Array<IShopifyImage>;
+  nodes: Array<Image>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /** List of supported image content types. */
-export enum IShopifyImageContentType {
+export enum ImageContentType {
   /** A JPG image. */
   Jpg = 'JPG',
   /** A PNG image. */
@@ -3392,12 +3392,12 @@ export enum IShopifyImageContentType {
  * An auto-generated type which holds one Image and a cursor during pagination.
  *
  */
-export type IShopifyImageEdge = {
+export type ImageEdge = {
   __typename?: 'ImageEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of ImageEdge. */
-  node: IShopifyImage;
+  node: Image;
 };
 
 /**
@@ -3406,7 +3406,7 @@ export type IShopifyImageEdge = {
  * All transformation options are considered best effort. Any transformation that the original image type doesn't support will be ignored.
  *
  */
-export type IShopifyImageTransformInput = {
+export type ImageTransformInput = {
   /**
    * The region of the image to remain after cropping.
    * Must be used in conjunction with the `maxWidth` and/or `maxHeight` fields, where the `maxWidth` and `maxHeight` aren't equal.
@@ -3415,7 +3415,7 @@ export type IShopifyImageTransformInput = {
    * in an image with a width of 5 and height of 10, where the right side of the image is removed.
    *
    */
-  crop?: InputMaybe<IShopifyCropRegion>;
+  crop?: InputMaybe<CropRegion>;
   /**
    * Image height in pixels between 1 and 5760.
    *
@@ -3431,7 +3431,7 @@ export type IShopifyImageTransformInput = {
    * Supported conversions: `.svg` to `.png`, any file type to `.jpg`, and any file type to `.webp`.
    *
    */
-  preferredContentType?: InputMaybe<IShopifyImageContentType>;
+  preferredContentType?: InputMaybe<ImageContentType>;
   /**
    * Image size multiplier for high-resolution retina displays. Must be within 1..3.
    *
@@ -3440,18 +3440,18 @@ export type IShopifyImageTransformInput = {
 };
 
 /** A language. */
-export type IShopifyLanguage = {
+export type Language = {
   __typename?: 'Language';
   /** The name of the language in the language itself. If the language uses capitalization, it is capitalized for a mid-sentence position. */
   endonymName: Scalars['String'];
   /** The ISO code. */
-  isoCode: IShopifyLanguageCode;
+  isoCode: LanguageCode;
   /** The name of the language in the current language. */
   name: Scalars['String'];
 };
 
 /** ISO 639-1 language codes supported by Shopify. */
-export enum IShopifyLanguageCode {
+export enum LanguageCode {
   /** Afrikaans. */
   Af = 'AF',
   /** Akan. */
@@ -3729,23 +3729,23 @@ export enum IShopifyLanguageCode {
 }
 
 /** Information about the localized experiences configured for the shop. */
-export type IShopifyLocalization = {
+export type Localization = {
   __typename?: 'Localization';
   /** The list of countries with enabled localized experiences. */
-  availableCountries: Array<IShopifyCountry>;
+  availableCountries: Array<Country>;
   /** The list of languages available for the active country. */
-  availableLanguages: Array<IShopifyLanguage>;
+  availableLanguages: Array<Language>;
   /** The country of the active localized experience. Use the `@inContext` directive to change this value. */
-  country: IShopifyCountry;
+  country: Country;
   /** The language of the active localized experience. Use the `@inContext` directive to change this value. */
-  language: IShopifyLanguage;
+  language: Language;
 };
 
 /** Represents a location where product inventory is held. */
-export type IShopifyLocation = IShopifyNode & {
+export type Location = Node & {
   __typename?: 'Location';
   /** The address of the location. */
-  address: IShopifyLocationAddress;
+  address: LocationAddress;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** The name of the location. */
@@ -3756,7 +3756,7 @@ export type IShopifyLocation = IShopifyNode & {
  * Represents the address of a location.
  *
  */
-export type IShopifyLocationAddress = {
+export type LocationAddress = {
   __typename?: 'LocationAddress';
   /** The first line of the address for the location. */
   address1?: Maybe<Scalars['String']>;
@@ -3791,30 +3791,30 @@ export type IShopifyLocationAddress = {
  * An auto-generated type for paginating through multiple Locations.
  *
  */
-export type IShopifyLocationConnection = {
+export type LocationConnection = {
   __typename?: 'LocationConnection';
   /** A list of edges. */
-  edges: Array<IShopifyLocationEdge>;
+  edges: Array<LocationEdge>;
   /** A list of the nodes contained in LocationEdge. */
-  nodes: Array<IShopifyLocation>;
+  nodes: Array<Location>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one Location and a cursor during pagination.
  *
  */
-export type IShopifyLocationEdge = {
+export type LocationEdge = {
   __typename?: 'LocationEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of LocationEdge. */
-  node: IShopifyLocation;
+  node: Location;
 };
 
 /** The set of valid sort keys for the Location query. */
-export enum IShopifyLocationSortKeys {
+export enum LocationSortKeys {
   /** Sort by the `city` value. */
   City = 'CITY',
   /** Sort by the `distance` value. */
@@ -3826,7 +3826,7 @@ export enum IShopifyLocationSortKeys {
 }
 
 /** Represents a mailing address for customers and shipping. */
-export type IShopifyMailingAddress = IShopifyNode & {
+export type MailingAddress = Node & {
   __typename?: 'MailingAddress';
   /** The first line of the address. Typically the street address or PO Box number. */
   address1?: Maybe<Scalars['String']>;
@@ -3864,7 +3864,7 @@ export type IShopifyMailingAddress = IShopifyNode & {
    * For example, US.
    *
    */
-  countryCodeV2?: Maybe<IShopifyCountryCode>;
+  countryCodeV2?: Maybe<CountryCode>;
   /** The first name of the customer. */
   firstName?: Maybe<Scalars['String']>;
   /** A formatted version of the address, customized by the provided arguments. */
@@ -3906,7 +3906,7 @@ export type IShopifyMailingAddress = IShopifyNode & {
 
 
 /** Represents a mailing address for customers and shipping. */
-export type IShopifyMailingAddressFormattedArgs = {
+export type MailingAddressFormattedArgs = {
   withCompany?: InputMaybe<Scalars['Boolean']>;
   withName?: InputMaybe<Scalars['Boolean']>;
 };
@@ -3915,30 +3915,30 @@ export type IShopifyMailingAddressFormattedArgs = {
  * An auto-generated type for paginating through multiple MailingAddresses.
  *
  */
-export type IShopifyMailingAddressConnection = {
+export type MailingAddressConnection = {
   __typename?: 'MailingAddressConnection';
   /** A list of edges. */
-  edges: Array<IShopifyMailingAddressEdge>;
+  edges: Array<MailingAddressEdge>;
   /** A list of the nodes contained in MailingAddressEdge. */
-  nodes: Array<IShopifyMailingAddress>;
+  nodes: Array<MailingAddress>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one MailingAddress and a cursor during pagination.
  *
  */
-export type IShopifyMailingAddressEdge = {
+export type MailingAddressEdge = {
   __typename?: 'MailingAddressEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of MailingAddressEdge. */
-  node: IShopifyMailingAddress;
+  node: MailingAddress;
 };
 
 /** Specifies the fields accepted to create or update a mailing address. */
-export type IShopifyMailingAddressInput = {
+export type MailingAddressInput = {
   /**
    * The first line of the address. Typically the street address or PO Box number.
    *
@@ -3982,48 +3982,48 @@ export type IShopifyMailingAddressInput = {
  * Manual discount applications capture the intentions of a discount that was manually created.
  *
  */
-export type IShopifyManualDiscountApplication = IShopifyDiscountApplication & {
+export type ManualDiscountApplication = DiscountApplication & {
   __typename?: 'ManualDiscountApplication';
   /** The method by which the discount's value is allocated to its entitled items. */
-  allocationMethod: IShopifyDiscountApplicationAllocationMethod;
+  allocationMethod: DiscountApplicationAllocationMethod;
   /** The description of the application. */
   description?: Maybe<Scalars['String']>;
   /** Which lines of targetType that the discount is allocated over. */
-  targetSelection: IShopifyDiscountApplicationTargetSelection;
+  targetSelection: DiscountApplicationTargetSelection;
   /** The type of line that the discount is applicable towards. */
-  targetType: IShopifyDiscountApplicationTargetType;
+  targetType: DiscountApplicationTargetType;
   /** The title of the application. */
   title: Scalars['String'];
   /** The value of the discount application. */
-  value: IShopifyPricingValue;
+  value: PricingValue;
 };
 
 /** Represents a media interface. */
-export type IShopifyMedia = {
+export type Media = {
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>;
   /** The media content type. */
-  mediaContentType: IShopifyMediaContentType;
+  mediaContentType: MediaContentType;
   /** The preview image for the media. */
-  previewImage?: Maybe<IShopifyImage>;
+  previewImage?: Maybe<Image>;
 };
 
 /**
  * An auto-generated type for paginating through multiple Media.
  *
  */
-export type IShopifyMediaConnection = {
+export type MediaConnection = {
   __typename?: 'MediaConnection';
   /** A list of edges. */
-  edges: Array<IShopifyMediaEdge>;
+  edges: Array<MediaEdge>;
   /** A list of the nodes contained in MediaEdge. */
-  nodes: Array<IShopifyMedia>;
+  nodes: Array<Media>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /** The possible content types for a media object. */
-export enum IShopifyMediaContentType {
+export enum MediaContentType {
   /** An externally hosted video. */
   ExternalVideo = 'EXTERNAL_VIDEO',
   /** A Shopify hosted image. */
@@ -4038,16 +4038,16 @@ export enum IShopifyMediaContentType {
  * An auto-generated type which holds one Media and a cursor during pagination.
  *
  */
-export type IShopifyMediaEdge = {
+export type MediaEdge = {
   __typename?: 'MediaEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of MediaEdge. */
-  node: IShopifyMedia;
+  node: Media;
 };
 
 /** Host for a Media Resource. */
-export enum IShopifyMediaHost {
+export enum MediaHost {
   /** Host for Vimeo embedded videos. */
   Vimeo = 'VIMEO',
   /** Host for YouTube embedded videos. */
@@ -4055,32 +4055,32 @@ export enum IShopifyMediaHost {
 }
 
 /** Represents a Shopify hosted image. */
-export type IShopifyMediaImage = IShopifyMedia & IShopifyNode & {
+export type MediaImage = Media & Node & {
   __typename?: 'MediaImage';
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** The image for the media. */
-  image?: Maybe<IShopifyImage>;
+  image?: Maybe<Image>;
   /** The media content type. */
-  mediaContentType: IShopifyMediaContentType;
+  mediaContentType: MediaContentType;
   /** The preview image for the media. */
-  previewImage?: Maybe<IShopifyImage>;
+  previewImage?: Maybe<Image>;
 };
 
 /**
  * A menu used for navigation within a storefront.
  *
  */
-export type IShopifyMenu = IShopifyNode & {
+export type Menu = Node & {
   __typename?: 'Menu';
   /** The menu's handle. */
   handle: Scalars['String'];
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** The menu's child items. */
-  items: Array<IShopifyMenuItem>;
+  items: Array<MenuItem>;
   /** The count of items on the menu. */
   itemsCount: Scalars['Int'];
   /** The menu's title. */
@@ -4091,12 +4091,12 @@ export type IShopifyMenu = IShopifyNode & {
  * A menu item within a parent menu.
  *
  */
-export type IShopifyMenuItem = IShopifyNode & {
+export type MenuItem = Node & {
   __typename?: 'MenuItem';
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** The menu item's child items. */
-  items: Array<IShopifyMenuItem>;
+  items: Array<MenuItem>;
   /** The ID of the linked resource. */
   resourceId?: Maybe<Scalars['ID']>;
   /** The menu item's tags to filter a collection. */
@@ -4104,13 +4104,13 @@ export type IShopifyMenuItem = IShopifyNode & {
   /** The menu item's title. */
   title: Scalars['String'];
   /** The menu item's type. */
-  type: IShopifyMenuItemType;
+  type: MenuItemType;
   /** The menu item's URL. */
   url?: Maybe<Scalars['URL']>;
 };
 
 /** A menu item type. */
-export enum IShopifyMenuItemType {
+export enum MenuItemType {
   /** An article link. */
   Article = 'ARTICLE',
   /** A blog link. */
@@ -4136,14 +4136,14 @@ export enum IShopifyMenuItemType {
 }
 
 /** The merchandise to be purchased at checkout. */
-export type IShopifyMerchandise = IShopifyProductVariant;
+export type Merchandise = ProductVariant;
 
 /**
  * Metafields represent custom metadata attached to a resource. Metafields can be sorted into namespaces and are
  * comprised of keys, values, and value types.
  *
  */
-export type IShopifyMetafield = IShopifyNode & {
+export type Metafield = Node & {
   __typename?: 'Metafield';
   /** The date and time when the storefront metafield was created. */
   createdAt: Scalars['DateTime'];
@@ -4156,9 +4156,9 @@ export type IShopifyMetafield = IShopifyNode & {
   /** The namespace for a metafield. */
   namespace: Scalars['String'];
   /** The parent object that the metafield belongs to. */
-  parentResource: IShopifyMetafieldParentResource;
+  parentResource: MetafieldParentResource;
   /** Returns a reference object if the metafield definition's type is a resource reference. */
-  reference?: Maybe<IShopifyMetafieldReference>;
+  reference?: Maybe<MetafieldReference>;
   /**
    * The type name of the metafield.
    * See the list of [supported types](https://shopify.dev/apps/metafields/definitions/types).
@@ -4181,7 +4181,7 @@ export type IShopifyMetafield = IShopifyNode & {
  * - `boolean` as of 2022-04.
  *
  */
-export type IShopifyMetafieldFilter = {
+export type MetafieldFilter = {
   /** The key of the metafield to filter on. */
   key: Scalars['String'];
   /** The namespace of the metafield to filter on. */
@@ -4191,31 +4191,31 @@ export type IShopifyMetafieldFilter = {
 };
 
 /** A resource that the metafield belongs to. */
-export type IShopifyMetafieldParentResource = IShopifyArticle | IShopifyBlog | IShopifyCollection | IShopifyCustomer | IShopifyOrder | IShopifyPage | IShopifyProduct | IShopifyProductVariant | IShopifyShop;
+export type MetafieldParentResource = Article | Blog | Collection | Customer | Order | Page | Product | ProductVariant | Shop;
 
 /**
  * Returns the resource which is being referred to by a metafield.
  *
  */
-export type IShopifyMetafieldReference = IShopifyGenericFile | IShopifyMediaImage | IShopifyPage | IShopifyProduct | IShopifyProductVariant | IShopifyVideo;
+export type MetafieldReference = GenericFile | MediaImage | Page | Product | ProductVariant | Video;
 
 /** Represents a Shopify hosted 3D model. */
-export type IShopifyModel3d = IShopifyMedia & IShopifyNode & {
+export type Model3d = Media & Node & {
   __typename?: 'Model3d';
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** The media content type. */
-  mediaContentType: IShopifyMediaContentType;
+  mediaContentType: MediaContentType;
   /** The preview image for the media. */
-  previewImage?: Maybe<IShopifyImage>;
+  previewImage?: Maybe<Image>;
   /** The sources for a 3d model. */
-  sources: Array<IShopifyModel3dSource>;
+  sources: Array<Model3dSource>;
 };
 
 /** Represents a source for a Shopify hosted 3d model. */
-export type IShopifyModel3dSource = {
+export type Model3dSource = {
   __typename?: 'Model3dSource';
   /** The filesize of the 3d model. */
   filesize: Scalars['Int'];
@@ -4228,30 +4228,30 @@ export type IShopifyModel3dSource = {
 };
 
 /** Specifies the fields for a monetary value with currency. */
-export type IShopifyMoneyInput = {
+export type MoneyInput = {
   /** Decimal money amount. */
   amount: Scalars['Decimal'];
   /** Currency of the money. */
-  currencyCode: IShopifyCurrencyCode;
+  currencyCode: CurrencyCode;
 };
 
 /**
  * A monetary value with currency.
  *
  */
-export type IShopifyMoneyV2 = {
+export type MoneyV2 = {
   __typename?: 'MoneyV2';
   /** Decimal money amount. */
   amount: Scalars['Decimal'];
   /** Currency of the money. */
-  currencyCode: IShopifyCurrencyCode;
+  currencyCode: CurrencyCode;
 };
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutation = {
+export type Mutation = {
   __typename?: 'Mutation';
   /** Updates the attributes on a cart. */
-  cartAttributesUpdate?: Maybe<IShopifyCartAttributesUpdatePayload>;
+  cartAttributesUpdate?: Maybe<CartAttributesUpdatePayload>;
   /**
    * Updates customer information associated with a cart.
    * Buyer identity is used to determine
@@ -4259,61 +4259,61 @@ export type IShopifyMutation = {
    * and should match the customer's shipping address.
    *
    */
-  cartBuyerIdentityUpdate?: Maybe<IShopifyCartBuyerIdentityUpdatePayload>;
+  cartBuyerIdentityUpdate?: Maybe<CartBuyerIdentityUpdatePayload>;
   /** Creates a new cart. */
-  cartCreate?: Maybe<IShopifyCartCreatePayload>;
+  cartCreate?: Maybe<CartCreatePayload>;
   /** Updates the discount codes applied to the cart. */
-  cartDiscountCodesUpdate?: Maybe<IShopifyCartDiscountCodesUpdatePayload>;
+  cartDiscountCodesUpdate?: Maybe<CartDiscountCodesUpdatePayload>;
   /** Adds a merchandise line to the cart. */
-  cartLinesAdd?: Maybe<IShopifyCartLinesAddPayload>;
+  cartLinesAdd?: Maybe<CartLinesAddPayload>;
   /** Removes one or more merchandise lines from the cart. */
-  cartLinesRemove?: Maybe<IShopifyCartLinesRemovePayload>;
+  cartLinesRemove?: Maybe<CartLinesRemovePayload>;
   /** Updates one or more merchandise lines on a cart. */
-  cartLinesUpdate?: Maybe<IShopifyCartLinesUpdatePayload>;
+  cartLinesUpdate?: Maybe<CartLinesUpdatePayload>;
   /** Updates the note on the cart. */
-  cartNoteUpdate?: Maybe<IShopifyCartNoteUpdatePayload>;
+  cartNoteUpdate?: Maybe<CartNoteUpdatePayload>;
   /** Updates the attributes of a checkout if `allowPartialAddresses` is `true`. */
-  checkoutAttributesUpdateV2?: Maybe<IShopifyCheckoutAttributesUpdateV2Payload>;
+  checkoutAttributesUpdateV2?: Maybe<CheckoutAttributesUpdateV2Payload>;
   /** Completes a checkout without providing payment information. You can use this mutation for free items or items whose purchase price is covered by a gift card. */
-  checkoutCompleteFree?: Maybe<IShopifyCheckoutCompleteFreePayload>;
+  checkoutCompleteFree?: Maybe<CheckoutCompleteFreePayload>;
   /** Completes a checkout using a credit card token from Shopify's card vault. Before you can complete checkouts using CheckoutCompleteWithCreditCardV2, you need to  [_request payment processing_](https://shopify.dev/apps/channels/getting-started#request-payment-processing). */
-  checkoutCompleteWithCreditCardV2?: Maybe<IShopifyCheckoutCompleteWithCreditCardV2Payload>;
+  checkoutCompleteWithCreditCardV2?: Maybe<CheckoutCompleteWithCreditCardV2Payload>;
   /** Completes a checkout with a tokenized payment. */
-  checkoutCompleteWithTokenizedPaymentV3?: Maybe<IShopifyCheckoutCompleteWithTokenizedPaymentV3Payload>;
+  checkoutCompleteWithTokenizedPaymentV3?: Maybe<CheckoutCompleteWithTokenizedPaymentV3Payload>;
   /** Creates a new checkout. */
-  checkoutCreate?: Maybe<IShopifyCheckoutCreatePayload>;
+  checkoutCreate?: Maybe<CheckoutCreatePayload>;
   /** Associates a customer to the checkout. */
-  checkoutCustomerAssociateV2?: Maybe<IShopifyCheckoutCustomerAssociateV2Payload>;
+  checkoutCustomerAssociateV2?: Maybe<CheckoutCustomerAssociateV2Payload>;
   /** Disassociates the current checkout customer from the checkout. */
-  checkoutCustomerDisassociateV2?: Maybe<IShopifyCheckoutCustomerDisassociateV2Payload>;
+  checkoutCustomerDisassociateV2?: Maybe<CheckoutCustomerDisassociateV2Payload>;
   /** Applies a discount to an existing checkout using a discount code. */
-  checkoutDiscountCodeApplyV2?: Maybe<IShopifyCheckoutDiscountCodeApplyV2Payload>;
+  checkoutDiscountCodeApplyV2?: Maybe<CheckoutDiscountCodeApplyV2Payload>;
   /** Removes the applied discounts from an existing checkout. */
-  checkoutDiscountCodeRemove?: Maybe<IShopifyCheckoutDiscountCodeRemovePayload>;
+  checkoutDiscountCodeRemove?: Maybe<CheckoutDiscountCodeRemovePayload>;
   /** Updates the email on an existing checkout. */
-  checkoutEmailUpdateV2?: Maybe<IShopifyCheckoutEmailUpdateV2Payload>;
+  checkoutEmailUpdateV2?: Maybe<CheckoutEmailUpdateV2Payload>;
   /** Removes an applied gift card from the checkout. */
-  checkoutGiftCardRemoveV2?: Maybe<IShopifyCheckoutGiftCardRemoveV2Payload>;
+  checkoutGiftCardRemoveV2?: Maybe<CheckoutGiftCardRemoveV2Payload>;
   /** Appends gift cards to an existing checkout. */
-  checkoutGiftCardsAppend?: Maybe<IShopifyCheckoutGiftCardsAppendPayload>;
+  checkoutGiftCardsAppend?: Maybe<CheckoutGiftCardsAppendPayload>;
   /** Adds a list of line items to a checkout. */
-  checkoutLineItemsAdd?: Maybe<IShopifyCheckoutLineItemsAddPayload>;
+  checkoutLineItemsAdd?: Maybe<CheckoutLineItemsAddPayload>;
   /** Removes line items from an existing checkout. */
-  checkoutLineItemsRemove?: Maybe<IShopifyCheckoutLineItemsRemovePayload>;
+  checkoutLineItemsRemove?: Maybe<CheckoutLineItemsRemovePayload>;
   /** Sets a list of line items to a checkout. */
-  checkoutLineItemsReplace?: Maybe<IShopifyCheckoutLineItemsReplacePayload>;
+  checkoutLineItemsReplace?: Maybe<CheckoutLineItemsReplacePayload>;
   /** Updates line items on a checkout. */
-  checkoutLineItemsUpdate?: Maybe<IShopifyCheckoutLineItemsUpdatePayload>;
+  checkoutLineItemsUpdate?: Maybe<CheckoutLineItemsUpdatePayload>;
   /** Updates the shipping address of an existing checkout. */
-  checkoutShippingAddressUpdateV2?: Maybe<IShopifyCheckoutShippingAddressUpdateV2Payload>;
+  checkoutShippingAddressUpdateV2?: Maybe<CheckoutShippingAddressUpdateV2Payload>;
   /** Updates the shipping lines on an existing checkout. */
-  checkoutShippingLineUpdate?: Maybe<IShopifyCheckoutShippingLineUpdatePayload>;
+  checkoutShippingLineUpdate?: Maybe<CheckoutShippingLineUpdatePayload>;
   /**
    * Creates a customer access token.
    * The customer access token is required to modify the customer object in any way.
    *
    */
-  customerAccessTokenCreate?: Maybe<IShopifyCustomerAccessTokenCreatePayload>;
+  customerAccessTokenCreate?: Maybe<CustomerAccessTokenCreatePayload>;
   /**
    * Creates a customer access token using a
    * [multipass token](https://shopify.dev/api/multipass) instead of email and
@@ -4321,9 +4321,9 @@ export type IShopifyMutation = {
    * record already exists but the record is disabled, then the customer record is enabled.
    *
    */
-  customerAccessTokenCreateWithMultipass?: Maybe<IShopifyCustomerAccessTokenCreateWithMultipassPayload>;
+  customerAccessTokenCreateWithMultipass?: Maybe<CustomerAccessTokenCreateWithMultipassPayload>;
   /** Permanently destroys a customer access token. */
-  customerAccessTokenDelete?: Maybe<IShopifyCustomerAccessTokenDeletePayload>;
+  customerAccessTokenDelete?: Maybe<CustomerAccessTokenDeletePayload>;
   /**
    * Renews a customer access token.
    *
@@ -4331,306 +4331,306 @@ export type IShopifyMutation = {
    * If a token has already expired, a new one should be created instead via `customerAccessTokenCreate`.
    *
    */
-  customerAccessTokenRenew?: Maybe<IShopifyCustomerAccessTokenRenewPayload>;
+  customerAccessTokenRenew?: Maybe<CustomerAccessTokenRenewPayload>;
   /** Activates a customer. */
-  customerActivate?: Maybe<IShopifyCustomerActivatePayload>;
+  customerActivate?: Maybe<CustomerActivatePayload>;
   /** Activates a customer with the activation url received from `customerCreate`. */
-  customerActivateByUrl?: Maybe<IShopifyCustomerActivateByUrlPayload>;
+  customerActivateByUrl?: Maybe<CustomerActivateByUrlPayload>;
   /** Creates a new address for a customer. */
-  customerAddressCreate?: Maybe<IShopifyCustomerAddressCreatePayload>;
+  customerAddressCreate?: Maybe<CustomerAddressCreatePayload>;
   /** Permanently deletes the address of an existing customer. */
-  customerAddressDelete?: Maybe<IShopifyCustomerAddressDeletePayload>;
+  customerAddressDelete?: Maybe<CustomerAddressDeletePayload>;
   /** Updates the address of an existing customer. */
-  customerAddressUpdate?: Maybe<IShopifyCustomerAddressUpdatePayload>;
+  customerAddressUpdate?: Maybe<CustomerAddressUpdatePayload>;
   /** Creates a new customer. */
-  customerCreate?: Maybe<IShopifyCustomerCreatePayload>;
+  customerCreate?: Maybe<CustomerCreatePayload>;
   /** Updates the default address of an existing customer. */
-  customerDefaultAddressUpdate?: Maybe<IShopifyCustomerDefaultAddressUpdatePayload>;
+  customerDefaultAddressUpdate?: Maybe<CustomerDefaultAddressUpdatePayload>;
   /** Sends a reset password email to the customer, as the first step in the reset password process. */
-  customerRecover?: Maybe<IShopifyCustomerRecoverPayload>;
+  customerRecover?: Maybe<CustomerRecoverPayload>;
   /** Resets a customer’s password with a token received from `CustomerRecover`. */
-  customerReset?: Maybe<IShopifyCustomerResetPayload>;
+  customerReset?: Maybe<CustomerResetPayload>;
   /** Resets a customer’s password with the reset password url received from `CustomerRecover`. */
-  customerResetByUrl?: Maybe<IShopifyCustomerResetByUrlPayload>;
+  customerResetByUrl?: Maybe<CustomerResetByUrlPayload>;
   /** Updates an existing customer. */
-  customerUpdate?: Maybe<IShopifyCustomerUpdatePayload>;
+  customerUpdate?: Maybe<CustomerUpdatePayload>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCartAttributesUpdateArgs = {
-  attributes: Array<IShopifyAttributeInput>;
+export type MutationCartAttributesUpdateArgs = {
+  attributes: Array<AttributeInput>;
   cartId: Scalars['ID'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCartBuyerIdentityUpdateArgs = {
-  buyerIdentity: IShopifyCartBuyerIdentityInput;
+export type MutationCartBuyerIdentityUpdateArgs = {
+  buyerIdentity: CartBuyerIdentityInput;
   cartId: Scalars['ID'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCartCreateArgs = {
-  input?: InputMaybe<IShopifyCartInput>;
+export type MutationCartCreateArgs = {
+  input?: InputMaybe<CartInput>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCartDiscountCodesUpdateArgs = {
+export type MutationCartDiscountCodesUpdateArgs = {
   cartId: Scalars['ID'];
   discountCodes?: InputMaybe<Array<Scalars['String']>>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCartLinesAddArgs = {
+export type MutationCartLinesAddArgs = {
   cartId: Scalars['ID'];
-  lines: Array<IShopifyCartLineInput>;
+  lines: Array<CartLineInput>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCartLinesRemoveArgs = {
+export type MutationCartLinesRemoveArgs = {
   cartId: Scalars['ID'];
   lineIds: Array<Scalars['ID']>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCartLinesUpdateArgs = {
+export type MutationCartLinesUpdateArgs = {
   cartId: Scalars['ID'];
-  lines: Array<IShopifyCartLineUpdateInput>;
+  lines: Array<CartLineUpdateInput>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCartNoteUpdateArgs = {
+export type MutationCartNoteUpdateArgs = {
   cartId: Scalars['ID'];
   note?: InputMaybe<Scalars['String']>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutAttributesUpdateV2Args = {
+export type MutationCheckoutAttributesUpdateV2Args = {
   checkoutId: Scalars['ID'];
-  input: IShopifyCheckoutAttributesUpdateV2Input;
+  input: CheckoutAttributesUpdateV2Input;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutCompleteFreeArgs = {
+export type MutationCheckoutCompleteFreeArgs = {
   checkoutId: Scalars['ID'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutCompleteWithCreditCardV2Args = {
+export type MutationCheckoutCompleteWithCreditCardV2Args = {
   checkoutId: Scalars['ID'];
-  payment: IShopifyCreditCardPaymentInputV2;
+  payment: CreditCardPaymentInputV2;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutCompleteWithTokenizedPaymentV3Args = {
+export type MutationCheckoutCompleteWithTokenizedPaymentV3Args = {
   checkoutId: Scalars['ID'];
-  payment: IShopifyTokenizedPaymentInputV3;
+  payment: TokenizedPaymentInputV3;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutCreateArgs = {
-  input: IShopifyCheckoutCreateInput;
+export type MutationCheckoutCreateArgs = {
+  input: CheckoutCreateInput;
   queueToken?: InputMaybe<Scalars['String']>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutCustomerAssociateV2Args = {
+export type MutationCheckoutCustomerAssociateV2Args = {
   checkoutId: Scalars['ID'];
   customerAccessToken: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutCustomerDisassociateV2Args = {
+export type MutationCheckoutCustomerDisassociateV2Args = {
   checkoutId: Scalars['ID'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutDiscountCodeApplyV2Args = {
+export type MutationCheckoutDiscountCodeApplyV2Args = {
   checkoutId: Scalars['ID'];
   discountCode: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutDiscountCodeRemoveArgs = {
+export type MutationCheckoutDiscountCodeRemoveArgs = {
   checkoutId: Scalars['ID'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutEmailUpdateV2Args = {
+export type MutationCheckoutEmailUpdateV2Args = {
   checkoutId: Scalars['ID'];
   email: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutGiftCardRemoveV2Args = {
+export type MutationCheckoutGiftCardRemoveV2Args = {
   appliedGiftCardId: Scalars['ID'];
   checkoutId: Scalars['ID'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutGiftCardsAppendArgs = {
+export type MutationCheckoutGiftCardsAppendArgs = {
   checkoutId: Scalars['ID'];
   giftCardCodes: Array<Scalars['String']>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutLineItemsAddArgs = {
+export type MutationCheckoutLineItemsAddArgs = {
   checkoutId: Scalars['ID'];
-  lineItems: Array<IShopifyCheckoutLineItemInput>;
+  lineItems: Array<CheckoutLineItemInput>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutLineItemsRemoveArgs = {
+export type MutationCheckoutLineItemsRemoveArgs = {
   checkoutId: Scalars['ID'];
   lineItemIds: Array<Scalars['ID']>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutLineItemsReplaceArgs = {
+export type MutationCheckoutLineItemsReplaceArgs = {
   checkoutId: Scalars['ID'];
-  lineItems: Array<IShopifyCheckoutLineItemInput>;
+  lineItems: Array<CheckoutLineItemInput>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutLineItemsUpdateArgs = {
+export type MutationCheckoutLineItemsUpdateArgs = {
   checkoutId: Scalars['ID'];
-  lineItems: Array<IShopifyCheckoutLineItemUpdateInput>;
+  lineItems: Array<CheckoutLineItemUpdateInput>;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutShippingAddressUpdateV2Args = {
+export type MutationCheckoutShippingAddressUpdateV2Args = {
   checkoutId: Scalars['ID'];
-  shippingAddress: IShopifyMailingAddressInput;
+  shippingAddress: MailingAddressInput;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCheckoutShippingLineUpdateArgs = {
+export type MutationCheckoutShippingLineUpdateArgs = {
   checkoutId: Scalars['ID'];
   shippingRateHandle: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerAccessTokenCreateArgs = {
-  input: IShopifyCustomerAccessTokenCreateInput;
+export type MutationCustomerAccessTokenCreateArgs = {
+  input: CustomerAccessTokenCreateInput;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerAccessTokenCreateWithMultipassArgs = {
+export type MutationCustomerAccessTokenCreateWithMultipassArgs = {
   multipassToken: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerAccessTokenDeleteArgs = {
+export type MutationCustomerAccessTokenDeleteArgs = {
   customerAccessToken: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerAccessTokenRenewArgs = {
+export type MutationCustomerAccessTokenRenewArgs = {
   customerAccessToken: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerActivateArgs = {
+export type MutationCustomerActivateArgs = {
   id: Scalars['ID'];
-  input: IShopifyCustomerActivateInput;
+  input: CustomerActivateInput;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerActivateByUrlArgs = {
+export type MutationCustomerActivateByUrlArgs = {
   activationUrl: Scalars['URL'];
   password: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerAddressCreateArgs = {
-  address: IShopifyMailingAddressInput;
+export type MutationCustomerAddressCreateArgs = {
+  address: MailingAddressInput;
   customerAccessToken: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerAddressDeleteArgs = {
-  customerAccessToken: Scalars['String'];
-  id: Scalars['ID'];
-};
-
-
-/** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerAddressUpdateArgs = {
-  address: IShopifyMailingAddressInput;
+export type MutationCustomerAddressDeleteArgs = {
   customerAccessToken: Scalars['String'];
   id: Scalars['ID'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerCreateArgs = {
-  input: IShopifyCustomerCreateInput;
+export type MutationCustomerAddressUpdateArgs = {
+  address: MailingAddressInput;
+  customerAccessToken: Scalars['String'];
+  id: Scalars['ID'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerDefaultAddressUpdateArgs = {
+export type MutationCustomerCreateArgs = {
+  input: CustomerCreateInput;
+};
+
+
+/** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
+export type MutationCustomerDefaultAddressUpdateArgs = {
   addressId: Scalars['ID'];
   customerAccessToken: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerRecoverArgs = {
+export type MutationCustomerRecoverArgs = {
   email: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerResetArgs = {
+export type MutationCustomerResetArgs = {
   id: Scalars['ID'];
-  input: IShopifyCustomerResetInput;
+  input: CustomerResetInput;
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerResetByUrlArgs = {
+export type MutationCustomerResetByUrlArgs = {
   password: Scalars['String'];
   resetUrl: Scalars['URL'];
 };
 
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
-export type IShopifyMutationCustomerUpdateArgs = {
-  customer: IShopifyCustomerUpdateInput;
+export type MutationCustomerUpdateArgs = {
+  customer: CustomerUpdateInput;
   customerAccessToken: Scalars['String'];
 };
 
@@ -4641,59 +4641,59 @@ export type IShopifyMutationCustomerUpdateArgs = {
  * and [nodes](https://shopify.dev/api/admin-graphql/unstable/queries/nodes) queries.
  *
  */
-export type IShopifyNode = {
+export type Node = {
   /** A globally-unique identifier. */
   id: Scalars['ID'];
 };
 
 /** Represents a resource that can be published to the Online Store sales channel. */
-export type IShopifyOnlineStorePublishable = {
+export type OnlineStorePublishable = {
   /** The URL used for viewing the resource on the shop's Online Store. Returns `null` if the resource is currently not published to the Online Store sales channel. */
   onlineStoreUrl?: Maybe<Scalars['URL']>;
 };
 
 /** An order is a customer’s completed request to purchase one or more products from a shop. An order is created when a customer completes the checkout process, during which time they provides an email address, billing address and payment information. */
-export type IShopifyOrder = IShopifyHasMetafields & IShopifyNode & {
+export type Order = HasMetafields & Node & {
   __typename?: 'Order';
   /** The reason for the order's cancellation. Returns `null` if the order wasn't canceled. */
-  cancelReason?: Maybe<IShopifyOrderCancelReason>;
+  cancelReason?: Maybe<OrderCancelReason>;
   /** The date and time when the order was canceled. Returns null if the order wasn't canceled. */
   canceledAt?: Maybe<Scalars['DateTime']>;
   /** The code of the currency used for the payment. */
-  currencyCode: IShopifyCurrencyCode;
+  currencyCode: CurrencyCode;
   /** The subtotal of line items and their discounts, excluding line items that have been removed. Does not contain order-level discounts, duties, shipping costs, or shipping discounts. Taxes are not included unless the order is a taxes-included order. */
-  currentSubtotalPrice: IShopifyMoneyV2;
+  currentSubtotalPrice: MoneyV2;
   /** The total cost of duties for the order, including refunds. */
-  currentTotalDuties?: Maybe<IShopifyMoneyV2>;
+  currentTotalDuties?: Maybe<MoneyV2>;
   /** The total amount of the order, including duties, taxes and discounts, minus amounts for line items that have been removed. */
-  currentTotalPrice: IShopifyMoneyV2;
+  currentTotalPrice: MoneyV2;
   /** The total of all taxes applied to the order, excluding taxes for returned line items. */
-  currentTotalTax: IShopifyMoneyV2;
+  currentTotalTax: MoneyV2;
   /** The locale code in which this specific order happened. */
   customerLocale?: Maybe<Scalars['String']>;
   /** The unique URL that the customer can use to access the order. */
   customerUrl?: Maybe<Scalars['URL']>;
   /** Discounts that have been applied on the order. */
-  discountApplications: IShopifyDiscountApplicationConnection;
+  discountApplications: DiscountApplicationConnection;
   /** Whether the order has had any edits applied or not. */
   edited: Scalars['Boolean'];
   /** The customer's email address. */
   email?: Maybe<Scalars['String']>;
   /** The financial status of the order. */
-  financialStatus?: Maybe<IShopifyOrderFinancialStatus>;
+  financialStatus?: Maybe<OrderFinancialStatus>;
   /** The fulfillment status for the order. */
-  fulfillmentStatus: IShopifyOrderFulfillmentStatus;
+  fulfillmentStatus: OrderFulfillmentStatus;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** List of the order’s line items. */
-  lineItems: IShopifyOrderLineItemConnection;
+  lineItems: OrderLineItemConnection;
   /** Returns a metafield found by namespace and key. */
-  metafield?: Maybe<IShopifyMetafield>;
+  metafield?: Maybe<Metafield>;
   /**
    * The metafields associated with the resource matching the supplied list of namespaces and keys.
    *
    */
-  metafields: Array<Maybe<IShopifyMetafield>>;
+  metafields: Array<Maybe<Metafield>>;
   /**
    * Unique identifier for the order that appears on the order.
    * For example, _#1000_ or _Store1001.
@@ -4703,9 +4703,9 @@ export type IShopifyOrder = IShopifyHasMetafields & IShopifyNode & {
   /** A unique numeric identifier for the order for use by shop owner and customer. */
   orderNumber: Scalars['Int'];
   /** The total cost of duties charged at checkout. */
-  originalTotalDuties?: Maybe<IShopifyMoneyV2>;
+  originalTotalDuties?: Maybe<MoneyV2>;
   /** The total price of the order before any applied edits. */
-  originalTotalPrice: IShopifyMoneyV2;
+  originalTotalPrice: MoneyV2;
   /** The customer's phone number for receiving SMS notifications. */
   phone?: Maybe<Scalars['String']>;
   /**
@@ -4716,12 +4716,12 @@ export type IShopifyOrder = IShopifyHasMetafields & IShopifyNode & {
    */
   processedAt: Scalars['DateTime'];
   /** The address to where the order will be shipped. */
-  shippingAddress?: Maybe<IShopifyMailingAddress>;
+  shippingAddress?: Maybe<MailingAddress>;
   /**
    * The discounts that have been allocated onto the shipping line by discount applications.
    *
    */
-  shippingDiscountAllocations: Array<IShopifyDiscountAllocation>;
+  shippingDiscountAllocations: Array<DiscountAllocation>;
   /** The unique URL for the order's status page. */
   statusUrl: Scalars['URL'];
   /**
@@ -4730,42 +4730,42 @@ export type IShopifyOrder = IShopifyHasMetafields & IShopifyNode & {
    */
   subtotalPrice?: Maybe<Scalars['Money']>;
   /** Price of the order before duties, shipping and taxes. */
-  subtotalPriceV2?: Maybe<IShopifyMoneyV2>;
+  subtotalPriceV2?: Maybe<MoneyV2>;
   /** List of the order’s successful fulfillments. */
-  successfulFulfillments?: Maybe<Array<IShopifyFulfillment>>;
+  successfulFulfillments?: Maybe<Array<Fulfillment>>;
   /**
    * The sum of all the prices of all the items in the order, taxes and discounts included (must be positive).
    * @deprecated Use `totalPriceV2` instead
    */
   totalPrice: Scalars['Money'];
   /** The sum of all the prices of all the items in the order, duties, taxes and discounts included (must be positive). */
-  totalPriceV2: IShopifyMoneyV2;
+  totalPriceV2: MoneyV2;
   /**
    * The total amount that has been refunded.
    * @deprecated Use `totalRefundedV2` instead
    */
   totalRefunded: Scalars['Money'];
   /** The total amount that has been refunded. */
-  totalRefundedV2: IShopifyMoneyV2;
+  totalRefundedV2: MoneyV2;
   /**
    * The total cost of shipping.
    * @deprecated Use `totalShippingPriceV2` instead
    */
   totalShippingPrice: Scalars['Money'];
   /** The total cost of shipping. */
-  totalShippingPriceV2: IShopifyMoneyV2;
+  totalShippingPriceV2: MoneyV2;
   /**
    * The total cost of taxes.
    * @deprecated Use `totalTaxV2` instead
    */
   totalTax?: Maybe<Scalars['Money']>;
   /** The total cost of taxes. */
-  totalTaxV2?: Maybe<IShopifyMoneyV2>;
+  totalTaxV2?: Maybe<MoneyV2>;
 };
 
 
 /** An order is a customer’s completed request to purchase one or more products from a shop. An order is created when a customer completes the checkout process, during which time they provides an email address, billing address and payment information. */
-export type IShopifyOrderDiscountApplicationsArgs = {
+export type OrderDiscountApplicationsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -4775,7 +4775,7 @@ export type IShopifyOrderDiscountApplicationsArgs = {
 
 
 /** An order is a customer’s completed request to purchase one or more products from a shop. An order is created when a customer completes the checkout process, during which time they provides an email address, billing address and payment information. */
-export type IShopifyOrderLineItemsArgs = {
+export type OrderLineItemsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -4785,25 +4785,25 @@ export type IShopifyOrderLineItemsArgs = {
 
 
 /** An order is a customer’s completed request to purchase one or more products from a shop. An order is created when a customer completes the checkout process, during which time they provides an email address, billing address and payment information. */
-export type IShopifyOrderMetafieldArgs = {
+export type OrderMetafieldArgs = {
   key: Scalars['String'];
   namespace: Scalars['String'];
 };
 
 
 /** An order is a customer’s completed request to purchase one or more products from a shop. An order is created when a customer completes the checkout process, during which time they provides an email address, billing address and payment information. */
-export type IShopifyOrderMetafieldsArgs = {
-  identifiers: Array<IShopifyHasMetafieldsIdentifier>;
+export type OrderMetafieldsArgs = {
+  identifiers: Array<HasMetafieldsIdentifier>;
 };
 
 
 /** An order is a customer’s completed request to purchase one or more products from a shop. An order is created when a customer completes the checkout process, during which time they provides an email address, billing address and payment information. */
-export type IShopifyOrderSuccessfulFulfillmentsArgs = {
+export type OrderSuccessfulFulfillmentsArgs = {
   first?: InputMaybe<Scalars['Int']>;
 };
 
 /** Represents the reason for the order's cancellation. */
-export enum IShopifyOrderCancelReason {
+export enum OrderCancelReason {
   /** The customer wanted to cancel the order. */
   Customer = 'CUSTOMER',
   /** Payment was declined. */
@@ -4820,30 +4820,30 @@ export enum IShopifyOrderCancelReason {
  * An auto-generated type for paginating through multiple Orders.
  *
  */
-export type IShopifyOrderConnection = {
+export type OrderConnection = {
   __typename?: 'OrderConnection';
   /** A list of edges. */
-  edges: Array<IShopifyOrderEdge>;
+  edges: Array<OrderEdge>;
   /** A list of the nodes contained in OrderEdge. */
-  nodes: Array<IShopifyOrder>;
+  nodes: Array<Order>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one Order and a cursor during pagination.
  *
  */
-export type IShopifyOrderEdge = {
+export type OrderEdge = {
   __typename?: 'OrderEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of OrderEdge. */
-  node: IShopifyOrder;
+  node: Order;
 };
 
 /** Represents the order's current financial status. */
-export enum IShopifyOrderFinancialStatus {
+export enum OrderFinancialStatus {
   /** Displayed as **Authorized**. */
   Authorized = 'AUTHORIZED',
   /** Displayed as **Paid**. */
@@ -4861,7 +4861,7 @@ export enum IShopifyOrderFinancialStatus {
 }
 
 /** Represents the order's aggregated fulfillment status for display purposes. */
-export enum IShopifyOrderFulfillmentStatus {
+export enum OrderFulfillmentStatus {
   /** Displayed as **Fulfilled**. All of the items in the order have been fulfilled. */
   Fulfilled = 'FULFILLED',
   /** Displayed as **In progress**. Some of the items in the order have been fulfilled, or a request for fulfillment has been sent to the fulfillment service. */
@@ -4883,54 +4883,54 @@ export enum IShopifyOrderFulfillmentStatus {
 }
 
 /** Represents a single line in an order. There is one line item for each distinct product variant. */
-export type IShopifyOrderLineItem = {
+export type OrderLineItem = {
   __typename?: 'OrderLineItem';
   /** The number of entries associated to the line item minus the items that have been removed. */
   currentQuantity: Scalars['Int'];
   /** List of custom attributes associated to the line item. */
-  customAttributes: Array<IShopifyAttribute>;
+  customAttributes: Array<Attribute>;
   /** The discounts that have been allocated onto the order line item by discount applications. */
-  discountAllocations: Array<IShopifyDiscountAllocation>;
+  discountAllocations: Array<DiscountAllocation>;
   /** The total price of the line item, including discounts, and displayed in the presentment currency. */
-  discountedTotalPrice: IShopifyMoneyV2;
+  discountedTotalPrice: MoneyV2;
   /** The total price of the line item, not including any discounts. The total price is calculated using the original unit price multiplied by the quantity, and it is displayed in the presentment currency. */
-  originalTotalPrice: IShopifyMoneyV2;
+  originalTotalPrice: MoneyV2;
   /** The number of products variants associated to the line item. */
   quantity: Scalars['Int'];
   /** The title of the product combined with title of the variant. */
   title: Scalars['String'];
   /** The product variant object associated to the line item. */
-  variant?: Maybe<IShopifyProductVariant>;
+  variant?: Maybe<ProductVariant>;
 };
 
 /**
  * An auto-generated type for paginating through multiple OrderLineItems.
  *
  */
-export type IShopifyOrderLineItemConnection = {
+export type OrderLineItemConnection = {
   __typename?: 'OrderLineItemConnection';
   /** A list of edges. */
-  edges: Array<IShopifyOrderLineItemEdge>;
+  edges: Array<OrderLineItemEdge>;
   /** A list of the nodes contained in OrderLineItemEdge. */
-  nodes: Array<IShopifyOrderLineItem>;
+  nodes: Array<OrderLineItem>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one OrderLineItem and a cursor during pagination.
  *
  */
-export type IShopifyOrderLineItemEdge = {
+export type OrderLineItemEdge = {
   __typename?: 'OrderLineItemEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of OrderLineItemEdge. */
-  node: IShopifyOrderLineItem;
+  node: OrderLineItem;
 };
 
 /** The set of valid sort keys for the Order query. */
-export enum IShopifyOrderSortKeys {
+export enum OrderSortKeys {
   /** Sort by the `id` value. */
   Id = 'ID',
   /** Sort by the `processed_at` value. */
@@ -4946,7 +4946,7 @@ export enum IShopifyOrderSortKeys {
 }
 
 /** Shopify merchants can create pages to hold static HTML content. Each Page object represents a custom page on the online store. */
-export type IShopifyPage = IShopifyHasMetafields & IShopifyNode & IShopifyOnlineStorePublishable & {
+export type Page = HasMetafields & Node & OnlineStorePublishable & {
   __typename?: 'Page';
   /** The description of the page, complete with HTML formatting. */
   body: Scalars['HTML'];
@@ -4959,16 +4959,16 @@ export type IShopifyPage = IShopifyHasMetafields & IShopifyNode & IShopifyOnline
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** Returns a metafield found by namespace and key. */
-  metafield?: Maybe<IShopifyMetafield>;
+  metafield?: Maybe<Metafield>;
   /**
    * The metafields associated with the resource matching the supplied list of namespaces and keys.
    *
    */
-  metafields: Array<Maybe<IShopifyMetafield>>;
+  metafields: Array<Maybe<Metafield>>;
   /** The URL used for viewing the resource on the shop's Online Store. Returns `null` if the resource is currently not published to the Online Store sales channel. */
   onlineStoreUrl?: Maybe<Scalars['URL']>;
   /** The page's SEO information. */
-  seo?: Maybe<IShopifySeo>;
+  seo?: Maybe<Seo>;
   /** The title of the page. */
   title: Scalars['String'];
   /** The timestamp of the latest page update. */
@@ -4977,41 +4977,41 @@ export type IShopifyPage = IShopifyHasMetafields & IShopifyNode & IShopifyOnline
 
 
 /** Shopify merchants can create pages to hold static HTML content. Each Page object represents a custom page on the online store. */
-export type IShopifyPageMetafieldArgs = {
+export type PageMetafieldArgs = {
   key: Scalars['String'];
   namespace: Scalars['String'];
 };
 
 
 /** Shopify merchants can create pages to hold static HTML content. Each Page object represents a custom page on the online store. */
-export type IShopifyPageMetafieldsArgs = {
-  identifiers: Array<IShopifyHasMetafieldsIdentifier>;
+export type PageMetafieldsArgs = {
+  identifiers: Array<HasMetafieldsIdentifier>;
 };
 
 /**
  * An auto-generated type for paginating through multiple Pages.
  *
  */
-export type IShopifyPageConnection = {
+export type PageConnection = {
   __typename?: 'PageConnection';
   /** A list of edges. */
-  edges: Array<IShopifyPageEdge>;
+  edges: Array<PageEdge>;
   /** A list of the nodes contained in PageEdge. */
-  nodes: Array<IShopifyPage>;
+  nodes: Array<Page>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one Page and a cursor during pagination.
  *
  */
-export type IShopifyPageEdge = {
+export type PageEdge = {
   __typename?: 'PageEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of PageEdge. */
-  node: IShopifyPage;
+  node: Page;
 };
 
 /**
@@ -5019,7 +5019,7 @@ export type IShopifyPageEdge = {
  * [Relay specification](https://relay.dev/graphql/connections.htm#sec-undefined.PageInfo).
  *
  */
-export type IShopifyPageInfo = {
+export type PageInfo = {
   __typename?: 'PageInfo';
   /** The cursor corresponding to the last node in edges. */
   endCursor?: Maybe<Scalars['String']>;
@@ -5032,7 +5032,7 @@ export type IShopifyPageInfo = {
 };
 
 /** The set of valid sort keys for the Page query. */
-export enum IShopifyPageSortKeys {
+export enum PageSortKeys {
   /** Sort by the `id` value. */
   Id = 'ID',
   /**
@@ -5048,7 +5048,7 @@ export enum IShopifyPageSortKeys {
 }
 
 /** A payment applied to a checkout. */
-export type IShopifyPayment = IShopifyNode & {
+export type Payment = Node & {
   __typename?: 'Payment';
   /**
    * The amount of the payment.
@@ -5056,13 +5056,13 @@ export type IShopifyPayment = IShopifyNode & {
    */
   amount: Scalars['Money'];
   /** The amount of the payment. */
-  amountV2: IShopifyMoneyV2;
+  amountV2: MoneyV2;
   /** The billing address for the payment. */
-  billingAddress?: Maybe<IShopifyMailingAddress>;
+  billingAddress?: Maybe<MailingAddress>;
   /** The checkout to which the payment belongs. */
-  checkout: IShopifyCheckout;
+  checkout: Checkout;
   /** The credit card used for the payment in the case of direct payments. */
-  creditCard?: Maybe<IShopifyCreditCard>;
+  creditCard?: Maybe<CreditCard>;
   /** A message describing a processing error during asynchronous processing. */
   errorMessage?: Maybe<Scalars['String']>;
   /** A globally-unique identifier. */
@@ -5081,30 +5081,30 @@ export type IShopifyPayment = IShopifyNode & {
   /** A flag to indicate if the payment is to be done in test mode for gateways that support it. */
   test: Scalars['Boolean'];
   /** The actual transaction recorded by Shopify after having processed the payment with the gateway. */
-  transaction?: Maybe<IShopifyTransaction>;
+  transaction?: Maybe<Transaction>;
 };
 
 /** Settings related to payments. */
-export type IShopifyPaymentSettings = {
+export type PaymentSettings = {
   __typename?: 'PaymentSettings';
   /** List of the card brands which the shop accepts. */
-  acceptedCardBrands: Array<IShopifyCardBrand>;
+  acceptedCardBrands: Array<CardBrand>;
   /** The url pointing to the endpoint to vault credit cards. */
   cardVaultUrl: Scalars['URL'];
   /** The country where the shop is located. */
-  countryCode: IShopifyCountryCode;
+  countryCode: CountryCode;
   /** The three-letter code for the shop's primary currency. */
-  currencyCode: IShopifyCurrencyCode;
+  currencyCode: CurrencyCode;
   /** A list of enabled currencies (ISO 4217 format) that the shop accepts. Merchants can enable currencies from their Shopify Payments settings in the Shopify admin. */
-  enabledPresentmentCurrencies: Array<IShopifyCurrencyCode>;
+  enabledPresentmentCurrencies: Array<CurrencyCode>;
   /** The shop’s Shopify Payments account id. */
   shopifyPaymentsAccountId?: Maybe<Scalars['String']>;
   /** List of the digital wallets which the shop supports. */
-  supportedDigitalWallets: Array<IShopifyDigitalWallet>;
+  supportedDigitalWallets: Array<DigitalWallet>;
 };
 
 /** The valid values for the types of payment token. */
-export enum IShopifyPaymentTokenType {
+export enum PaymentTokenType {
   /** Apple Pay token type. */
   ApplePay = 'APPLE_PAY',
   /** Google Pay token type. */
@@ -5118,7 +5118,7 @@ export enum IShopifyPaymentTokenType {
 }
 
 /** A filter used to view a subset of products in a collection matching a specific price range. */
-export type IShopifyPriceRangeFilter = {
+export type PriceRangeFilter = {
   /** The maximum price in the range. Empty indicates no max price. */
   max?: InputMaybe<Scalars['Float']>;
   /** The minimum price in the range. Defaults to zero. */
@@ -5126,27 +5126,27 @@ export type IShopifyPriceRangeFilter = {
 };
 
 /** The value of the percentage pricing object. */
-export type IShopifyPricingPercentageValue = {
+export type PricingPercentageValue = {
   __typename?: 'PricingPercentageValue';
   /** The percentage value of the object. */
   percentage: Scalars['Float'];
 };
 
 /** The price value (fixed or percentage) for a discount application. */
-export type IShopifyPricingValue = IShopifyMoneyV2 | IShopifyPricingPercentageValue;
+export type PricingValue = MoneyV2 | PricingPercentageValue;
 
 /**
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also qualifies as a product, as do services (such as equipment rental, work for hire, customization of another product or an extended warranty).
  */
-export type IShopifyProduct = IShopifyHasMetafields & IShopifyNode & IShopifyOnlineStorePublishable & {
+export type Product = HasMetafields & Node & OnlineStorePublishable & {
   __typename?: 'Product';
   /** Indicates if at least one product variant is available for sale. */
   availableForSale: Scalars['Boolean'];
   /** List of collections a product belongs to. */
-  collections: IShopifyCollectionConnection;
+  collections: CollectionConnection;
   /** The compare at price of the product across all variants. */
-  compareAtPriceRange: IShopifyProductPriceRange;
+  compareAtPriceRange: ProductPriceRange;
   /** The date and time when the product was created. */
   createdAt: Scalars['DateTime'];
   /** Stripped description of the product, single line with HTML tags removed. */
@@ -5159,7 +5159,7 @@ export type IShopifyProduct = IShopifyHasMetafields & IShopifyNode & IShopifyOnl
    * This field is functionally equivalent to `images(first: 1)`.
    *
    */
-  featuredImage?: Maybe<IShopifyImage>;
+  featuredImage?: Maybe<Image>;
   /**
    * A human-friendly unique string for the Product automatically generated from its title.
    * They are used by the Liquid templating language to refer to objects.
@@ -5169,22 +5169,22 @@ export type IShopifyProduct = IShopifyHasMetafields & IShopifyNode & IShopifyOnl
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** List of images associated with the product. */
-  images: IShopifyImageConnection;
+  images: ImageConnection;
   /** The media associated with the product. */
-  media: IShopifyMediaConnection;
+  media: MediaConnection;
   /** Returns a metafield found by namespace and key. */
-  metafield?: Maybe<IShopifyMetafield>;
+  metafield?: Maybe<Metafield>;
   /**
    * The metafields associated with the resource matching the supplied list of namespaces and keys.
    *
    */
-  metafields: Array<Maybe<IShopifyMetafield>>;
+  metafields: Array<Maybe<Metafield>>;
   /** The URL used for viewing the resource on the shop's Online Store. Returns `null` if the resource is currently not published to the Online Store sales channel. */
   onlineStoreUrl?: Maybe<Scalars['URL']>;
   /** List of product options. */
-  options: Array<IShopifyProductOption>;
+  options: Array<ProductOption>;
   /** The price range. */
-  priceRange: IShopifyProductPriceRange;
+  priceRange: ProductPriceRange;
   /** A categorization that a product can be tagged with, commonly used for filtering and searching. */
   productType: Scalars['String'];
   /** The date and time when the product was published to the channel. */
@@ -5192,9 +5192,9 @@ export type IShopifyProduct = IShopifyHasMetafields & IShopifyNode & IShopifyOnl
   /** Whether the product can only be purchased with a selling plan. */
   requiresSellingPlan: Scalars['Boolean'];
   /** A list of a product's available selling plan groups. A selling plan group represents a selling method. For example, 'Subscribe and save' is a selling method where customers pay for goods or services per delivery. A selling plan group contains individual selling plans. */
-  sellingPlanGroups: IShopifySellingPlanGroupConnection;
+  sellingPlanGroups: SellingPlanGroupConnection;
   /** The product's SEO information. */
-  seo: IShopifySeo;
+  seo: Seo;
   /**
    * A comma separated list of tags that have been added to the product.
    * Additional access scope required for private apps: unauthenticated_read_product_tags.
@@ -5219,9 +5219,9 @@ export type IShopifyProduct = IShopifyHasMetafields & IShopifyNode & IShopifyOnl
    * If there is not a variant for the selected options, `null` will be returned.
    *
    */
-  variantBySelectedOptions?: Maybe<IShopifyProductVariant>;
+  variantBySelectedOptions?: Maybe<ProductVariant>;
   /** List of the product’s variants. */
-  variants: IShopifyProductVariantConnection;
+  variants: ProductVariantConnection;
   /** The product’s vendor name. */
   vendor: Scalars['String'];
 };
@@ -5231,7 +5231,7 @@ export type IShopifyProduct = IShopifyHasMetafields & IShopifyNode & IShopifyOnl
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also qualifies as a product, as do services (such as equipment rental, work for hire, customization of another product or an extended warranty).
  */
-export type IShopifyProductCollectionsArgs = {
+export type ProductCollectionsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -5244,7 +5244,7 @@ export type IShopifyProductCollectionsArgs = {
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also qualifies as a product, as do services (such as equipment rental, work for hire, customization of another product or an extended warranty).
  */
-export type IShopifyProductDescriptionArgs = {
+export type ProductDescriptionArgs = {
   truncateAt?: InputMaybe<Scalars['Int']>;
 };
 
@@ -5253,13 +5253,13 @@ export type IShopifyProductDescriptionArgs = {
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also qualifies as a product, as do services (such as equipment rental, work for hire, customization of another product or an extended warranty).
  */
-export type IShopifyProductImagesArgs = {
+export type ProductImagesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyProductImageSortKeys>;
+  sortKey?: InputMaybe<ProductImageSortKeys>;
 };
 
 
@@ -5267,13 +5267,13 @@ export type IShopifyProductImagesArgs = {
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also qualifies as a product, as do services (such as equipment rental, work for hire, customization of another product or an extended warranty).
  */
-export type IShopifyProductMediaArgs = {
+export type ProductMediaArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyProductMediaSortKeys>;
+  sortKey?: InputMaybe<ProductMediaSortKeys>;
 };
 
 
@@ -5281,7 +5281,7 @@ export type IShopifyProductMediaArgs = {
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also qualifies as a product, as do services (such as equipment rental, work for hire, customization of another product or an extended warranty).
  */
-export type IShopifyProductMetafieldArgs = {
+export type ProductMetafieldArgs = {
   key: Scalars['String'];
   namespace: Scalars['String'];
 };
@@ -5291,8 +5291,8 @@ export type IShopifyProductMetafieldArgs = {
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also qualifies as a product, as do services (such as equipment rental, work for hire, customization of another product or an extended warranty).
  */
-export type IShopifyProductMetafieldsArgs = {
-  identifiers: Array<IShopifyHasMetafieldsIdentifier>;
+export type ProductMetafieldsArgs = {
+  identifiers: Array<HasMetafieldsIdentifier>;
 };
 
 
@@ -5300,7 +5300,7 @@ export type IShopifyProductMetafieldsArgs = {
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also qualifies as a product, as do services (such as equipment rental, work for hire, customization of another product or an extended warranty).
  */
-export type IShopifyProductOptionsArgs = {
+export type ProductOptionsArgs = {
   first?: InputMaybe<Scalars['Int']>;
 };
 
@@ -5309,7 +5309,7 @@ export type IShopifyProductOptionsArgs = {
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also qualifies as a product, as do services (such as equipment rental, work for hire, customization of another product or an extended warranty).
  */
-export type IShopifyProductSellingPlanGroupsArgs = {
+export type ProductSellingPlanGroupsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -5322,8 +5322,8 @@ export type IShopifyProductSellingPlanGroupsArgs = {
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also qualifies as a product, as do services (such as equipment rental, work for hire, customization of another product or an extended warranty).
  */
-export type IShopifyProductVariantBySelectedOptionsArgs = {
-  selectedOptions: Array<IShopifySelectedOptionInput>;
+export type ProductVariantBySelectedOptionsArgs = {
+  selectedOptions: Array<SelectedOptionInput>;
 };
 
 
@@ -5331,17 +5331,17 @@ export type IShopifyProductVariantBySelectedOptionsArgs = {
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also qualifies as a product, as do services (such as equipment rental, work for hire, customization of another product or an extended warranty).
  */
-export type IShopifyProductVariantsArgs = {
+export type ProductVariantsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyProductVariantSortKeys>;
+  sortKey?: InputMaybe<ProductVariantSortKeys>;
 };
 
 /** The set of valid sort keys for the ProductCollection query. */
-export enum IShopifyProductCollectionSortKeys {
+export enum ProductCollectionSortKeys {
   /** Sort by the `best-selling` value. */
   BestSelling = 'BEST_SELLING',
   /** Sort by the `collection-default` value. */
@@ -5368,50 +5368,50 @@ export enum IShopifyProductCollectionSortKeys {
  * An auto-generated type for paginating through multiple Products.
  *
  */
-export type IShopifyProductConnection = {
+export type ProductConnection = {
   __typename?: 'ProductConnection';
   /** A list of edges. */
-  edges: Array<IShopifyProductEdge>;
+  edges: Array<ProductEdge>;
   /** A list of available filters. */
-  filters: Array<IShopifyFilter>;
+  filters: Array<Filter>;
   /** A list of the nodes contained in ProductEdge. */
-  nodes: Array<IShopifyProduct>;
+  nodes: Array<Product>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one Product and a cursor during pagination.
  *
  */
-export type IShopifyProductEdge = {
+export type ProductEdge = {
   __typename?: 'ProductEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of ProductEdge. */
-  node: IShopifyProduct;
+  node: Product;
 };
 
 /** A filter used to view a subset of products in a collection. */
-export type IShopifyProductFilter = {
+export type ProductFilter = {
   /** Filter on if the product is available for sale. */
   available?: InputMaybe<Scalars['Boolean']>;
   /** A range of prices to filter with-in. */
-  price?: InputMaybe<IShopifyPriceRangeFilter>;
+  price?: InputMaybe<PriceRangeFilter>;
   /** A product metafield to filter on. */
-  productMetafield?: InputMaybe<IShopifyMetafieldFilter>;
+  productMetafield?: InputMaybe<MetafieldFilter>;
   /** The product type to filter on. */
   productType?: InputMaybe<Scalars['String']>;
   /** The product vendor to filter on. */
   productVendor?: InputMaybe<Scalars['String']>;
   /** A variant metafield to filter on. */
-  variantMetafield?: InputMaybe<IShopifyMetafieldFilter>;
+  variantMetafield?: InputMaybe<MetafieldFilter>;
   /** A variant option to filter on. */
-  variantOption?: InputMaybe<IShopifyVariantOptionFilter>;
+  variantOption?: InputMaybe<VariantOptionFilter>;
 };
 
 /** The set of valid sort keys for the ProductImage query. */
-export enum IShopifyProductImageSortKeys {
+export enum ProductImageSortKeys {
   /** Sort by the `created_at` value. */
   CreatedAt = 'CREATED_AT',
   /** Sort by the `id` value. */
@@ -5427,7 +5427,7 @@ export enum IShopifyProductImageSortKeys {
 }
 
 /** The set of valid sort keys for the ProductMedia query. */
-export enum IShopifyProductMediaSortKeys {
+export enum ProductMediaSortKeys {
   /** Sort by the `id` value. */
   Id = 'ID',
   /** Sort by the `position` value. */
@@ -5446,7 +5446,7 @@ export enum IShopifyProductMediaSortKeys {
  * 255 characters limit each.
  *
  */
-export type IShopifyProductOption = IShopifyNode & {
+export type ProductOption = Node & {
   __typename?: 'ProductOption';
   /** A globally-unique identifier. */
   id: Scalars['ID'];
@@ -5457,16 +5457,16 @@ export type IShopifyProductOption = IShopifyNode & {
 };
 
 /** The price range of the product. */
-export type IShopifyProductPriceRange = {
+export type ProductPriceRange = {
   __typename?: 'ProductPriceRange';
   /** The highest variant's price. */
-  maxVariantPrice: IShopifyMoneyV2;
+  maxVariantPrice: MoneyV2;
   /** The lowest variant's price. */
-  minVariantPrice: IShopifyMoneyV2;
+  minVariantPrice: MoneyV2;
 };
 
 /** The set of valid sort keys for the Product query. */
-export enum IShopifyProductSortKeys {
+export enum ProductSortKeys {
   /** Sort by the `best_selling` value. */
   BestSelling = 'BEST_SELLING',
   /** Sort by the `created_at` value. */
@@ -5492,7 +5492,7 @@ export enum IShopifyProductSortKeys {
 }
 
 /** A product variant represents a different version of a product, such as differing sizes or differing colors. */
-export type IShopifyProductVariant = IShopifyHasMetafields & IShopifyNode & {
+export type ProductVariant = HasMetafields & Node & {
   __typename?: 'ProductVariant';
   /** Indicates if the product variant is available for sale. */
   availableForSale: Scalars['Boolean'];
@@ -5504,7 +5504,7 @@ export type IShopifyProductVariant = IShopifyHasMetafields & IShopifyNode & {
    */
   compareAtPrice?: Maybe<Scalars['Money']>;
   /** The compare at price of the variant. This can be used to mark a variant as on sale, when `compareAtPriceV2` is higher than `priceV2`. */
-  compareAtPriceV2?: Maybe<IShopifyMoneyV2>;
+  compareAtPriceV2?: Maybe<MoneyV2>;
   /** Whether a product is out of stock but still available for purchase (used for backorders). */
   currentlyNotInStock: Scalars['Boolean'];
   /** A globally-unique identifier. */
@@ -5513,63 +5513,63 @@ export type IShopifyProductVariant = IShopifyHasMetafields & IShopifyNode & {
    * Image associated with the product variant. This field falls back to the product image if no image is available.
    *
    */
-  image?: Maybe<IShopifyImage>;
+  image?: Maybe<Image>;
   /** Returns a metafield found by namespace and key. */
-  metafield?: Maybe<IShopifyMetafield>;
+  metafield?: Maybe<Metafield>;
   /**
    * The metafields associated with the resource matching the supplied list of namespaces and keys.
    *
    */
-  metafields: Array<Maybe<IShopifyMetafield>>;
+  metafields: Array<Maybe<Metafield>>;
   /**
    * The product variant’s price.
    * @deprecated Use `priceV2` instead
    */
   price: Scalars['Money'];
   /** The product variant’s price. */
-  priceV2: IShopifyMoneyV2;
+  priceV2: MoneyV2;
   /** The product object that the product variant belongs to. */
-  product: IShopifyProduct;
+  product: Product;
   /** The total sellable quantity of the variant for online sales channels. */
   quantityAvailable?: Maybe<Scalars['Int']>;
   /** Whether a customer needs to provide a shipping address when placing an order for the product variant. */
   requiresShipping: Scalars['Boolean'];
   /** List of product options applied to the variant. */
-  selectedOptions: Array<IShopifySelectedOption>;
+  selectedOptions: Array<SelectedOption>;
   /** Represents an association between a variant and a selling plan. Selling plan allocations describe which selling plans are available for each variant, and what their impact is on pricing. */
-  sellingPlanAllocations: IShopifySellingPlanAllocationConnection;
+  sellingPlanAllocations: SellingPlanAllocationConnection;
   /** The SKU (stock keeping unit) associated with the variant. */
   sku?: Maybe<Scalars['String']>;
   /** The in-store pickup availability of this variant by location. */
-  storeAvailability: IShopifyStoreAvailabilityConnection;
+  storeAvailability: StoreAvailabilityConnection;
   /** The product variant’s title. */
   title: Scalars['String'];
   /** The unit price value for the variant based on the variant's measurement. */
-  unitPrice?: Maybe<IShopifyMoneyV2>;
+  unitPrice?: Maybe<MoneyV2>;
   /** The unit price measurement for the variant. */
-  unitPriceMeasurement?: Maybe<IShopifyUnitPriceMeasurement>;
+  unitPriceMeasurement?: Maybe<UnitPriceMeasurement>;
   /** The weight of the product variant in the unit system specified with `weight_unit`. */
   weight?: Maybe<Scalars['Float']>;
   /** Unit of measurement for weight. */
-  weightUnit: IShopifyWeightUnit;
+  weightUnit: WeightUnit;
 };
 
 
 /** A product variant represents a different version of a product, such as differing sizes or differing colors. */
-export type IShopifyProductVariantMetafieldArgs = {
+export type ProductVariantMetafieldArgs = {
   key: Scalars['String'];
   namespace: Scalars['String'];
 };
 
 
 /** A product variant represents a different version of a product, such as differing sizes or differing colors. */
-export type IShopifyProductVariantMetafieldsArgs = {
-  identifiers: Array<IShopifyHasMetafieldsIdentifier>;
+export type ProductVariantMetafieldsArgs = {
+  identifiers: Array<HasMetafieldsIdentifier>;
 };
 
 
 /** A product variant represents a different version of a product, such as differing sizes or differing colors. */
-export type IShopifyProductVariantSellingPlanAllocationsArgs = {
+export type ProductVariantSellingPlanAllocationsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -5579,7 +5579,7 @@ export type IShopifyProductVariantSellingPlanAllocationsArgs = {
 
 
 /** A product variant represents a different version of a product, such as differing sizes or differing colors. */
-export type IShopifyProductVariantStoreAvailabilityArgs = {
+export type ProductVariantStoreAvailabilityArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -5591,30 +5591,30 @@ export type IShopifyProductVariantStoreAvailabilityArgs = {
  * An auto-generated type for paginating through multiple ProductVariants.
  *
  */
-export type IShopifyProductVariantConnection = {
+export type ProductVariantConnection = {
   __typename?: 'ProductVariantConnection';
   /** A list of edges. */
-  edges: Array<IShopifyProductVariantEdge>;
+  edges: Array<ProductVariantEdge>;
   /** A list of the nodes contained in ProductVariantEdge. */
-  nodes: Array<IShopifyProductVariant>;
+  nodes: Array<ProductVariant>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one ProductVariant and a cursor during pagination.
  *
  */
-export type IShopifyProductVariantEdge = {
+export type ProductVariantEdge = {
   __typename?: 'ProductVariantEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of ProductVariantEdge. */
-  node: IShopifyProductVariant;
+  node: ProductVariant;
 };
 
 /** The set of valid sort keys for the ProductVariant query. */
-export enum IShopifyProductVariantSortKeys {
+export enum ProductVariantSortKeys {
   /** Sort by the `id` value. */
   Id = 'ID',
   /** Sort by the `position` value. */
@@ -5632,263 +5632,263 @@ export enum IShopifyProductVariantSortKeys {
 }
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRoot = {
+export type QueryRoot = {
   __typename?: 'QueryRoot';
   /** List of the shop's articles. */
-  articles: IShopifyArticleConnection;
+  articles: ArticleConnection;
   /** Fetch a specific `Blog` by one of its unique attributes. */
-  blog?: Maybe<IShopifyBlog>;
+  blog?: Maybe<Blog>;
   /**
    * Find a blog by its handle.
    * @deprecated Use `blog` instead
    */
-  blogByHandle?: Maybe<IShopifyBlog>;
+  blogByHandle?: Maybe<Blog>;
   /** List of the shop's blogs. */
-  blogs: IShopifyBlogConnection;
+  blogs: BlogConnection;
   /** Retrieve a cart by its ID. For more information, refer to [Manage a cart with the Storefront API](https://shopify.dev/api/examples/cart). */
-  cart?: Maybe<IShopifyCart>;
+  cart?: Maybe<Cart>;
   /** Fetch a specific `Collection` by one of its unique attributes. */
-  collection?: Maybe<IShopifyCollection>;
+  collection?: Maybe<Collection>;
   /**
    * Find a collection by its handle.
    * @deprecated Use `collection` instead
    */
-  collectionByHandle?: Maybe<IShopifyCollection>;
+  collectionByHandle?: Maybe<Collection>;
   /** List of the shop’s collections. */
-  collections: IShopifyCollectionConnection;
+  collections: CollectionConnection;
   /** Find a customer by its access token. */
-  customer?: Maybe<IShopifyCustomer>;
+  customer?: Maybe<Customer>;
   /** Returns the localized experiences configured for the shop. */
-  localization: IShopifyLocalization;
+  localization: Localization;
   /**
    * List of the shop's locations that support in-store pickup.
    *
    * When sorting by distance, you must specify a location via the `near` argument.
    *
    */
-  locations: IShopifyLocationConnection;
+  locations: LocationConnection;
   /** A storefront menu. */
-  menu?: Maybe<IShopifyMenu>;
+  menu?: Maybe<Menu>;
   /** Returns a specific node by ID. */
-  node?: Maybe<IShopifyNode>;
+  node?: Maybe<Node>;
   /** Returns the list of nodes with the given IDs. */
-  nodes: Array<Maybe<IShopifyNode>>;
+  nodes: Array<Maybe<Node>>;
   /** Fetch a specific `Page` by one of its unique attributes. */
-  page?: Maybe<IShopifyPage>;
+  page?: Maybe<Page>;
   /**
    * Find a page by its handle.
    * @deprecated Use `page` instead
    */
-  pageByHandle?: Maybe<IShopifyPage>;
+  pageByHandle?: Maybe<Page>;
   /** List of the shop's pages. */
-  pages: IShopifyPageConnection;
+  pages: PageConnection;
   /** Fetch a specific `Product` by one of its unique attributes. */
-  product?: Maybe<IShopifyProduct>;
+  product?: Maybe<Product>;
   /**
    * Find a product by its handle.
    * @deprecated Use `product` instead
    */
-  productByHandle?: Maybe<IShopifyProduct>;
+  productByHandle?: Maybe<Product>;
   /**
    * Find recommended products related to a given `product_id`.
    * To learn more about how recommendations are generated, see
    * [*Showing product recommendations on product pages*](https://help.shopify.com/themes/development/recommended-products).
    *
    */
-  productRecommendations?: Maybe<Array<IShopifyProduct>>;
+  productRecommendations?: Maybe<Array<Product>>;
   /**
    * Tags added to products.
    * Additional access scope required: unauthenticated_read_product_tags.
    *
    */
-  productTags: IShopifyStringConnection;
+  productTags: StringConnection;
   /** List of product types for the shop's products that are published to your app. */
-  productTypes: IShopifyStringConnection;
+  productTypes: StringConnection;
   /** List of the shop’s products. */
-  products: IShopifyProductConnection;
+  products: ProductConnection;
   /** The list of public Storefront API versions, including supported, release candidate and unstable versions. */
-  publicApiVersions: Array<IShopifyApiVersion>;
+  publicApiVersions: Array<ApiVersion>;
   /** The shop associated with the storefront access token. */
-  shop: IShopifyShop;
+  shop: Shop;
   /** A list of redirects for a shop. */
-  urlRedirects: IShopifyUrlRedirectConnection;
+  urlRedirects: UrlRedirectConnection;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootArticlesArgs = {
+export type QueryRootArticlesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   query?: InputMaybe<Scalars['String']>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyArticleSortKeys>;
+  sortKey?: InputMaybe<ArticleSortKeys>;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootBlogArgs = {
+export type QueryRootBlogArgs = {
   handle?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootBlogByHandleArgs = {
+export type QueryRootBlogByHandleArgs = {
   handle: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootBlogsArgs = {
+export type QueryRootBlogsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   query?: InputMaybe<Scalars['String']>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyBlogSortKeys>;
+  sortKey?: InputMaybe<BlogSortKeys>;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootCartArgs = {
+export type QueryRootCartArgs = {
   id: Scalars['ID'];
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootCollectionArgs = {
+export type QueryRootCollectionArgs = {
   handle?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootCollectionByHandleArgs = {
+export type QueryRootCollectionByHandleArgs = {
   handle: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootCollectionsArgs = {
+export type QueryRootCollectionsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   query?: InputMaybe<Scalars['String']>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyCollectionSortKeys>;
+  sortKey?: InputMaybe<CollectionSortKeys>;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootCustomerArgs = {
+export type QueryRootCustomerArgs = {
   customerAccessToken: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootLocationsArgs = {
+export type QueryRootLocationsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
-  near?: InputMaybe<IShopifyGeoCoordinateInput>;
+  near?: InputMaybe<GeoCoordinateInput>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyLocationSortKeys>;
+  sortKey?: InputMaybe<LocationSortKeys>;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootMenuArgs = {
+export type QueryRootMenuArgs = {
   handle: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootNodeArgs = {
+export type QueryRootNodeArgs = {
   id: Scalars['ID'];
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootNodesArgs = {
+export type QueryRootNodesArgs = {
   ids: Array<Scalars['ID']>;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootPageArgs = {
+export type QueryRootPageArgs = {
   handle?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootPageByHandleArgs = {
+export type QueryRootPageByHandleArgs = {
   handle: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootPagesArgs = {
+export type QueryRootPagesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   query?: InputMaybe<Scalars['String']>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyPageSortKeys>;
+  sortKey?: InputMaybe<PageSortKeys>;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootProductArgs = {
+export type QueryRootProductArgs = {
   handle?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootProductByHandleArgs = {
+export type QueryRootProductByHandleArgs = {
   handle: Scalars['String'];
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootProductRecommendationsArgs = {
+export type QueryRootProductRecommendationsArgs = {
   productId: Scalars['ID'];
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootProductTagsArgs = {
+export type QueryRootProductTagsArgs = {
   first: Scalars['Int'];
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootProductTypesArgs = {
+export type QueryRootProductTypesArgs = {
   first: Scalars['Int'];
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootProductsArgs = {
+export type QueryRootProductsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   query?: InputMaybe<Scalars['String']>;
   reverse?: InputMaybe<Scalars['Boolean']>;
-  sortKey?: InputMaybe<IShopifyProductSortKeys>;
+  sortKey?: InputMaybe<ProductSortKeys>;
 };
 
 
 /** The schema’s entry-point for queries. This acts as the public, top-level API from which all queries must start. */
-export type IShopifyQueryRootUrlRedirectsArgs = {
+export type QueryRootUrlRedirectsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -5897,7 +5897,7 @@ export type IShopifyQueryRootUrlRedirectsArgs = {
 };
 
 /** SEO information. */
-export type IShopifySeo = {
+export type Seo = {
   __typename?: 'SEO';
   /** The meta description. */
   description?: Maybe<Scalars['String']>;
@@ -5910,18 +5910,18 @@ export type IShopifySeo = {
  * was created by a Shopify Script.
  *
  */
-export type IShopifyScriptDiscountApplication = IShopifyDiscountApplication & {
+export type ScriptDiscountApplication = DiscountApplication & {
   __typename?: 'ScriptDiscountApplication';
   /** The method by which the discount's value is allocated to its entitled items. */
-  allocationMethod: IShopifyDiscountApplicationAllocationMethod;
+  allocationMethod: DiscountApplicationAllocationMethod;
   /** Which lines of targetType that the discount is allocated over. */
-  targetSelection: IShopifyDiscountApplicationTargetSelection;
+  targetSelection: DiscountApplicationTargetSelection;
   /** The type of line that the discount is applicable towards. */
-  targetType: IShopifyDiscountApplicationTargetType;
+  targetType: DiscountApplicationTargetType;
   /** The title of the application as defined by the Script. */
   title: Scalars['String'];
   /** The value of the discount application. */
-  value: IShopifyPricingValue;
+  value: PricingValue;
 };
 
 /**
@@ -5929,7 +5929,7 @@ export type IShopifyScriptDiscountApplication = IShopifyDiscountApplication & {
  * Products can have multiple options, like different sizes or colors.
  *
  */
-export type IShopifySelectedOption = {
+export type SelectedOption = {
   __typename?: 'SelectedOption';
   /** The product option’s name. */
   name: Scalars['String'];
@@ -5938,7 +5938,7 @@ export type IShopifySelectedOption = {
 };
 
 /** Specifies the input fields required for a selected option. */
-export type IShopifySelectedOptionInput = {
+export type SelectedOptionInput = {
   /** The product option’s name. */
   name: Scalars['String'];
   /** The product option’s value. */
@@ -5946,10 +5946,10 @@ export type IShopifySelectedOptionInput = {
 };
 
 /** Represents how products and variants can be sold and purchased. */
-export type IShopifySellingPlan = {
+export type SellingPlan = {
   __typename?: 'SellingPlan';
   /** The initial payment due for the purchase. */
-  checkoutCharge: IShopifySellingPlanCheckoutCharge;
+  checkoutCharge: SellingPlanCheckoutCharge;
   /** The description of the selling plan. */
   description?: Maybe<Scalars['String']>;
   /** A globally-unique identifier. */
@@ -5957,83 +5957,83 @@ export type IShopifySellingPlan = {
   /** The name of the selling plan. For example, '6 weeks of prepaid granola, delivered weekly'. */
   name: Scalars['String'];
   /** The selling plan options available in the drop-down list in the storefront. For example, 'Delivery every week' or 'Delivery every 2 weeks' specifies the delivery frequency options for the product. Individual selling plans contribute their options to the associated selling plan group. For example, a selling plan group might have an option called `option1: Delivery every`. One selling plan in that group could contribute `option1: 2 weeks` with the pricing for that option, and another selling plan could contribute `option1: 4 weeks`, with different pricing. */
-  options: Array<IShopifySellingPlanOption>;
+  options: Array<SellingPlanOption>;
   /** The price adjustments that a selling plan makes when a variant is purchased with a selling plan. */
-  priceAdjustments: Array<IShopifySellingPlanPriceAdjustment>;
+  priceAdjustments: Array<SellingPlanPriceAdjustment>;
   /** Whether purchasing the selling plan will result in multiple deliveries. */
   recurringDeliveries: Scalars['Boolean'];
 };
 
 /** Represents an association between a variant and a selling plan. Selling plan allocations describe the options offered for each variant, and the price of the variant when purchased with a selling plan. */
-export type IShopifySellingPlanAllocation = {
+export type SellingPlanAllocation = {
   __typename?: 'SellingPlanAllocation';
   /** The checkout charge amount due for the purchase. */
-  checkoutChargeAmount: IShopifyMoneyV2;
+  checkoutChargeAmount: MoneyV2;
   /** A list of price adjustments, with a maximum of two. When there are two, the first price adjustment goes into effect at the time of purchase, while the second one starts after a certain number of orders. A price adjustment represents how a selling plan affects pricing when a variant is purchased with a selling plan. Prices display in the customer's currency if the shop is configured for it. */
-  priceAdjustments: Array<IShopifySellingPlanAllocationPriceAdjustment>;
+  priceAdjustments: Array<SellingPlanAllocationPriceAdjustment>;
   /** The remaining balance charge amount due for the purchase. */
-  remainingBalanceChargeAmount: IShopifyMoneyV2;
+  remainingBalanceChargeAmount: MoneyV2;
   /** A representation of how products and variants can be sold and purchased. For example, an individual selling plan could be '6 weeks of prepaid granola, delivered weekly'. */
-  sellingPlan: IShopifySellingPlan;
+  sellingPlan: SellingPlan;
 };
 
 /**
  * An auto-generated type for paginating through multiple SellingPlanAllocations.
  *
  */
-export type IShopifySellingPlanAllocationConnection = {
+export type SellingPlanAllocationConnection = {
   __typename?: 'SellingPlanAllocationConnection';
   /** A list of edges. */
-  edges: Array<IShopifySellingPlanAllocationEdge>;
+  edges: Array<SellingPlanAllocationEdge>;
   /** A list of the nodes contained in SellingPlanAllocationEdge. */
-  nodes: Array<IShopifySellingPlanAllocation>;
+  nodes: Array<SellingPlanAllocation>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one SellingPlanAllocation and a cursor during pagination.
  *
  */
-export type IShopifySellingPlanAllocationEdge = {
+export type SellingPlanAllocationEdge = {
   __typename?: 'SellingPlanAllocationEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of SellingPlanAllocationEdge. */
-  node: IShopifySellingPlanAllocation;
+  node: SellingPlanAllocation;
 };
 
 /** The resulting prices for variants when they're purchased with a specific selling plan. */
-export type IShopifySellingPlanAllocationPriceAdjustment = {
+export type SellingPlanAllocationPriceAdjustment = {
   __typename?: 'SellingPlanAllocationPriceAdjustment';
   /** The price of the variant when it's purchased without a selling plan for the same number of deliveries. For example, if a customer purchases 6 deliveries of $10.00 granola separately, then the price is 6 x $10.00 = $60.00. */
-  compareAtPrice: IShopifyMoneyV2;
+  compareAtPrice: MoneyV2;
   /** The effective price for a single delivery. For example, for a prepaid subscription plan that includes 6 deliveries at the price of $48.00, the per delivery price is $8.00. */
-  perDeliveryPrice: IShopifyMoneyV2;
+  perDeliveryPrice: MoneyV2;
   /** The price of the variant when it's purchased with a selling plan For example, for a prepaid subscription plan that includes 6 deliveries of $10.00 granola, where the customer gets 20% off, the price is 6 x $10.00 x 0.80 = $48.00. */
-  price: IShopifyMoneyV2;
+  price: MoneyV2;
   /** The resulting price per unit for the variant associated with the selling plan. If the variant isn't sold by quantity or measurement, then this field returns `null`. */
-  unitPrice?: Maybe<IShopifyMoneyV2>;
+  unitPrice?: Maybe<MoneyV2>;
 };
 
 /** The initial payment due for the purchase. */
-export type IShopifySellingPlanCheckoutCharge = {
+export type SellingPlanCheckoutCharge = {
   __typename?: 'SellingPlanCheckoutCharge';
   /** The charge type for the checkout charge. */
-  type: IShopifySellingPlanCheckoutChargeType;
+  type: SellingPlanCheckoutChargeType;
   /** The charge value for the checkout charge. */
-  value: IShopifySellingPlanCheckoutChargeValue;
+  value: SellingPlanCheckoutChargeValue;
 };
 
 /** The percentage value of the price used for checkout charge. */
-export type IShopifySellingPlanCheckoutChargePercentageValue = {
+export type SellingPlanCheckoutChargePercentageValue = {
   __typename?: 'SellingPlanCheckoutChargePercentageValue';
   /** The percentage value of the price used for checkout charge. */
   percentage: Scalars['Float'];
 };
 
 /** The checkout charge when the full amount isn't charged at checkout. */
-export enum IShopifySellingPlanCheckoutChargeType {
+export enum SellingPlanCheckoutChargeType {
   /** The checkout charge is a percentage of the product or variant price. */
   Percentage = 'PERCENTAGE',
   /** The checkout charge is a fixed price amount. */
@@ -6041,64 +6041,64 @@ export enum IShopifySellingPlanCheckoutChargeType {
 }
 
 /** The portion of the price to be charged at checkout. */
-export type IShopifySellingPlanCheckoutChargeValue = IShopifyMoneyV2 | IShopifySellingPlanCheckoutChargePercentageValue;
+export type SellingPlanCheckoutChargeValue = MoneyV2 | SellingPlanCheckoutChargePercentageValue;
 
 /**
  * An auto-generated type for paginating through multiple SellingPlans.
  *
  */
-export type IShopifySellingPlanConnection = {
+export type SellingPlanConnection = {
   __typename?: 'SellingPlanConnection';
   /** A list of edges. */
-  edges: Array<IShopifySellingPlanEdge>;
+  edges: Array<SellingPlanEdge>;
   /** A list of the nodes contained in SellingPlanEdge. */
-  nodes: Array<IShopifySellingPlan>;
+  nodes: Array<SellingPlan>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one SellingPlan and a cursor during pagination.
  *
  */
-export type IShopifySellingPlanEdge = {
+export type SellingPlanEdge = {
   __typename?: 'SellingPlanEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of SellingPlanEdge. */
-  node: IShopifySellingPlan;
+  node: SellingPlan;
 };
 
 /** A fixed amount that's deducted from the original variant price. For example, $10.00 off. */
-export type IShopifySellingPlanFixedAmountPriceAdjustment = {
+export type SellingPlanFixedAmountPriceAdjustment = {
   __typename?: 'SellingPlanFixedAmountPriceAdjustment';
   /** The money value of the price adjustment. */
-  adjustmentAmount: IShopifyMoneyV2;
+  adjustmentAmount: MoneyV2;
 };
 
 /** A fixed price adjustment for a variant that's purchased with a selling plan. */
-export type IShopifySellingPlanFixedPriceAdjustment = {
+export type SellingPlanFixedPriceAdjustment = {
   __typename?: 'SellingPlanFixedPriceAdjustment';
   /** A new price of the variant when it's purchased with the selling plan. */
-  price: IShopifyMoneyV2;
+  price: MoneyV2;
 };
 
 /** Represents a selling method. For example, 'Subscribe and save' is a selling method where customers pay for goods or services per delivery. A selling plan group contains individual selling plans. */
-export type IShopifySellingPlanGroup = {
+export type SellingPlanGroup = {
   __typename?: 'SellingPlanGroup';
   /** A display friendly name for the app that created the selling plan group. */
   appName?: Maybe<Scalars['String']>;
   /** The name of the selling plan group. */
   name: Scalars['String'];
   /** Represents the selling plan options available in the drop-down list in the storefront. For example, 'Delivery every week' or 'Delivery every 2 weeks' specifies the delivery frequency options for the product. */
-  options: Array<IShopifySellingPlanGroupOption>;
+  options: Array<SellingPlanGroupOption>;
   /** A list of selling plans in a selling plan group. A selling plan is a representation of how products and variants can be sold and purchased. For example, an individual selling plan could be '6 weeks of prepaid granola, delivered weekly'. */
-  sellingPlans: IShopifySellingPlanConnection;
+  sellingPlans: SellingPlanConnection;
 };
 
 
 /** Represents a selling method. For example, 'Subscribe and save' is a selling method where customers pay for goods or services per delivery. A selling plan group contains individual selling plans. */
-export type IShopifySellingPlanGroupSellingPlansArgs = {
+export type SellingPlanGroupSellingPlansArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -6110,26 +6110,26 @@ export type IShopifySellingPlanGroupSellingPlansArgs = {
  * An auto-generated type for paginating through multiple SellingPlanGroups.
  *
  */
-export type IShopifySellingPlanGroupConnection = {
+export type SellingPlanGroupConnection = {
   __typename?: 'SellingPlanGroupConnection';
   /** A list of edges. */
-  edges: Array<IShopifySellingPlanGroupEdge>;
+  edges: Array<SellingPlanGroupEdge>;
   /** A list of the nodes contained in SellingPlanGroupEdge. */
-  nodes: Array<IShopifySellingPlanGroup>;
+  nodes: Array<SellingPlanGroup>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one SellingPlanGroup and a cursor during pagination.
  *
  */
-export type IShopifySellingPlanGroupEdge = {
+export type SellingPlanGroupEdge = {
   __typename?: 'SellingPlanGroupEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of SellingPlanGroupEdge. */
-  node: IShopifySellingPlanGroup;
+  node: SellingPlanGroup;
 };
 
 /**
@@ -6137,7 +6137,7 @@ export type IShopifySellingPlanGroupEdge = {
  *
  * Individual selling plans contribute their options to the associated selling plan group. For example, a selling plan group might have an option called `option1: Delivery every`. One selling plan in that group could contribute `option1: 2 weeks` with the pricing for that option, and another selling plan could contribute `option1: 4 weeks`, with different pricing.
  */
-export type IShopifySellingPlanGroupOption = {
+export type SellingPlanGroupOption = {
   __typename?: 'SellingPlanGroupOption';
   /** The name of the option. For example, 'Delivery every'. */
   name: Scalars['String'];
@@ -6146,7 +6146,7 @@ export type IShopifySellingPlanGroupOption = {
 };
 
 /** An option provided by a Selling Plan. */
-export type IShopifySellingPlanOption = {
+export type SellingPlanOption = {
   __typename?: 'SellingPlanOption';
   /** The name of the option (ie "Delivery every"). */
   name?: Maybe<Scalars['String']>;
@@ -6155,26 +6155,26 @@ export type IShopifySellingPlanOption = {
 };
 
 /** A percentage amount that's deducted from the original variant price. For example, 10% off. */
-export type IShopifySellingPlanPercentagePriceAdjustment = {
+export type SellingPlanPercentagePriceAdjustment = {
   __typename?: 'SellingPlanPercentagePriceAdjustment';
   /** The percentage value of the price adjustment. */
   adjustmentPercentage: Scalars['Int'];
 };
 
 /** Represents by how much the price of a variant associated with a selling plan is adjusted. Each variant can have up to two price adjustments. If a variant has multiple price adjustments, then the first price adjustment applies when the variant is initially purchased. The second price adjustment applies after a certain number of orders (specified by the `orderCount` field) are made. If a selling plan doesn't have any price adjustments, then the unadjusted price of the variant is the effective price. */
-export type IShopifySellingPlanPriceAdjustment = {
+export type SellingPlanPriceAdjustment = {
   __typename?: 'SellingPlanPriceAdjustment';
   /** The type of price adjustment. An adjustment value can have one of three types: percentage, amount off, or a new price. */
-  adjustmentValue: IShopifySellingPlanPriceAdjustmentValue;
+  adjustmentValue: SellingPlanPriceAdjustmentValue;
   /** The number of orders that the price adjustment applies to. If the price adjustment always applies, then this field is `null`. */
   orderCount?: Maybe<Scalars['Int']>;
 };
 
 /** Represents by how much the price of a variant associated with a selling plan is adjusted. Each variant can have up to two price adjustments. */
-export type IShopifySellingPlanPriceAdjustmentValue = IShopifySellingPlanFixedAmountPriceAdjustment | IShopifySellingPlanFixedPriceAdjustment | IShopifySellingPlanPercentagePriceAdjustment;
+export type SellingPlanPriceAdjustmentValue = SellingPlanFixedAmountPriceAdjustment | SellingPlanFixedPriceAdjustment | SellingPlanPercentagePriceAdjustment;
 
 /** A shipping rate to be applied to a checkout. */
-export type IShopifyShippingRate = {
+export type ShippingRate = {
   __typename?: 'ShippingRate';
   /** Human-readable unique identifier for this shipping rate. */
   handle: Scalars['String'];
@@ -6184,62 +6184,62 @@ export type IShopifyShippingRate = {
    */
   price: Scalars['Money'];
   /** Price of this shipping rate. */
-  priceV2: IShopifyMoneyV2;
+  priceV2: MoneyV2;
   /** Title of this shipping rate. */
   title: Scalars['String'];
 };
 
 /** Shop represents a collection of the general settings and information about the shop. */
-export type IShopifyShop = IShopifyHasMetafields & IShopifyNode & {
+export type Shop = HasMetafields & Node & {
   __typename?: 'Shop';
   /** A description of the shop. */
   description?: Maybe<Scalars['String']>;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** Returns a metafield found by namespace and key. */
-  metafield?: Maybe<IShopifyMetafield>;
+  metafield?: Maybe<Metafield>;
   /**
    * The metafields associated with the resource matching the supplied list of namespaces and keys.
    *
    */
-  metafields: Array<Maybe<IShopifyMetafield>>;
+  metafields: Array<Maybe<Metafield>>;
   /** A string representing the way currency is formatted when the currency isn’t specified. */
   moneyFormat: Scalars['String'];
   /** The shop’s name. */
   name: Scalars['String'];
   /** Settings related to payments. */
-  paymentSettings: IShopifyPaymentSettings;
+  paymentSettings: PaymentSettings;
   /** The primary domain of the shop’s Online Store. */
-  primaryDomain: IShopifyDomain;
+  primaryDomain: Domain;
   /** The shop’s privacy policy. */
-  privacyPolicy?: Maybe<IShopifyShopPolicy>;
+  privacyPolicy?: Maybe<ShopPolicy>;
   /** The shop’s refund policy. */
-  refundPolicy?: Maybe<IShopifyShopPolicy>;
+  refundPolicy?: Maybe<ShopPolicy>;
   /** The shop’s shipping policy. */
-  shippingPolicy?: Maybe<IShopifyShopPolicy>;
+  shippingPolicy?: Maybe<ShopPolicy>;
   /** Countries that the shop ships to. */
-  shipsToCountries: Array<IShopifyCountryCode>;
+  shipsToCountries: Array<CountryCode>;
   /** The shop’s subscription policy. */
-  subscriptionPolicy?: Maybe<IShopifyShopPolicyWithDefault>;
+  subscriptionPolicy?: Maybe<ShopPolicyWithDefault>;
   /** The shop’s terms of service. */
-  termsOfService?: Maybe<IShopifyShopPolicy>;
+  termsOfService?: Maybe<ShopPolicy>;
 };
 
 
 /** Shop represents a collection of the general settings and information about the shop. */
-export type IShopifyShopMetafieldArgs = {
+export type ShopMetafieldArgs = {
   key: Scalars['String'];
   namespace: Scalars['String'];
 };
 
 
 /** Shop represents a collection of the general settings and information about the shop. */
-export type IShopifyShopMetafieldsArgs = {
-  identifiers: Array<IShopifyHasMetafieldsIdentifier>;
+export type ShopMetafieldsArgs = {
+  identifiers: Array<HasMetafieldsIdentifier>;
 };
 
 /** Policy that a merchant has configured for their store, such as their refund or privacy policy. */
-export type IShopifyShopPolicy = IShopifyNode & {
+export type ShopPolicy = Node & {
   __typename?: 'ShopPolicy';
   /** Policy text, maximum size of 64kb. */
   body: Scalars['String'];
@@ -6259,7 +6259,7 @@ export type IShopifyShopPolicy = IShopifyNode & {
  * Otherwise, the policy will return the merchant-configured value.
  *
  */
-export type IShopifyShopPolicyWithDefault = {
+export type ShopPolicyWithDefault = {
   __typename?: 'ShopPolicyWithDefault';
   /** The text of the policy. Maximum size: 64KB. */
   body: Scalars['String'];
@@ -6278,12 +6278,12 @@ export type IShopifyShopPolicyWithDefault = {
  * Local pick-up must be enabled in the  store's shipping settings, otherwise this will return an empty result.
  *
  */
-export type IShopifyStoreAvailability = {
+export type StoreAvailability = {
   __typename?: 'StoreAvailability';
   /** Whether the product variant is in-stock at this location. */
   available: Scalars['Boolean'];
   /** The location where this product variant is stocked at. */
-  location: IShopifyLocation;
+  location: Location;
   /** Returns the estimated amount of time it takes for pickup to be ready (Example: Usually ready in 24 hours). */
   pickUpTime: Scalars['String'];
 };
@@ -6292,45 +6292,45 @@ export type IShopifyStoreAvailability = {
  * An auto-generated type for paginating through multiple StoreAvailabilities.
  *
  */
-export type IShopifyStoreAvailabilityConnection = {
+export type StoreAvailabilityConnection = {
   __typename?: 'StoreAvailabilityConnection';
   /** A list of edges. */
-  edges: Array<IShopifyStoreAvailabilityEdge>;
+  edges: Array<StoreAvailabilityEdge>;
   /** A list of the nodes contained in StoreAvailabilityEdge. */
-  nodes: Array<IShopifyStoreAvailability>;
+  nodes: Array<StoreAvailability>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one StoreAvailability and a cursor during pagination.
  *
  */
-export type IShopifyStoreAvailabilityEdge = {
+export type StoreAvailabilityEdge = {
   __typename?: 'StoreAvailabilityEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of StoreAvailabilityEdge. */
-  node: IShopifyStoreAvailability;
+  node: StoreAvailability;
 };
 
 /**
  * An auto-generated type for paginating through a list of Strings.
  *
  */
-export type IShopifyStringConnection = {
+export type StringConnection = {
   __typename?: 'StringConnection';
   /** A list of edges. */
-  edges: Array<IShopifyStringEdge>;
+  edges: Array<StringEdge>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one String and a cursor during pagination.
  *
  */
-export type IShopifyStringEdge = {
+export type StringEdge = {
   __typename?: 'StringEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
@@ -6343,25 +6343,25 @@ export type IShopifyStringEdge = {
  * a tokenized payment.
  *
  */
-export type IShopifyTokenizedPaymentInputV3 = {
+export type TokenizedPaymentInputV3 = {
   /** The billing address for the payment. */
-  billingAddress: IShopifyMailingAddressInput;
+  billingAddress: MailingAddressInput;
   /** A unique client generated key used to avoid duplicate charges. When a duplicate payment is found, the original is returned instead of creating a new one. For more information, refer to [Idempotent requests](https://shopify.dev/api/usage/idempotent-requests). */
   idempotencyKey: Scalars['String'];
   /** Public Hash Key used for AndroidPay payments only. */
   identifier?: InputMaybe<Scalars['String']>;
   /** The amount and currency of the payment. */
-  paymentAmount: IShopifyMoneyInput;
+  paymentAmount: MoneyInput;
   /** A simple string or JSON containing the required payment data for the tokenized payment. */
   paymentData: Scalars['String'];
   /** Whether to execute the payment in test mode, if possible. Test mode is not supported in production stores. Defaults to `false`. */
   test?: InputMaybe<Scalars['Boolean']>;
   /** The type of payment token. */
-  type: IShopifyPaymentTokenType;
+  type: PaymentTokenType;
 };
 
 /** An object representing exchange of money for a product or service. */
-export type IShopifyTransaction = {
+export type Transaction = {
   __typename?: 'Transaction';
   /**
    * The amount of money that the transaction was for.
@@ -6369,22 +6369,22 @@ export type IShopifyTransaction = {
    */
   amount: Scalars['Money'];
   /** The amount of money that the transaction was for. */
-  amountV2: IShopifyMoneyV2;
+  amountV2: MoneyV2;
   /** The kind of the transaction. */
-  kind: IShopifyTransactionKind;
+  kind: TransactionKind;
   /**
    * The status of the transaction.
    * @deprecated Use `statusV2` instead
    */
-  status: IShopifyTransactionStatus;
+  status: TransactionStatus;
   /** The status of the transaction. */
-  statusV2?: Maybe<IShopifyTransactionStatus>;
+  statusV2?: Maybe<TransactionStatus>;
   /** Whether the transaction was done in test mode or not. */
   test: Scalars['Boolean'];
 };
 
 /** The different kinds of order transactions. */
-export enum IShopifyTransactionKind {
+export enum TransactionKind {
   /**
    * An amount reserved against the cardholder's funding source.
    * Money does not change hands until the authorization is captured.
@@ -6402,7 +6402,7 @@ export enum IShopifyTransactionKind {
 }
 
 /** Transaction statuses describe the status of a transaction. */
-export enum IShopifyTransactionStatus {
+export enum TransactionStatus {
   /** There was an error while processing the transaction. */
   Error = 'ERROR',
   /** The transaction failed. */
@@ -6417,22 +6417,22 @@ export enum IShopifyTransactionStatus {
  * The measurement used to calculate a unit price for a product variant (e.g. $9.99 / 100ml).
  *
  */
-export type IShopifyUnitPriceMeasurement = {
+export type UnitPriceMeasurement = {
   __typename?: 'UnitPriceMeasurement';
   /** The type of unit of measurement for the unit price measurement. */
-  measuredType?: Maybe<IShopifyUnitPriceMeasurementMeasuredType>;
+  measuredType?: Maybe<UnitPriceMeasurementMeasuredType>;
   /** The quantity unit for the unit price measurement. */
-  quantityUnit?: Maybe<IShopifyUnitPriceMeasurementMeasuredUnit>;
+  quantityUnit?: Maybe<UnitPriceMeasurementMeasuredUnit>;
   /** The quantity value for the unit price measurement. */
   quantityValue: Scalars['Float'];
   /** The reference unit for the unit price measurement. */
-  referenceUnit?: Maybe<IShopifyUnitPriceMeasurementMeasuredUnit>;
+  referenceUnit?: Maybe<UnitPriceMeasurementMeasuredUnit>;
   /** The reference value for the unit price measurement. */
   referenceValue: Scalars['Int'];
 };
 
 /** The accepted types of unit of measurement. */
-export enum IShopifyUnitPriceMeasurementMeasuredType {
+export enum UnitPriceMeasurementMeasuredType {
   /** Unit of measurements representing areas. */
   Area = 'AREA',
   /** Unit of measurements representing lengths. */
@@ -6444,7 +6444,7 @@ export enum IShopifyUnitPriceMeasurementMeasuredType {
 }
 
 /** The valid units of measurement for a unit price measurement. */
-export enum IShopifyUnitPriceMeasurementMeasuredUnit {
+export enum UnitPriceMeasurementMeasuredUnit {
   /** 100 centiliters equals 1 liter. */
   Cl = 'CL',
   /** 100 centimeters equals 1 meter. */
@@ -6470,7 +6470,7 @@ export enum IShopifyUnitPriceMeasurementMeasuredUnit {
 }
 
 /** Systems of weights and measures. */
-export enum IShopifyUnitSystem {
+export enum UnitSystem {
   /** Imperial system of weights and measures. */
   ImperialSystem = 'IMPERIAL_SYSTEM',
   /** Metric system of weights and measures. */
@@ -6478,7 +6478,7 @@ export enum IShopifyUnitSystem {
 }
 
 /** A redirect on the online store. */
-export type IShopifyUrlRedirect = IShopifyNode & {
+export type UrlRedirect = Node & {
   __typename?: 'UrlRedirect';
   /** The ID of the URL redirect. */
   id: Scalars['ID'];
@@ -6492,30 +6492,30 @@ export type IShopifyUrlRedirect = IShopifyNode & {
  * An auto-generated type for paginating through multiple UrlRedirects.
  *
  */
-export type IShopifyUrlRedirectConnection = {
+export type UrlRedirectConnection = {
   __typename?: 'UrlRedirectConnection';
   /** A list of edges. */
-  edges: Array<IShopifyUrlRedirectEdge>;
+  edges: Array<UrlRedirectEdge>;
   /** A list of the nodes contained in UrlRedirectEdge. */
-  nodes: Array<IShopifyUrlRedirect>;
+  nodes: Array<UrlRedirect>;
   /** Information to aid in pagination. */
-  pageInfo: IShopifyPageInfo;
+  pageInfo: PageInfo;
 };
 
 /**
  * An auto-generated type which holds one UrlRedirect and a cursor during pagination.
  *
  */
-export type IShopifyUrlRedirectEdge = {
+export type UrlRedirectEdge = {
   __typename?: 'UrlRedirectEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of UrlRedirectEdge. */
-  node: IShopifyUrlRedirect;
+  node: UrlRedirect;
 };
 
 /** Represents an error in the input of a mutation. */
-export type IShopifyUserError = IShopifyDisplayableError & {
+export type UserError = DisplayableError & {
   __typename?: 'UserError';
   /** The path to the input field that caused the error. */
   field?: Maybe<Array<Scalars['String']>>;
@@ -6524,7 +6524,7 @@ export type IShopifyUserError = IShopifyDisplayableError & {
 };
 
 /** A filter used to view a subset of products in a collection matching a specific variant option. */
-export type IShopifyVariantOptionFilter = {
+export type VariantOptionFilter = {
   /** The name of the variant option to filter on. */
   name: Scalars['String'];
   /** The value of the variant option to filter on. */
@@ -6532,22 +6532,22 @@ export type IShopifyVariantOptionFilter = {
 };
 
 /** Represents a Shopify hosted video. */
-export type IShopifyVideo = IShopifyMedia & IShopifyNode & {
+export type Video = Media & Node & {
   __typename?: 'Video';
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>;
   /** A globally-unique identifier. */
   id: Scalars['ID'];
   /** The media content type. */
-  mediaContentType: IShopifyMediaContentType;
+  mediaContentType: MediaContentType;
   /** The preview image for the media. */
-  previewImage?: Maybe<IShopifyImage>;
+  previewImage?: Maybe<Image>;
   /** The sources for a video. */
-  sources: Array<IShopifyVideoSource>;
+  sources: Array<VideoSource>;
 };
 
 /** Represents a source for a Shopify hosted video. */
-export type IShopifyVideoSource = {
+export type VideoSource = {
   __typename?: 'VideoSource';
   /** The format of the video source. */
   format: Scalars['String'];
@@ -6562,7 +6562,7 @@ export type IShopifyVideoSource = {
 };
 
 /** Units of measurement for weight. */
-export enum IShopifyWeightUnit {
+export enum WeightUnit {
   /** Metric system unit of mass. */
   Grams = 'GRAMS',
   /** 1 kilogram equals 1000 grams. */
@@ -6573,43 +6573,139 @@ export enum IShopifyWeightUnit {
   Pounds = 'POUNDS'
 }
 
-export type IShopifyProductVariantFragment = { __typename?: 'ProductVariant', id: string, availableForSale: boolean, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } };
+export type SeoFragment = { __typename?: 'SEO', description?: string | null, title?: string | null };
 
-export type IShopifyProductFragment = { __typename?: 'Product', availableForSale: boolean, title: string, handle: string, id: string, description: string, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any } }, featuredImage?: { __typename?: 'Image', url: any, altText?: string | null } | null, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', url: any, altText?: string | null }> }, sellingPlanGroups: { __typename?: 'SellingPlanGroupConnection', nodes: Array<{ __typename?: 'SellingPlanGroup', appName?: string | null, name: string, sellingPlans: { __typename?: 'SellingPlanConnection', nodes: Array<{ __typename?: 'SellingPlan', name: string, id: string, description?: string | null }> }, options: Array<{ __typename?: 'SellingPlanGroupOption', name: string, values: Array<string> }> }> }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string, availableForSale: boolean, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } };
+export type ProductOptionFragment = { __typename?: 'ProductOption', id: string, name: string, values: Array<string> };
 
-export type IShopifyGetAllProductsQueryVariables = Exact<{ [key: string]: never; }>;
+export type MetafieldFragment = { __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null };
+
+export type ImageFragment = { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null };
+
+export type ProductPriceRangeFragment = { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } };
+
+export type ProductVariantFragment = { __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } };
+
+export type ProductFragment = { __typename?: 'Product', availableForSale: boolean, createdAt: any, description: string, descriptionHtml: any, handle: string, id: string, onlineStoreUrl?: any | null, productType: string, publishedAt: any, requiresSellingPlan: boolean, tags: Array<string>, title: string, totalInventory?: number | null, updatedAt: any, vendor: string, compareAtPriceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, featuredImage?: { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null } | null, metafields: Array<{ __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null } | null>, options: Array<{ __typename?: 'ProductOption', id: string, name: string, values: Array<string> }>, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null }> }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } };
+
+export type CartFragment = { __typename?: 'Cart', id: string, createdAt: any, updatedAt: any, checkoutUrl: any, totalQuantity: number, lines: { __typename?: 'CartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', amountPerQuantity: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', title: string, id: string, image?: { __typename?: 'Image', altText?: string | null, url: any, id?: string | null } | null, product: { __typename?: 'Product', id: string, title: string } }, sellingPlanAllocation?: { __typename?: 'SellingPlanAllocation', sellingPlan: { __typename?: 'SellingPlan', id: string, name: string }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', price: { __typename?: 'MoneyV2', amount: any }, compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any } }> } | null, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }> }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null }, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }>, buyerIdentity: { __typename?: 'CartBuyerIdentity', email?: string | null, phone?: string | null, countryCode?: CountryCode | null, customer?: { __typename?: 'Customer', id: string } | null } };
+
+export type CartLinesUpdateMutationVariables = Exact<{
+  cartId: Scalars['ID'];
+  lines: Array<CartLineUpdateInput> | CartLineUpdateInput;
+}>;
 
 
-export type IShopifyGetAllProductsQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', availableForSale: boolean, title: string, handle: string, id: string, description: string, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any } }, featuredImage?: { __typename?: 'Image', url: any, altText?: string | null } | null, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', url: any, altText?: string | null }> }, sellingPlanGroups: { __typename?: 'SellingPlanGroupConnection', nodes: Array<{ __typename?: 'SellingPlanGroup', appName?: string | null, name: string, sellingPlans: { __typename?: 'SellingPlanConnection', nodes: Array<{ __typename?: 'SellingPlan', name: string, id: string, description?: string | null }> }, options: Array<{ __typename?: 'SellingPlanGroupOption', name: string, values: Array<string> }> }> }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string, availableForSale: boolean, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } }> } };
+export type CartLinesUpdateMutation = { __typename?: 'Mutation', cartLinesUpdate?: { __typename?: 'CartLinesUpdatePayload', cart?: { __typename?: 'Cart', id: string, createdAt: any, updatedAt: any, checkoutUrl: any, totalQuantity: number, lines: { __typename?: 'CartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', amountPerQuantity: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', title: string, id: string, image?: { __typename?: 'Image', altText?: string | null, url: any, id?: string | null } | null, product: { __typename?: 'Product', id: string, title: string } }, sellingPlanAllocation?: { __typename?: 'SellingPlanAllocation', sellingPlan: { __typename?: 'SellingPlan', id: string, name: string }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', price: { __typename?: 'MoneyV2', amount: any }, compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any } }> } | null, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }> }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null }, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }>, buyerIdentity: { __typename?: 'CartBuyerIdentity', email?: string | null, phone?: string | null, countryCode?: CountryCode | null, customer?: { __typename?: 'Customer', id: string } | null } } | null, userErrors: Array<{ __typename?: 'CartUserError', field?: Array<string> | null, message: string }> } | null };
 
-export type IShopifyGetAllProductsHandleQueryVariables = Exact<{ [key: string]: never; }>;
+export type CartLinesRemoveMutationVariables = Exact<{
+  cartId: Scalars['ID'];
+  lineIds: Array<Scalars['ID']> | Scalars['ID'];
+}>;
 
 
-export type IShopifyGetAllProductsHandleQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', handle: string }> } };
+export type CartLinesRemoveMutation = { __typename?: 'Mutation', cartLinesRemove?: { __typename?: 'CartLinesRemovePayload', cart?: { __typename?: 'Cart', id: string, createdAt: any, updatedAt: any, checkoutUrl: any, totalQuantity: number, lines: { __typename?: 'CartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', amountPerQuantity: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', title: string, id: string, image?: { __typename?: 'Image', altText?: string | null, url: any, id?: string | null } | null, product: { __typename?: 'Product', id: string, title: string } }, sellingPlanAllocation?: { __typename?: 'SellingPlanAllocation', sellingPlan: { __typename?: 'SellingPlan', id: string, name: string }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', price: { __typename?: 'MoneyV2', amount: any }, compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any } }> } | null, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }> }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null }, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }>, buyerIdentity: { __typename?: 'CartBuyerIdentity', email?: string | null, phone?: string | null, countryCode?: CountryCode | null, customer?: { __typename?: 'Customer', id: string } | null } } | null, userErrors: Array<{ __typename?: 'CartUserError', field?: Array<string> | null, message: string }> } | null };
 
-export type IShopifyGetProductByHandleQueryVariables = Exact<{
+export type CartCreateMutationVariables = Exact<{
+  input: CartInput;
+}>;
+
+
+export type CartCreateMutation = { __typename?: 'Mutation', cartCreate?: { __typename?: 'CartCreatePayload', cart?: { __typename?: 'Cart', id: string, createdAt: any, updatedAt: any, checkoutUrl: any, totalQuantity: number, lines: { __typename?: 'CartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', amountPerQuantity: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', title: string, id: string, image?: { __typename?: 'Image', altText?: string | null, url: any, id?: string | null } | null, product: { __typename?: 'Product', id: string, title: string } }, sellingPlanAllocation?: { __typename?: 'SellingPlanAllocation', sellingPlan: { __typename?: 'SellingPlan', id: string, name: string }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', price: { __typename?: 'MoneyV2', amount: any }, compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any } }> } | null, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }> }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null }, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }>, buyerIdentity: { __typename?: 'CartBuyerIdentity', email?: string | null, phone?: string | null, countryCode?: CountryCode | null, customer?: { __typename?: 'Customer', id: string } | null } } | null, userErrors: Array<{ __typename?: 'CartUserError', field?: Array<string> | null, message: string }> } | null };
+
+export type CartLinesAddMutationVariables = Exact<{
+  cartId: Scalars['ID'];
+  lines: Array<CartLineInput> | CartLineInput;
+}>;
+
+
+export type CartLinesAddMutation = { __typename?: 'Mutation', cartLinesAdd?: { __typename?: 'CartLinesAddPayload', cart?: { __typename?: 'Cart', id: string, createdAt: any, updatedAt: any, checkoutUrl: any, totalQuantity: number, lines: { __typename?: 'CartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', amountPerQuantity: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', title: string, id: string, image?: { __typename?: 'Image', altText?: string | null, url: any, id?: string | null } | null, product: { __typename?: 'Product', id: string, title: string } }, sellingPlanAllocation?: { __typename?: 'SellingPlanAllocation', sellingPlan: { __typename?: 'SellingPlan', id: string, name: string }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', price: { __typename?: 'MoneyV2', amount: any }, compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any } }> } | null, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }> }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null }, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }>, buyerIdentity: { __typename?: 'CartBuyerIdentity', email?: string | null, phone?: string | null, countryCode?: CountryCode | null, customer?: { __typename?: 'Customer', id: string } | null } } | null, userErrors: Array<{ __typename?: 'CartUserError', field?: Array<string> | null, message: string }> } | null };
+
+export type GetAllProductsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllProductsQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', availableForSale: boolean, createdAt: any, description: string, descriptionHtml: any, handle: string, id: string, onlineStoreUrl?: any | null, productType: string, publishedAt: any, requiresSellingPlan: boolean, tags: Array<string>, title: string, totalInventory?: number | null, updatedAt: any, vendor: string, compareAtPriceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, featuredImage?: { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null } | null, metafields: Array<{ __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null } | null>, options: Array<{ __typename?: 'ProductOption', id: string, name: string, values: Array<string> }>, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null }> }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } }> } };
+
+export type GetAllProductsHandleQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllProductsHandleQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', handle: string }> } };
+
+export type GetProductByHandleQueryVariables = Exact<{
   handle: Scalars['String'];
 }>;
 
 
-export type IShopifyGetProductByHandleQuery = { __typename?: 'QueryRoot', product?: { __typename?: 'Product', availableForSale: boolean, title: string, handle: string, id: string, description: string, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any } }, featuredImage?: { __typename?: 'Image', url: any, altText?: string | null } | null, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', url: any, altText?: string | null }> }, sellingPlanGroups: { __typename?: 'SellingPlanGroupConnection', nodes: Array<{ __typename?: 'SellingPlanGroup', appName?: string | null, name: string, sellingPlans: { __typename?: 'SellingPlanConnection', nodes: Array<{ __typename?: 'SellingPlan', name: string, id: string, description?: string | null }> }, options: Array<{ __typename?: 'SellingPlanGroupOption', name: string, values: Array<string> }> }> }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string, availableForSale: boolean, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } } | null };
+export type GetProductByHandleQuery = { __typename?: 'QueryRoot', product?: { __typename?: 'Product', availableForSale: boolean, createdAt: any, description: string, descriptionHtml: any, handle: string, id: string, onlineStoreUrl?: any | null, productType: string, publishedAt: any, requiresSellingPlan: boolean, tags: Array<string>, title: string, totalInventory?: number | null, updatedAt: any, vendor: string, compareAtPriceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, featuredImage?: { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null } | null, metafields: Array<{ __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null } | null>, options: Array<{ __typename?: 'ProductOption', id: string, name: string, values: Array<string> }>, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null }> }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } } | null };
 
-export type IShopifyAllProductsQueryVariables = Exact<{
+export type GetProductsByCollectionQueryVariables = Exact<{
   handle: Scalars['String'];
 }>;
 
 
-export type IShopifyAllProductsQuery = { __typename?: 'QueryRoot', collection?: { __typename?: 'Collection', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', availableForSale: boolean, title: string, handle: string, id: string, description: string, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any } }, featuredImage?: { __typename?: 'Image', url: any, altText?: string | null } | null, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', url: any, altText?: string | null }> }, sellingPlanGroups: { __typename?: 'SellingPlanGroupConnection', nodes: Array<{ __typename?: 'SellingPlanGroup', appName?: string | null, name: string, sellingPlans: { __typename?: 'SellingPlanConnection', nodes: Array<{ __typename?: 'SellingPlan', name: string, id: string, description?: string | null }> }, options: Array<{ __typename?: 'SellingPlanGroupOption', name: string, values: Array<string> }> }> }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string, availableForSale: boolean, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } }> } } | null };
+export type GetProductsByCollectionQuery = { __typename?: 'QueryRoot', collection?: { __typename?: 'Collection', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', availableForSale: boolean, createdAt: any, description: string, descriptionHtml: any, handle: string, id: string, onlineStoreUrl?: any | null, productType: string, publishedAt: any, requiresSellingPlan: boolean, tags: Array<string>, title: string, totalInventory?: number | null, updatedAt: any, vendor: string, compareAtPriceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, featuredImage?: { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null } | null, metafields: Array<{ __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null } | null>, options: Array<{ __typename?: 'ProductOption', id: string, name: string, values: Array<string> }>, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null }> }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } }> } } | null };
 
-export type IShopifySearchProductQueryVariables = Exact<{
+export type SearchProductQueryVariables = Exact<{
   term: Scalars['String'];
 }>;
 
 
-export type IShopifySearchProductQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', availableForSale: boolean, title: string, handle: string, id: string, description: string, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any } }, featuredImage?: { __typename?: 'Image', url: any, altText?: string | null } | null, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', url: any, altText?: string | null }> }, sellingPlanGroups: { __typename?: 'SellingPlanGroupConnection', nodes: Array<{ __typename?: 'SellingPlanGroup', appName?: string | null, name: string, sellingPlans: { __typename?: 'SellingPlanConnection', nodes: Array<{ __typename?: 'SellingPlan', name: string, id: string, description?: string | null }> }, options: Array<{ __typename?: 'SellingPlanGroupOption', name: string, values: Array<string> }> }> }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string, availableForSale: boolean, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } }> } };
+export type SearchProductQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', availableForSale: boolean, createdAt: any, description: string, descriptionHtml: any, handle: string, id: string, onlineStoreUrl?: any | null, productType: string, publishedAt: any, requiresSellingPlan: boolean, tags: Array<string>, title: string, totalInventory?: number | null, updatedAt: any, vendor: string, compareAtPriceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, featuredImage?: { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null } | null, metafields: Array<{ __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null } | null>, options: Array<{ __typename?: 'ProductOption', id: string, name: string, values: Array<string> }>, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null }> }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } }> } };
 
+export const ProductPriceRangeFragmentDoc = gql`
+    fragment ProductPriceRange on ProductPriceRange {
+  maxVariantPrice {
+    amount
+    currencyCode
+  }
+  minVariantPrice {
+    amount
+    currencyCode
+  }
+}
+    `;
+export const ImageFragmentDoc = gql`
+    fragment Image on Image {
+  altText
+  height
+  id
+  url
+  width
+}
+    `;
+export const MetafieldFragmentDoc = gql`
+    fragment Metafield on Metafield {
+  createdAt
+  description
+  id
+  key
+  namespace
+  parentResource {
+    __typename
+  }
+  reference {
+    __typename
+  }
+  type
+  updatedAt
+  value
+}
+    `;
+export const ProductOptionFragmentDoc = gql`
+    fragment ProductOption on ProductOption {
+  id
+  name
+  values
+}
+    `;
+export const SeoFragmentDoc = gql`
+    fragment SEO on SEO {
+  description
+  title
+}
+    `;
 export const ProductVariantFragmentDoc = gql`
     fragment ProductVariant on ProductVariant {
+  availableForSale
   id
   availableForSale
   title
@@ -6650,45 +6746,42 @@ export const ProductVariantFragmentDoc = gql`
 export const ProductFragmentDoc = gql`
     fragment Product on Product {
   availableForSale
-  title
+  compareAtPriceRange {
+    ...ProductPriceRange
+  }
+  createdAt
+  description
+  descriptionHtml
+  featuredImage {
+    ...Image
+  }
   handle
   id
+  metafields(identifiers: []) {
+    ...Metafield
+  }
+  onlineStoreUrl
+  options(first: 50) {
+    ...ProductOption
+  }
   priceRange {
-    maxVariantPrice {
-      amount
-    }
+    ...ProductPriceRange
   }
-  description
-  featuredImage {
-    url
-    altText
-  }
-  images(first: 2) {
-    nodes {
-      url
-      altText
-    }
-  }
-  sellingPlanGroups(first: 50) {
-    nodes {
-      appName
-      name
-      sellingPlans(first: 50) {
-        nodes {
-          name
-          id
-          description
-        }
-      }
-      options {
-        name
-        values
-      }
-    }
-  }
+  productType
+  publishedAt
+  requiresSellingPlan
   seo {
-    description
-    title
+    ...SEO
+  }
+  tags
+  title
+  totalInventory
+  updatedAt
+  vendor
+  images(first: 5) {
+    nodes {
+      ...Image
+    }
   }
   variants(first: 50) {
     nodes {
@@ -6696,7 +6789,150 @@ export const ProductFragmentDoc = gql`
     }
   }
 }
-    ${ProductVariantFragmentDoc}`;
+    ${ProductPriceRangeFragmentDoc}
+${ImageFragmentDoc}
+${MetafieldFragmentDoc}
+${ProductOptionFragmentDoc}
+${SeoFragmentDoc}
+${ProductVariantFragmentDoc}`;
+export const CartFragmentDoc = gql`
+    fragment Cart on Cart {
+  id
+  createdAt
+  updatedAt
+  checkoutUrl
+  totalQuantity
+  lines(first: 10) {
+    nodes {
+      id
+      quantity
+      cost {
+        amountPerQuantity {
+          amount
+        }
+      }
+      merchandise {
+        ... on ProductVariant {
+          image {
+            altText
+            url
+            id
+          }
+          title
+          id
+          product {
+            id
+            title
+          }
+        }
+      }
+      sellingPlanAllocation {
+        sellingPlan {
+          id
+          name
+        }
+        priceAdjustments {
+          price {
+            amount
+          }
+          compareAtPrice {
+            amount
+          }
+          perDeliveryPrice {
+            amount
+          }
+        }
+      }
+      attributes {
+        key
+        value
+      }
+    }
+  }
+  cost {
+    totalAmount {
+      amount
+      currencyCode
+    }
+    subtotalAmount {
+      amount
+      currencyCode
+    }
+    totalTaxAmount {
+      amount
+      currencyCode
+    }
+    totalDutyAmount {
+      amount
+      currencyCode
+    }
+  }
+  attributes {
+    key
+    value
+  }
+  buyerIdentity {
+    email
+    phone
+    customer {
+      id
+    }
+    countryCode
+  }
+}
+    `;
+export const CartLinesUpdateDocument = gql`
+    mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+  cartLinesUpdate(cartId: $cartId, lines: $lines) {
+    cart {
+      ...Cart
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+    ${CartFragmentDoc}`;
+export const CartLinesRemoveDocument = gql`
+    mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+  cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+    cart {
+      ...Cart
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+    ${CartFragmentDoc}`;
+export const CartCreateDocument = gql`
+    mutation cartCreate($input: CartInput!) {
+  cartCreate(input: $input) {
+    cart {
+      ...Cart
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+    ${CartFragmentDoc}`;
+export const CartLinesAddDocument = gql`
+    mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+  cartLinesAdd(cartId: $cartId, lines: $lines) {
+    cart {
+      ...Cart
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+    ${CartFragmentDoc}`;
 export const GetAllProductsDocument = gql`
     query getAllProducts {
   products(first: 50) {
@@ -6722,8 +6958,8 @@ export const GetProductByHandleDocument = gql`
   }
 }
     ${ProductFragmentDoc}`;
-export const AllProductsDocument = gql`
-    query AllProducts($handle: String!) {
+export const GetProductsByCollectionDocument = gql`
+    query getProductsByCollection($handle: String!) {
   collection(handle: $handle) {
     products(first: 50) {
       nodes {
@@ -6750,44 +6986,55 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    getAllProducts(variables?: IShopifyGetAllProductsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IShopifyGetAllProductsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<IShopifyGetAllProductsQuery>(GetAllProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllProducts', 'query');
+    cartLinesUpdate(variables: CartLinesUpdateMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CartLinesUpdateMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CartLinesUpdateMutation>(CartLinesUpdateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'cartLinesUpdate', 'mutation');
     },
-    getAllProductsHandle(variables?: IShopifyGetAllProductsHandleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IShopifyGetAllProductsHandleQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<IShopifyGetAllProductsHandleQuery>(GetAllProductsHandleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllProductsHandle', 'query');
+    cartLinesRemove(variables: CartLinesRemoveMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CartLinesRemoveMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CartLinesRemoveMutation>(CartLinesRemoveDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'cartLinesRemove', 'mutation');
     },
-    getProductByHandle(variables: IShopifyGetProductByHandleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IShopifyGetProductByHandleQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<IShopifyGetProductByHandleQuery>(GetProductByHandleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductByHandle', 'query');
+    cartCreate(variables: CartCreateMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CartCreateMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CartCreateMutation>(CartCreateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'cartCreate', 'mutation');
     },
-    AllProducts(variables: IShopifyAllProductsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IShopifyAllProductsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<IShopifyAllProductsQuery>(AllProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllProducts', 'query');
+    cartLinesAdd(variables: CartLinesAddMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CartLinesAddMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CartLinesAddMutation>(CartLinesAddDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'cartLinesAdd', 'mutation');
     },
-    searchProduct(variables: IShopifySearchProductQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IShopifySearchProductQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<IShopifySearchProductQuery>(SearchProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchProduct', 'query');
+    getAllProducts(variables?: GetAllProductsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAllProductsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAllProductsQuery>(GetAllProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllProducts', 'query');
+    },
+    getAllProductsHandle(variables?: GetAllProductsHandleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAllProductsHandleQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAllProductsHandleQuery>(GetAllProductsHandleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllProductsHandle', 'query');
+    },
+    getProductByHandle(variables: GetProductByHandleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetProductByHandleQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductByHandleQuery>(GetProductByHandleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductByHandle', 'query');
+    },
+    getProductsByCollection(variables: GetProductsByCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetProductsByCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductsByCollectionQuery>(GetProductsByCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductsByCollection', 'query');
+    },
+    searchProduct(variables: SearchProductQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchProductQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchProductQuery>(SearchProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchProduct', 'query');
     }
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;
 export function getSdkWithHooks(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   const sdk = getSdk(client, withWrapper);
-  const genKey = <V extends Record<string, unknown> = Record<string, unknown>>(name: string, object: V = {} as V): SWRKeyInterface => [name, ...Object.keys(object).sort().map(key => object[key])];
   return {
     ...sdk,
-    useGetAllProducts(variables?: IShopifyGetAllProductsQueryVariables, config?: SWRConfigInterface<IShopifyGetAllProductsQuery, ClientError>) {
-      return useSWR<IShopifyGetAllProductsQuery, ClientError>(genKey<IShopifyGetAllProductsQueryVariables>('GetAllProducts', variables), () => sdk.getAllProducts(variables), config);
+    useGetAllProducts(key: SWRKeyInterface, variables?: GetAllProductsQueryVariables, config?: SWRConfigInterface<GetAllProductsQuery, ClientError>) {
+      return useSWR<GetAllProductsQuery, ClientError>(key, () => sdk.getAllProducts(variables), config);
     },
-    useGetAllProductsHandle(variables?: IShopifyGetAllProductsHandleQueryVariables, config?: SWRConfigInterface<IShopifyGetAllProductsHandleQuery, ClientError>) {
-      return useSWR<IShopifyGetAllProductsHandleQuery, ClientError>(genKey<IShopifyGetAllProductsHandleQueryVariables>('GetAllProductsHandle', variables), () => sdk.getAllProductsHandle(variables), config);
+    useGetAllProductsHandle(key: SWRKeyInterface, variables?: GetAllProductsHandleQueryVariables, config?: SWRConfigInterface<GetAllProductsHandleQuery, ClientError>) {
+      return useSWR<GetAllProductsHandleQuery, ClientError>(key, () => sdk.getAllProductsHandle(variables), config);
     },
-    useGetProductByHandle(variables: IShopifyGetProductByHandleQueryVariables, config?: SWRConfigInterface<IShopifyGetProductByHandleQuery, ClientError>) {
-      return useSWR<IShopifyGetProductByHandleQuery, ClientError>(genKey<IShopifyGetProductByHandleQueryVariables>('GetProductByHandle', variables), () => sdk.getProductByHandle(variables), config);
+    useGetProductByHandle(key: SWRKeyInterface, variables: GetProductByHandleQueryVariables, config?: SWRConfigInterface<GetProductByHandleQuery, ClientError>) {
+      return useSWR<GetProductByHandleQuery, ClientError>(key, () => sdk.getProductByHandle(variables), config);
     },
-    useAllProducts(variables: IShopifyAllProductsQueryVariables, config?: SWRConfigInterface<IShopifyAllProductsQuery, ClientError>) {
-      return useSWR<IShopifyAllProductsQuery, ClientError>(genKey<IShopifyAllProductsQueryVariables>('AllProducts', variables), () => sdk.AllProducts(variables), config);
+    useGetProductsByCollection(key: SWRKeyInterface, variables: GetProductsByCollectionQueryVariables, config?: SWRConfigInterface<GetProductsByCollectionQuery, ClientError>) {
+      return useSWR<GetProductsByCollectionQuery, ClientError>(key, () => sdk.getProductsByCollection(variables), config);
     },
-    useSearchProduct(variables: IShopifySearchProductQueryVariables, config?: SWRConfigInterface<IShopifySearchProductQuery, ClientError>) {
-      return useSWR<IShopifySearchProductQuery, ClientError>(genKey<IShopifySearchProductQueryVariables>('SearchProduct', variables), () => sdk.searchProduct(variables), config);
+    useSearchProduct(key: SWRKeyInterface, variables: SearchProductQueryVariables, config?: SWRConfigInterface<SearchProductQuery, ClientError>) {
+      return useSWR<SearchProductQuery, ClientError>(key, () => sdk.searchProduct(variables), config);
     }
   };
 }
-export type IShopifySdkWithHooks = ReturnType<typeof getSdkWithHooks>;
+export type SdkWithHooks = ReturnType<typeof getSdkWithHooks>;
