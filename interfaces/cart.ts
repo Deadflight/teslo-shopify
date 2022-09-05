@@ -1,4 +1,12 @@
-import { VariantsNode } from "./product";
+export interface ICart {
+	isLoaded: boolean;
+	isCartEmpty: boolean;
+	cart: ICartProduct[];
+	numberOfItems: number;
+	subTotal: number;
+	tax: number;
+	total: number;
+}
 
 export interface ICartProduct {
 	id: string;

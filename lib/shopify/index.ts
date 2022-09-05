@@ -1,3 +1,3 @@
 export * from "./client";
 export * from "./queries";
-export * from "./fragments";
+export * from "./generated";
