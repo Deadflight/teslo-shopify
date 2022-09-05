@@ -16,14 +16,21 @@ const CategoryPage: NextPage<Props> = ({ gender }) => {
 		}
 	);
 
-	if (error || !data) {
-		return <Error statusCode={500} />;
-	}
-
 	const TitlePage = gender.charAt(0).toUpperCase() + gender.slice(1);
 
 	const productsFor =
 		TitlePage === "Men" ? "him" : TitlePage === "Women" ? "her" : "kids";
+
+	if (error || !data?.collection) {
+		return (
+			<ShopLayout
+				title={`Teslo Shop - ${TitlePage}`}
+				pageDescription={`Teslo Shop - ${TitlePage}`}
+			>
+				<Error statusCode={500} />;
+			</ShopLayout>
+		);
+	}
 
 	return (
 		<ShopLayout
@@ -77,14 +84,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const genderInitialData = await sdkSWR.getProductsByCollection({
 		handle: gender,
 	});
-
-	if (!genderInitialData.collection)
-		return {
-			redirect: {
-				destination: "/",
-				permanent: false,
-			},
-		};
 
 	return {
 		props: {
