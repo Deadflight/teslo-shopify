@@ -60,3 +60,21 @@ export const ADD_CART_LINE = gql`
 	}
 	${CART_FIELDS}
 `;
+
+export const CREATE_CUSTOMER = gql`
+	mutation customerCreate($input: CustomerCreateInput!) {
+		customerCreate(input: $input) {
+			customer {
+				firstName
+				lastName
+				email
+				acceptsMarketing
+			}
+			customerUserErrors {
+				field
+				message
+				code
+			}
+		}
+	}
+`;

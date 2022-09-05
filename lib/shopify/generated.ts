@@ -1248,6 +1248,8 @@ export enum CheckoutErrorCode {
   LineItemNotFound = 'LINE_ITEM_NOT_FOUND',
   /** Checkout is locked. */
   Locked = 'LOCKED',
+  /** Maximum number of discount codes limit reached. */
+  MaximumDiscountCodeLimitReached = 'MAXIMUM_DISCOUNT_CODE_LIMIT_REACHED',
   /** Missing payment input. */
   MissingPaymentInput = 'MISSING_PAYMENT_INPUT',
   /** Not enough in stock. */
@@ -4346,11 +4348,20 @@ export type Mutation = {
   customerCreate?: Maybe<CustomerCreatePayload>;
   /** Updates the default address of an existing customer. */
   customerDefaultAddressUpdate?: Maybe<CustomerDefaultAddressUpdatePayload>;
-  /** Sends a reset password email to the customer, as the first step in the reset password process. */
+  /**
+   * "Sends a reset password email to the customer. The reset password email contains a reset password URL and token that you can pass to the [`customerResetByUrl`](https://shopify.dev/api/storefront/latest/mutations/customerResetByUrl) or [`customerReset`](https://shopify.dev/api/storefront/latest/mutations/customerReset) mutation to reset the customer password."
+   *
+   */
   customerRecover?: Maybe<CustomerRecoverPayload>;
-  /** Resets a customer’s password with a token received from `CustomerRecover`. */
+  /**
+   * "Resets a customer’s password with the token received from a reset password email. You can send a reset password email with the [`customerRecover`](https://shopify.dev/api/storefront/latest/mutations/customerRecover) mutation."
+   *
+   */
   customerReset?: Maybe<CustomerResetPayload>;
-  /** Resets a customer’s password with the reset password url received from `CustomerRecover`. */
+  /**
+   * "Resets a customer’s password with the reset password URL received from a reset password email. You can send a reset password email with the [`customerRecover`](https://shopify.dev/api/storefront/latest/mutations/customerRecover) mutation."
+   *
+   */
   customerResetByUrl?: Maybe<CustomerResetByUrlPayload>;
   /** Updates an existing customer. */
   customerUpdate?: Maybe<CustomerUpdatePayload>;
@@ -6620,6 +6631,13 @@ export type CartLinesAddMutationVariables = Exact<{
 
 export type CartLinesAddMutation = { __typename?: 'Mutation', cartLinesAdd?: { __typename?: 'CartLinesAddPayload', cart?: { __typename?: 'Cart', id: string, createdAt: any, updatedAt: any, checkoutUrl: any, totalQuantity: number, lines: { __typename?: 'CartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', amountPerQuantity: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', title: string, id: string, image?: { __typename?: 'Image', altText?: string | null, url: any, id?: string | null } | null, product: { __typename?: 'Product', id: string, title: string } }, sellingPlanAllocation?: { __typename?: 'SellingPlanAllocation', sellingPlan: { __typename?: 'SellingPlan', id: string, name: string }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', price: { __typename?: 'MoneyV2', amount: any }, compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any } }> } | null, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }> }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null }, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }>, buyerIdentity: { __typename?: 'CartBuyerIdentity', email?: string | null, phone?: string | null, countryCode?: CountryCode | null, customer?: { __typename?: 'Customer', id: string } | null } } | null, userErrors: Array<{ __typename?: 'CartUserError', field?: Array<string> | null, message: string }> } | null };
 
+export type CustomerCreateMutationVariables = Exact<{
+  input: CustomerCreateInput;
+}>;
+
+
+export type CustomerCreateMutation = { __typename?: 'Mutation', customerCreate?: { __typename?: 'CustomerCreatePayload', customer?: { __typename?: 'Customer', firstName?: string | null, lastName?: string | null, email?: string | null, acceptsMarketing: boolean } | null, customerUserErrors: Array<{ __typename?: 'CustomerUserError', field?: Array<string> | null, message: string, code?: CustomerErrorCode | null }> } | null };
+
 export type GetAllProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6933,6 +6951,23 @@ export const CartLinesAddDocument = gql`
   }
 }
     ${CartFragmentDoc}`;
+export const CustomerCreateDocument = gql`
+    mutation customerCreate($input: CustomerCreateInput!) {
+  customerCreate(input: $input) {
+    customer {
+      firstName
+      lastName
+      email
+      acceptsMarketing
+    }
+    customerUserErrors {
+      field
+      message
+      code
+    }
+  }
+}
+    `;
 export const GetAllProductsDocument = gql`
     query getAllProducts {
   products(first: 50) {
@@ -6997,6 +7032,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     cartLinesAdd(variables: CartLinesAddMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CartLinesAddMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CartLinesAddMutation>(CartLinesAddDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'cartLinesAdd', 'mutation');
+    },
+    customerCreate(variables: CustomerCreateMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CustomerCreateMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CustomerCreateMutation>(CustomerCreateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'customerCreate', 'mutation');
     },
     getAllProducts(variables?: GetAllProductsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAllProductsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllProductsQuery>(GetAllProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllProducts', 'query');
