@@ -20,7 +20,7 @@ export default NextAuth({
 			},
 			async authorize(credentials) {
 				console.log({ credentials });
-				// return { name: 'Juan', correo: 'juan@google.com', role: 'admin' };
+				return { credentials };
 
 				//return await dbUsers.checkUserEmailPassword( credentials!.email, credentials!.password );
 			},
