@@ -1,7 +1,8 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { UiProvider, CartProvider } from "../context";
+import { UiProvider, CartProvider, AuthProvider } from "../context";
 import { SWRConfig } from "swr";
+import {} from "context/auth";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
@@ -10,11 +11,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 				fallbackData: pageProps.fallbackData,
 			}}
 		>
-			<CartProvider>
-				<UiProvider>
-					<Component {...pageProps} />
-				</UiProvider>
-			</CartProvider>
+			<AuthProvider>
+				<CartProvider>
+					<UiProvider>
+						<Component {...pageProps} />
+					</UiProvider>
+				</CartProvider>
+			</AuthProvider>
 		</SWRConfig>
 	);
 }

@@ -65,15 +65,10 @@ export const CREATE_CUSTOMER = gql`
 	mutation customerCreate($input: CustomerCreateInput!) {
 		customerCreate(input: $input) {
 			customer {
-				firstName
-				lastName
-				email
-				acceptsMarketing
+				id
 			}
 			customerUserErrors {
-				field
 				message
-				code
 			}
 		}
 	}

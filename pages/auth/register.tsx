@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupSchemas } from "utils";
+import { useContext, useState } from "react";
+import { AuthContext } from "context";
+import { AiOutlineLoading } from "react-icons/ai";
 
 type Inputs = {
 	email: string;
@@ -13,7 +16,11 @@ type Inputs = {
 };
 
 const RegisterPage = () => {
+	const [showError, setShowError] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 	const router = useRouter();
+	const { registerUser } = useContext(AuthContext);
 	const {
 		register,
 		handleSubmit,
@@ -21,7 +28,29 @@ const RegisterPage = () => {
 	} = useForm<Inputs>({
 		resolver: yupResolver(yupSchemas.RegisterSchema),
 	});
-	const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+	const onSubmit: SubmitHandler<Inputs> = async (registerData) => {
+		const { firstName, lastName, email, password } = registerData;
+
+		setIsLoading(true);
+
+		const { hasError, message } = await registerUser(
+			firstName,
+			lastName,
+			email,
+			password
+		);
+
+		setIsLoading(false);
+
+		if (hasError) {
+			setShowError(true);
+			setErrorMessage(message!);
+			setTimeout(() => setShowError(false), 3000);
+			return;
+		}
+	};
+
 	return (
 		<ShopLayout title="Teslo - Register" pageDescription="Teslo Register Page">
 			<section className="h-[calc(100vh-10rem)] flex items-center justify-center">
@@ -38,46 +67,59 @@ const RegisterPage = () => {
 						type="text"
 						className="bg-gray-300 p-2 rounded-lg outline-none placeholder:text-gray-600"
 					/>
-					<span className="text-xs font-extralight">
+					<span className="text-xs font-extralight text-red-500">
 						{errors.firstName?.message}
 					</span>
+
 					<input
 						{...register("lastName", { required: true })}
 						placeholder={"Last Name"}
 						type="text"
 						className="bg-gray-300 p-2 rounded-lg outline-none placeholder:text-gray-600"
 					/>
-					<span className="text-xs font-extralight">
+					<span className="text-xs font-extralight text-red-500">
 						{errors.lastName?.message}
 					</span>
+
 					<input
 						{...register("email", { required: true })}
 						placeholder={"Email"}
 						type="text"
 						className="bg-gray-300 p-2 rounded-lg outline-none placeholder:text-gray-600"
 					/>
-					<span className="text-xs font-extralight">
+					<span className="text-xs font-extralight text-red-500">
 						{errors.email?.message}
 					</span>
 
-					{/* include validation with required or other standard HTML validation rules */}
 					<input
 						{...register("password", { required: true })}
 						type="password"
 						placeholder={"Password"}
 						className="bg-gray-300 p-2 rounded-lg outline-none placeholder:text-gray-600"
 					/>
-					<span className="text-xs font-extralight">
+					<span className="text-xs font-extralight text-red-500">
 						{errors.password?.message}
 					</span>
 
 					<button
+						disabled={isLoading}
 						type="submit"
 						aria-label="Login Button"
-						className="px-[22px] py-2 bg-blue-600 rounded-[10px] text-white font-medium text-[0.9rem] hover:bg-blue-700 duration-300"
+						className="px-[22px] py-2 items-center justify-center flex bg-blue-600 rounded-[10px] text-white font-medium text-[0.9rem] hover:bg-blue-700 duration-300 disabled:bg-gray-500"
 					>
-						Register
+						{isLoading ? (
+							<AiOutlineLoading className="animate-spin text-white" size={20} />
+						) : (
+							"Register"
+						)}
 					</button>
+					<span
+						className={`${
+							showError ? "block" : "hidden"
+						} text-xs font-extralight text-red-500`}
+					>
+						{errorMessage}
+					</span>
 					<div className="flex justify-end">
 						<Link
 							href={

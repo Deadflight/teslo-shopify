@@ -6636,7 +6636,7 @@ export type CustomerCreateMutationVariables = Exact<{
 }>;
 
 
-export type CustomerCreateMutation = { __typename?: 'Mutation', customerCreate?: { __typename?: 'CustomerCreatePayload', customer?: { __typename?: 'Customer', firstName?: string | null, lastName?: string | null, email?: string | null, acceptsMarketing: boolean } | null, customerUserErrors: Array<{ __typename?: 'CustomerUserError', field?: Array<string> | null, message: string, code?: CustomerErrorCode | null }> } | null };
+export type CustomerCreateMutation = { __typename?: 'Mutation', customerCreate?: { __typename?: 'CustomerCreatePayload', customer?: { __typename?: 'Customer', id: string } | null, customerUserErrors: Array<{ __typename?: 'CustomerUserError', message: string }> } | null };
 
 export type GetAllProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6955,15 +6955,10 @@ export const CustomerCreateDocument = gql`
     mutation customerCreate($input: CustomerCreateInput!) {
   customerCreate(input: $input) {
     customer {
-      firstName
-      lastName
-      email
-      acceptsMarketing
+      id
     }
     customerUserErrors {
-      field
       message
-      code
     }
   }
 }
