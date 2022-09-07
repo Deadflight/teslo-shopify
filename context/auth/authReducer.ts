@@ -1,4 +1,4 @@
-import { IUser } from "interfaces";
+import { IUser } from "../../interfaces";
 import { AuthState } from "./";
 
 // Con esto es como en typescript creamos algo como los actions creators

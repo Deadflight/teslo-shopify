@@ -1,7 +1,7 @@
-import { ShopLayout } from "components/layouts";
+import { ShopLayout } from "../components/layouts";
 import type { NextPage, GetStaticProps } from "next";
-import { ProductList } from "components/products";
-import { sdkSWR } from "lib";
+import { ProductList } from "../components/products";
+import { sdkSWR } from "../lib";
 import Error from "next/error";
 
 const Home: NextPage = () => {

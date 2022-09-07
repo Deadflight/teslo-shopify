@@ -1,4 +1,4 @@
-import { ICartProduct } from "interfaces";
+import { ICartProduct } from "../../interfaces";
 import { createContext } from "react";
 
 interface ContextProps {

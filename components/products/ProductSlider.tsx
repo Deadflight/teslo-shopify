@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import NextImage from "next/image";
 import styles from "./productslider.module.css";
-import { ImageFragment } from "lib";
+import { ImageFragment } from "../../lib";
 
 interface Props {
 	images: ImageFragment[];

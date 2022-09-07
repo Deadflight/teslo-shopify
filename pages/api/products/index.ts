@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { GetAllProductsQuery, sdkSWR } from "lib";
+import { GetAllProductsQuery, sdkSWR } from "../../../lib";
 
 type Data =
 	| {

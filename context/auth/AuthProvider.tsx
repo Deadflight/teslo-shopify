@@ -1,8 +1,8 @@
-import { tesloApi } from "api";
+import { tesloApi } from "../../api";
 import axios from "axios";
-import { IUser } from "interfaces";
+import { IUser } from "../../interfaces";
 import Cookies from "js-cookie";
-import { CustomerCreateMutation } from "lib";
+import { CustomerCreateMutation } from "../../lib";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { FC, useReducer, ReactNode, useEffect } from "react";

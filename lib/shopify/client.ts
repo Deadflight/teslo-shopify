@@ -1,5 +1,5 @@
 import { GraphQLClient } from "graphql-request";
-import { getSdkWithHooks, getSdk } from "./generated";
+import { getSdkWithHooks } from "./generated";
 
 // Load the access token as per instructions above
 const storefrontAccessToken =

@@ -1,13 +1,13 @@
 import { GetStaticProps, GetStaticPaths, NextPage } from "next";
-import { ShopLayout } from "components/layouts";
-import { ICartProduct } from "interfaces";
-import { ProductSlider, SizeSelector } from "components/products";
-import { currency } from "utils";
-import { ItemCounter } from "components/ui";
+import { ShopLayout } from "../../components/layouts";
+import { ICartProduct } from "../../interfaces";
+import { ProductSlider, SizeSelector } from "../../components/products";
+import { currency } from "../../utils";
+import { ItemCounter } from "../../components/ui";
 import { useState, useContext } from "react";
 import Error from "next/error";
-import { CartContext } from "context/cart";
-import { ProductVariantFragment, sdkSWR } from "lib";
+import { CartContext } from "../../context";
+import { ProductVariantFragment, sdkSWR } from "../../lib";
 
 interface Props {
 	slug: string;

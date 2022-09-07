@@ -1,9 +1,9 @@
-import { ShopLayout } from "components/layouts";
+import { ShopLayout } from "../../components/layouts";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { yupSchemas } from "utils";
+import { yupSchemas } from "../../utils";
 import { GetServerSideProps } from "next";
 import { getSession, signIn } from "next-auth/react";
 import { useState } from "react";

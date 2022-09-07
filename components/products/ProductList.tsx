@@ -1,4 +1,4 @@
-import { ProductFragment } from "lib";
+import { ProductFragment } from "../../lib";
 import { FC } from "react";
 import { ProductCard } from "./ProductCard";
 

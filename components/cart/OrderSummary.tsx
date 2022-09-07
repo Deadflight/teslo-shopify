@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
-import { CartContext } from "context";
-import { currency } from "utils";
+import { CartContext } from "../../context";
+import { currency } from "../../utils";
 
 interface Props {
 	orderValues?: {

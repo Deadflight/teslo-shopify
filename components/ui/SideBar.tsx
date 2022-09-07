@@ -1,7 +1,6 @@
 import Portal from "./Portal";
 import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext, UiContext } from "context";
-import Link from "next/link";
+import { AuthContext, UiContext } from "../../context";
 import { FaChild, FaRegUserCircle } from "react-icons/fa";
 import {
 	MdOutlineDashboard,
@@ -15,7 +14,6 @@ import {
 } from "react-icons/hi";
 import { IoIosMan, IoIosWoman } from "react-icons/io";
 import { useRouter } from "next/router";
-import { signOut } from "next-auth/react";
 
 const guestClientNavItems = [
 	{

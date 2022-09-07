@@ -1,4 +1,4 @@
-import { GetProductsByCollectionQuery, sdkSWR } from "lib";
+import { GetProductsByCollectionQuery, sdkSWR } from "../../../lib";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = { message: string } | GetProductsByCollectionQuery;

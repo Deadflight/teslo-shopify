@@ -1,11 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ShopLayout } from "components/layouts";
+import { ShopLayout } from "../../components/layouts";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { yupSchemas } from "utils";
+import { yupSchemas } from "../../utils";
 import { useContext, useState } from "react";
-import { AuthContext } from "context";
+import { AuthContext } from "../../context";
 import { AiOutlineLoading } from "react-icons/ai";
 import { signIn, getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
