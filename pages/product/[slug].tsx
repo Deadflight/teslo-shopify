@@ -1,39 +1,32 @@
 import { GetStaticProps, GetStaticPaths, NextPage } from "next";
-import { ShopLayout } from "components/layouts";
-import {
-	GET_ALL_PRODUCTS_HANDLE,
-	storeClient,
-	GET_PRODUCT_BY_HANDLE,
-} from "lib";
-import {
-	IFallback,
-	IProducts,
-	IProductHandle,
-	ICartProduct,
-	VariantsNode,
-} from "interfaces";
-import { useProduct } from "hooks";
-import { ProductSlider, SizeSelector } from "components/products";
-import { currency } from "utils";
-import { ItemCounter } from "components/ui";
-import { useState } from "react";
+import { ShopLayout } from "../../components/layouts";
+import { ICartProduct } from "../../interfaces";
+import { ProductSlider, SizeSelector } from "../../components/products";
+import { currency } from "../../utils";
+import { ItemCounter } from "../../components/ui";
+import { useState, useContext } from "react";
+import Error from "next/error";
+import { CartContext } from "../../context";
+import { ProductVariantFragment, sdkSWR } from "../../lib";
 
 interface Props {
-	fallback: IFallback;
 	slug: string;
 }
 
-const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
-	const { product, isError, isLoading } = useProduct(
-		`/products/slug?slug=${slug}`,
-		fallback
+const ProductPage: NextPage<Props> = ({ slug }) => {
+	const { addProductToCart } = useContext(CartContext);
+	const { data, error } = sdkSWR.useGetProductByHandle(
+		[`/api/products/slug?slug=${slug}`],
+		{
+			handle: slug,
+		}
 	);
 
 	const [tempCartProduct, setTempCartProduct] = useState<ICartProduct>({
-		id: product.id,
-		image: product.images.nodes[0].url,
-		slug: product.handle,
-		title: product.title,
+		id: "",
+		image: "",
+		slug: "",
+		title: "",
 		quantity: 1,
 		price: "",
 		size: "",
@@ -42,7 +35,11 @@ const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
 		quantityAvailable: 0,
 	});
 
-	console.log("tempCartProduct", tempCartProduct);
+	if (error) {
+		return <Error statusCode={500} />;
+	}
+
+	const { product } = data!;
 
 	const onUpdateQuantity = (newValue: number) => {
 		if (!tempCartProduct.size) return;
@@ -53,20 +50,25 @@ const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
 		}));
 	};
 
-	const selectedSize = (variantSizes: VariantsNode) => {
+	const selectedSize = (variantSizes: ProductVariantFragment) => {
 		setTempCartProduct((currentProduct: any) => ({
 			...currentProduct,
+			id: product?.id,
+			image: product?.images.nodes[0].url,
+			slug: product?.handle,
+			title: product?.title,
 			size: variantSizes.title,
 			variantId: variantSizes.id,
 			quantityAvailable: variantSizes.quantityAvailable,
 			quantity: 1,
 			availableForSale: variantSizes.availableForSale,
+			price: variantSizes.priceV2.amount,
 		}));
 	};
 
-	const onAddProductToCart = () => {
+	const onAddProductToCart = async () => {
 		if (!tempCartProduct.size) return;
-		alert("Product added to cart");
+		addProductToCart(tempCartProduct);
 	};
 
 	return (
@@ -76,15 +78,17 @@ const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
 		>
 			<section className="flex py-3 w-full flex-col gap-8 md:flex-row">
 				<div className="w-full md:w-[57%]">
-					<ProductSlider images={product.images} />
+					<ProductSlider images={product?.images?.nodes!} />
 				</div>
 				<article className="w-full md:w-[calc(43%-32px)]">
-					<h1 className="text-3xl font-semibold">{product.title}</h1>
+					<h1 className="text-3xl font-semibold">{product?.title}</h1>
 					<h2 className="text-lg font-semibold">
-						{currency.format(Number(product.priceRange.maxVariantPrice.amount))}
+						{currency.format(
+							Number(product?.priceRange.maxVariantPrice.amount)
+						)}
 					</h2>
 
-					<div className="space-y-3 mt-6">
+					<div className="space-y-4 mt-6">
 						<span className=" font-medium text-sm">Quantity</span>
 						<ItemCounter
 							currentValue={tempCartProduct.quantity}
@@ -96,7 +100,7 @@ const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
 							}
 						/>
 						<SizeSelector
-							variantSizes={product.variants.nodes}
+							variantSizes={product?.variants?.nodes!}
 							selectedSize={tempCartProduct.size}
 							onSelectedSize={selectedSize}
 						/>
@@ -105,12 +109,12 @@ const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
 								"bg-blue-600 text-white hover:bg-blue-800 transition duration-500 w-full rounded-[10px] py-[4px] px-[10px] font-medium text-sm disabled:bg-transparent disabled:transition-none disabled:text-red-500 disabled:border disabled:border-red-500 disabled:rounded-[16px] disabled:cursor-default"
 							}
 							disabled={
-								!product.availableForSale ||
+								!product?.availableForSale ||
 								tempCartProduct.availableForSale === false
 							}
 							onClick={onAddProductToCart}
 						>
-							{product.availableForSale
+							{product?.availableForSale
 								? !tempCartProduct.size.length
 									? "Select a size"
 									: !tempCartProduct.availableForSale
@@ -118,6 +122,11 @@ const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
 									: "Add to cart"
 								: "Out of stock"}
 						</button>
+
+						<div className="mt-2">
+							<h3 className="font-medium text-sm">Description</h3>
+							<p className="text-sm font-normal">{product?.description}</p>
+						</div>
 					</div>
 				</article>
 			</section>
@@ -127,9 +136,7 @@ const ProductPage: NextPage<Props> = ({ fallback, slug }) => {
 
 // You should use getStaticPaths if you’re statically pre-rendering pages that use dynamic routes
 export const getStaticPaths: GetStaticPaths = async () => {
-	const { products } = await storeClient.request<IProducts>(
-		GET_ALL_PRODUCTS_HANDLE
-	);
+	const { products } = await sdkSWR.getAllProductsHandle();
 	const { nodes } = products;
 
 	const paths = nodes.map((product) => ({
@@ -137,6 +144,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 			slug: product.handle,
 		},
 	}));
+
 	return {
 		paths,
 		fallback: "blocking",
@@ -151,14 +159,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { slug = "" } = params as { slug: string };
 
-	const { product } = await storeClient.request<IProductHandle>(
-		GET_PRODUCT_BY_HANDLE,
-		{
-			handle: slug,
-		}
-	);
+	const initialProductData = await sdkSWR.getProductByHandle({
+		handle: slug,
+	});
 
-	if (!product) {
+	if (!initialProductData.product) {
 		return {
 			redirect: {
 				destination: "/",
@@ -169,9 +174,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	return {
 		props: {
-			fallback: {
-				[`/api/products/slug?slug=${slug}`]: product,
-			},
+			fallbackData: initialProductData,
 			slug,
 		},
 	};

@@ -1,21 +1,25 @@
-import { ShopLayout } from "components/layouts";
-import { ProductList } from "components/products";
-import { useProducts } from "hooks";
-import { IFallback, IProducts } from "interfaces";
-import { storeClient, SEARCH_PRODUCT, GET_ALL_PRODUCTS } from "lib";
+import { ShopLayout } from "../../components/layouts";
+import { ProductList } from "../../components/products";
 import { NextPage, GetServerSideProps } from "next";
+import Error from "next/error";
+import { sdkSWR } from "../../lib/shopify/client";
 
 interface Props {
-	fallback: IFallback;
 	foundProducts: boolean;
 	query: string;
 }
 
-const SearchPage: NextPage<Props> = ({ fallback, foundProducts, query }) => {
-	const { products, isError, isLoading } = useProducts(
-		`/products/search?query=${query}`,
-		fallback
+const SearchPage: NextPage<Props> = ({ foundProducts, query }) => {
+	const { data, error } = sdkSWR.useSearchProduct(
+		[`/api/products/search?query=${query}`],
+		{
+			term: query,
+		}
 	);
+
+	if (error || !data) {
+		return <Error statusCode={500} />;
+	}
 
 	return (
 		<ShopLayout
@@ -33,7 +37,7 @@ const SearchPage: NextPage<Props> = ({ fallback, foundProducts, query }) => {
 				</h2>
 			)}
 
-			<ProductList products={products} />
+			<ProductList products={data?.products?.nodes} />
 		</ShopLayout>
 	);
 };
@@ -53,33 +57,25 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 		};
 	}
 
-	//Query without spaces
-	const { products } = await storeClient.request<IProducts>(SEARCH_PRODUCT, {
-		term: `title:${query}*`,
+	const searchedProducts = await sdkSWR.searchProduct({
+		term: query,
 	});
 
-	if (!products.nodes.length) {
-		const { products } = await storeClient.request<IProducts>(GET_ALL_PRODUCTS);
-		const { nodes } = products;
+	if (!searchedProducts.products.nodes.length) {
+		const allProducts = await sdkSWR.getAllProducts();
 
 		return {
 			props: {
-				fallback: {
-					[`/api/products/search?query=${query}`]: nodes,
-				},
+				fallbackData: allProducts,
 				foundProducts: false,
 				query,
 			},
 		};
 	}
 
-	const { nodes } = products;
-
 	return {
 		props: {
-			fallback: {
-				[`/api/products/search?query=${query}`]: nodes,
-			},
+			fallbackData: searchedProducts,
 			foundProducts: true,
 			query,
 		},

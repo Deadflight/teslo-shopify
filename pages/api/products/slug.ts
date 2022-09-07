@@ -1,12 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { storeClient, GET_PRODUCT_BY_HANDLE } from "lib";
-import { IProduct, IProductHandle } from "interfaces";
+import { GetProductByHandleQuery, sdkSWR } from "../../../lib";
 
 type Data =
 	| {
 			message: string;
 	  }
-	| IProduct;
+	| GetProductByHandleQuery;
 
 export default function handler(
 	req: NextApiRequest,
@@ -23,11 +22,12 @@ export default function handler(
 const getProduct = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const { slug = "" } = req.query as { slug: string };
 
-	const { product } = await storeClient.request<IProductHandle>(
-		GET_PRODUCT_BY_HANDLE,
-		{
-			handle: slug,
-		}
-	);
+	const product = await sdkSWR.getProductByHandle({
+		handle: slug,
+	});
+
+	if (!product)
+		return res.status(404).json({ message: `Product Not Found: ${slug}` });
+
 	return res.status(200).json(product);
 };

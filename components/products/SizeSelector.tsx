@@ -1,12 +1,12 @@
-import { VariantsNode } from "interfaces";
+import { ProductVariantFragment } from "../../lib";
 import { FC } from "react";
 
 interface Props {
 	selectedSize?: string;
-	variantSizes: VariantsNode[];
+	variantSizes: ProductVariantFragment[];
 
 	// Method
-	onSelectedSize: (size: VariantsNode) => void;
+	onSelectedSize: (size: ProductVariantFragment) => void;
 }
 
 export const SizeSelector: FC<Props> = ({

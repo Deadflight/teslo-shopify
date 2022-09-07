@@ -1,4 +1,4 @@
-import { UiContext } from "context";
+import { UiContext, CartContext } from "../../context";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useState, useContext, useRef, useEffect } from "react";
@@ -21,6 +21,7 @@ const navItems = [
 export const Navbar: FC = () => {
 	const [isSearchInputVisible, setIsSearchInputVisible] = useState(false);
 	const searchRef = useRef<any>(null);
+	const { numberOfItems } = useContext(CartContext);
 	const [searchTerm, setSearchTerm] = useState("");
 	const { push, asPath } = useRouter();
 
@@ -140,22 +141,32 @@ export const Navbar: FC = () => {
 					</div>
 				</li>
 				<li>
-					<button className="p-2 btn-animated" aria-label="Cart Icon">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							className="h-6 w-6 stroke-gray-500"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							strokeWidth={2}
+					<Link href={`/cart`}>
+						<a
+							className="flex items-center p-2 btn-animated w-full relative"
+							aria-label="Cart Icon"
 						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-							/>
-						</svg>
-					</button>
+							{!!numberOfItems && (
+								<span className="absolute right-0 -translate-y-3 text-white translate-x-1 place-content-center flex items-center justify-center flex-row flex-nowrap text-xs font-medium bg-blue-500 rounded-full min-w-[20px] h-5 text-center">
+									{numberOfItems}
+								</span>
+							)}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								className="h-6 w-6 stroke-gray-500"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								strokeWidth={2}
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+								/>
+							</svg>
+						</a>
+					</Link>
 				</li>
 				<li>
 					<button

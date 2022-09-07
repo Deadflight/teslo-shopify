@@ -1,8 +1,7 @@
-import { ICollection, IProduct } from "interfaces";
-import { PRODUCTS_BY_COLLECTION, storeClient } from "lib";
+import { GetProductsByCollectionQuery, sdkSWR } from "../../../lib";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type Data = { message: string } | IProduct[];
+type Data = { message: string } | GetProductsByCollectionQuery;
 
 export default function handler(
 	req: NextApiRequest,
@@ -20,17 +19,20 @@ const getProductsByCollection = async (
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) => {
-	const { gender } = req.query;
+	const { gender = "" } = req.query as { gender: string };
+
+	if (!gender.length) return res.status(500).json({ message: "Error Server" });
 
 	// const collectionName = gender + "-collection";
 
-	const { collection } = await storeClient.request<ICollection>(
-		PRODUCTS_BY_COLLECTION,
-		{
-			handle: gender,
-		}
-	);
-	const { products } = collection;
-	const { nodes } = products;
-	return res.status(200).json(nodes);
+	const productsByCollection = await sdkSWR.getProductsByCollection({
+		handle: gender,
+	});
+
+	if (!productsByCollection.collection)
+		return res.status(404).json({
+			message: `Error Collection not foud: ${productsByCollection.collection}`,
+		});
+
+	return res.status(200).json(productsByCollection);
 };

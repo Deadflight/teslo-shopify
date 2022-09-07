@@ -1,22 +1,26 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { UiProvider } from "../context";
+import { UiProvider, CartProvider, AuthProvider } from "../context";
+import { SessionProvider } from "next-auth/react";
 import { SWRConfig } from "swr";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 	return (
-		<SWRConfig
-			value={{
-				fetcher: async (resource, init) => {
-					return fetch(resource, init).then((res) => res.json());
-				},
-				fallback: pageProps.fallback,
-			}}
-		>
-			<UiProvider>
-				<Component {...pageProps} />
-			</UiProvider>
-		</SWRConfig>
+		<SessionProvider session={session}>
+			<SWRConfig
+				value={{
+					fallbackData: pageProps.fallbackData,
+				}}
+			>
+				<AuthProvider>
+					<CartProvider>
+						<UiProvider>
+							<Component {...pageProps} />
+						</UiProvider>
+					</CartProvider>
+				</AuthProvider>
+			</SWRConfig>
+		</SessionProvider>
 	);
 }
 
