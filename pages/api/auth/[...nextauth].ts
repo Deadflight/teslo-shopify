@@ -63,11 +63,11 @@ export default NextAuth({
 		async jwt({ token, account, user }) {
 			// console.log({ token, account, user });
 			if (account) {
-				const accessToken = user?.customerAccessTokenCreate as {
+				const { customerAccessToken } = user?.customerAccessTokenCreate as {
 					customerAccessToken: { accessToken: string };
 				};
 
-				token.accessToken = accessToken;
+				token.accessToken = customerAccessToken.accessToken;
 
 				switch (account.type) {
 					// case "oauth":
