@@ -15,6 +15,9 @@ export default function handler(
 	switch (req.method) {
 		case "POST":
 			return createCustomer(req, res);
+
+		default:
+			return res.status(500).json({ message: "Method Not Allowed" });
 	}
 }
 
