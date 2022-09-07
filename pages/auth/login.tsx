@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { yupSchemas } from "utils";
+import { GetServerSideProps } from "next";
+import { getSession, signIn } from "next-auth/react";
+import { useState } from "react";
 
 type Inputs = {
 	email: string;
@@ -11,6 +14,7 @@ type Inputs = {
 };
 
 const LoginPage = () => {
+	const [showError, setShowError] = useState(false);
 	const router = useRouter();
 	const {
 		register,
@@ -19,7 +23,16 @@ const LoginPage = () => {
 	} = useForm<Inputs>({
 		resolver: yupResolver(yupSchemas.LoginSchema),
 	});
-	const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+	const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
+		try {
+			setShowError(false);
+			await signIn("credentials", { email, password });
+		} catch (error) {
+			console.log(error);
+			setShowError(true);
+		}
+	};
 
 	return (
 		<ShopLayout title="Teslo - Login" pageDescription="Teslo Login Page">
@@ -38,7 +51,7 @@ const LoginPage = () => {
 						type="text"
 						className="bg-gray-300 p-2 rounded-lg outline-none placeholder:text-gray-600"
 					/>
-					<span className="text-xs font-extralight">
+					<span className="text-xs font-extralight text-red-500">
 						{errors.email?.message}
 					</span>
 
@@ -49,7 +62,7 @@ const LoginPage = () => {
 						placeholder={"Password"}
 						className="bg-gray-300 p-2 rounded-lg outline-none placeholder:text-gray-600"
 					/>
-					<span className="text-xs font-extralight">
+					<span className="text-xs font-extralight text-red-500">
 						{errors.password?.message}
 					</span>
 
@@ -60,6 +73,9 @@ const LoginPage = () => {
 					>
 						Log In
 					</button>
+					<span className="text-xs font-extralight text-red-500">
+						{showError && "Email or Password Wrong"}
+					</span>
 					<div className="flex justify-end">
 						<Link
 							href={
@@ -82,6 +98,32 @@ const LoginPage = () => {
 			</section>
 		</ShopLayout>
 	);
+};
+
+// You should use getServerSideProps when:
+// - Only if you need to pre-render a page whose data must be fetched at request time
+
+export const getServerSideProps: GetServerSideProps = async ({
+	req,
+	query,
+}) => {
+	const session = await getSession({ req });
+	// console.log({session});
+
+	const { p = "/" } = query;
+
+	if (session) {
+		return {
+			redirect: {
+				destination: p.toString(),
+				permanent: false,
+			},
+		};
+	}
+
+	return {
+		props: {},
+	};
 };
 
 export default LoginPage;

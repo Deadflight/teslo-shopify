@@ -1,9 +1,13 @@
 import Portal from "./Portal";
 import { useContext, useEffect, useRef, useState } from "react";
-import { UiContext } from "context";
+import { AuthContext, UiContext } from "context";
 import Link from "next/link";
 import { FaChild, FaRegUserCircle } from "react-icons/fa";
-import { MdOutlineDashboard, MdOutlineCategory } from "react-icons/md";
+import {
+	MdOutlineDashboard,
+	MdOutlineCategory,
+	MdOutlineVpnKey,
+} from "react-icons/md";
 import {
 	HiOutlineTicket,
 	HiOutlineLogout,
@@ -11,6 +15,15 @@ import {
 } from "react-icons/hi";
 import { IoIosMan, IoIosWoman } from "react-icons/io";
 import { useRouter } from "next/router";
+import { signOut } from "next-auth/react";
+
+const guestClientNavItems = [
+	{
+		name: "Log In",
+		href: "/auth/login",
+		icon: <MdOutlineVpnKey className="h-6 w-6 text-gray-500" />,
+	},
+];
 
 const clientNavItems = [
 	{
@@ -75,6 +88,8 @@ export const SideBar = () => {
 	const { isSideMenuOpen, isSlideIn, toggleSideMenu } = useContext(UiContext);
 	const cartRef = useRef<any>(null);
 	const [searchTerm, setSearchTerm] = useState("");
+	const { logout, isLoggedIn, user } = useContext(AuthContext);
+
 	const { push } = useRouter();
 
 	const handleSearch = () => {
@@ -83,9 +98,16 @@ export const SideBar = () => {
 		push(`/search/${searchTerm}`);
 	};
 
-	const handlePush = (href: string) => {
+	const handlePush = (item: {
+		name: string;
+		href: string;
+		icon: JSX.Element;
+	}) => {
+		if (item.name === "Logout") {
+			logout();
+		}
 		toggleSideMenu();
-		push(href);
+		push(item.href);
 	};
 
 	// Close the side menu when the user clicks outside of it
@@ -161,7 +183,22 @@ export const SideBar = () => {
 							<li className="sidebar-item md:hidden" key={item.name}>
 								<button
 									className="flex items-center space-x-10 border-none"
-									onClick={() => handlePush(item.href)}
+									onClick={() => handlePush(item)}
+								>
+									{item.icon}
+									<p>{item.name}</p>
+								</button>
+							</li>
+						))}
+
+						{guestClientNavItems.map((item) => (
+							<li
+								className={` ${!isLoggedIn ? "" : "hidden"} sidebar-item`}
+								key={item.name}
+							>
+								<button
+									className="flex items-center space-x-10 border-none"
+									onClick={() => handlePush(item)}
 								>
 									{item.icon}
 									<p>{item.name}</p>
@@ -170,10 +207,13 @@ export const SideBar = () => {
 						))}
 
 						{clientNavItems.map((item) => (
-							<li className="sidebar-item" key={item.name}>
+							<li
+								className={` ${isLoggedIn ? "" : "hidden"} sidebar-item`}
+								key={item.name}
+							>
 								<button
 									className="flex items-center space-x-10 border-none"
-									onClick={() => handlePush(item.href)}
+									onClick={() => handlePush(item)}
 								>
 									{item.icon}
 									<p>{item.name}</p>
@@ -184,20 +224,20 @@ export const SideBar = () => {
 						<hr />
 
 						{/* Admin Sidebar */}
-						<li className="px-4 py-4 cursor-default">
+						{/* <li className={`px-4 py-4 cursor-default`}>
 							<p className="text-gray-600 font-medium text-sm">Admin Panel</p>
 						</li>
 						{adminNavItems.map((item) => (
 							<li className="sidebar-item" key={item.name}>
 								<button
 									className="flex items-center space-x-10 border-none"
-									onClick={() => handlePush(item.href)}
+									onClick={() => handlePush(item)}
 								>
 									{item.icon}
 									<p>{item.name}</p>
 								</button>
 							</li>
-						))}
+						))} */}
 					</ul>
 				</section>
 			</aside>

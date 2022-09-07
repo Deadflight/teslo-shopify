@@ -7,6 +7,8 @@ import { yupSchemas } from "utils";
 import { useContext, useState } from "react";
 import { AuthContext } from "context";
 import { AiOutlineLoading } from "react-icons/ai";
+import { signIn, getSession } from "next-auth/react";
+import { GetServerSideProps } from "next";
 
 type Inputs = {
 	email: string;
@@ -49,6 +51,8 @@ const RegisterPage = () => {
 			setTimeout(() => setShowError(false), 3000);
 			return;
 		}
+
+		await signIn("credentials", { email, password });
 	};
 
 	return (
@@ -142,6 +146,29 @@ const RegisterPage = () => {
 			</section>
 		</ShopLayout>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async ({
+	req,
+	query,
+}) => {
+	const session = await getSession({ req });
+	console.log({ session });
+
+	const { p = "/" } = query;
+
+	if (session) {
+		return {
+			redirect: {
+				destination: p.toString(),
+				permanent: false,
+			},
+		};
+	}
+
+	return {
+		props: {},
+	};
 };
 
 export default RegisterPage;
