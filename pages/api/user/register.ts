@@ -35,8 +35,6 @@ const createCustomer = async (
 
 	const { customerCreate } = response;
 
-	console.log(response);
-
 	if (customerCreate?.customerUserErrors[0]?.message) {
 		return res
 			.status(500)
