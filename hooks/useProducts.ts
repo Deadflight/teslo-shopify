@@ -1,4 +1,4 @@
-import { ProductFragment } from "lib";
+import { ProductFragment } from "../lib";
 import useSWR, { SWRConfiguration } from "swr";
 
 // const fetcher = (...args: [key: string]) => fetch(...args).then(res => res.json());

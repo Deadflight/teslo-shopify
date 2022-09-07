@@ -1,8 +1,8 @@
-import { ProductFragment } from "lib";
+import { ProductFragment } from "../../lib";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useMemo, useState } from "react";
-import { currency } from "utils";
+import { currency } from "../../utils";
 
 interface Props {
 	product: ProductFragment;

@@ -6636,7 +6636,14 @@ export type CustomerCreateMutationVariables = Exact<{
 }>;
 
 
-export type CustomerCreateMutation = { __typename?: 'Mutation', customerCreate?: { __typename?: 'CustomerCreatePayload', customer?: { __typename?: 'Customer', firstName?: string | null, lastName?: string | null, email?: string | null, acceptsMarketing: boolean } | null, customerUserErrors: Array<{ __typename?: 'CustomerUserError', field?: Array<string> | null, message: string, code?: CustomerErrorCode | null }> } | null };
+export type CustomerCreateMutation = { __typename?: 'Mutation', customerCreate?: { __typename?: 'CustomerCreatePayload', customer?: { __typename?: 'Customer', id: string } | null, customerUserErrors: Array<{ __typename?: 'CustomerUserError', message: string }> } | null };
+
+export type CustomerAccessTokenCreateMutationVariables = Exact<{
+  input: CustomerAccessTokenCreateInput;
+}>;
+
+
+export type CustomerAccessTokenCreateMutation = { __typename?: 'Mutation', customerAccessTokenCreate?: { __typename?: 'CustomerAccessTokenCreatePayload', customerAccessToken?: { __typename?: 'CustomerAccessToken', accessToken: string, expiresAt: any } | null, customerUserErrors: Array<{ __typename?: 'CustomerUserError', message: string }> } | null };
 
 export type GetAllProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6668,6 +6675,13 @@ export type SearchProductQueryVariables = Exact<{
 
 
 export type SearchProductQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', availableForSale: boolean, createdAt: any, description: string, descriptionHtml: any, handle: string, id: string, onlineStoreUrl?: any | null, productType: string, publishedAt: any, requiresSellingPlan: boolean, tags: Array<string>, title: string, totalInventory?: number | null, updatedAt: any, vendor: string, compareAtPriceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, featuredImage?: { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null } | null, metafields: Array<{ __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null } | null>, options: Array<{ __typename?: 'ProductOption', id: string, name: string, values: Array<string> }>, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null }> }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } }> } };
+
+export type SearchCustomerQueryVariables = Exact<{
+  customerAccessToken: Scalars['String'];
+}>;
+
+
+export type SearchCustomerQuery = { __typename?: 'QueryRoot', customer?: { __typename?: 'Customer', firstName?: string | null, lastName?: string | null, email?: string | null } | null };
 
 export const ProductPriceRangeFragmentDoc = gql`
     fragment ProductPriceRange on ProductPriceRange {
@@ -6955,15 +6969,23 @@ export const CustomerCreateDocument = gql`
     mutation customerCreate($input: CustomerCreateInput!) {
   customerCreate(input: $input) {
     customer {
-      firstName
-      lastName
-      email
-      acceptsMarketing
+      id
     }
     customerUserErrors {
-      field
       message
-      code
+    }
+  }
+}
+    `;
+export const CustomerAccessTokenCreateDocument = gql`
+    mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
+  customerAccessTokenCreate(input: $input) {
+    customerAccessToken {
+      accessToken
+      expiresAt
+    }
+    customerUserErrors {
+      message
     }
   }
 }
@@ -7013,6 +7035,15 @@ export const SearchProductDocument = gql`
   }
 }
     ${ProductFragmentDoc}`;
+export const SearchCustomerDocument = gql`
+    query searchCustomer($customerAccessToken: String!) {
+  customer(customerAccessToken: $customerAccessToken) {
+    firstName
+    lastName
+    email
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -7036,6 +7067,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     customerCreate(variables: CustomerCreateMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CustomerCreateMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CustomerCreateMutation>(CustomerCreateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'customerCreate', 'mutation');
     },
+    customerAccessTokenCreate(variables: CustomerAccessTokenCreateMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CustomerAccessTokenCreateMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CustomerAccessTokenCreateMutation>(CustomerAccessTokenCreateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'customerAccessTokenCreate', 'mutation');
+    },
     getAllProducts(variables?: GetAllProductsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAllProductsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllProductsQuery>(GetAllProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllProducts', 'query');
     },
@@ -7050,6 +7084,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     searchProduct(variables: SearchProductQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchProductQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<SearchProductQuery>(SearchProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchProduct', 'query');
+    },
+    searchCustomer(variables: SearchCustomerQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchCustomerQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchCustomerQuery>(SearchCustomerDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchCustomer', 'query');
     }
   };
 }
@@ -7072,6 +7109,9 @@ export function getSdkWithHooks(client: GraphQLClient, withWrapper: SdkFunctionW
     },
     useSearchProduct(key: SWRKeyInterface, variables: SearchProductQueryVariables, config?: SWRConfigInterface<SearchProductQuery, ClientError>) {
       return useSWR<SearchProductQuery, ClientError>(key, () => sdk.searchProduct(variables), config);
+    },
+    useSearchCustomer(key: SWRKeyInterface, variables: SearchCustomerQueryVariables, config?: SWRConfigInterface<SearchCustomerQuery, ClientError>) {
+      return useSWR<SearchCustomerQuery, ClientError>(key, () => sdk.searchCustomer(variables), config);
     }
   };
 }

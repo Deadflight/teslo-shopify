@@ -1,4 +1,4 @@
-import { ProductVariantFragment } from "lib";
+import { ProductVariantFragment } from "../../lib";
 import { FC } from "react";
 
 interface Props {

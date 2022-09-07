@@ -65,15 +65,24 @@ export const CREATE_CUSTOMER = gql`
 	mutation customerCreate($input: CustomerCreateInput!) {
 		customerCreate(input: $input) {
 			customer {
-				firstName
-				lastName
-				email
-				acceptsMarketing
+				id
 			}
 			customerUserErrors {
-				field
 				message
-				code
+			}
+		}
+	}
+`;
+
+export const CREATE_CUSTOMER_ACCESS_TOKEN = gql`
+	mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
+		customerAccessTokenCreate(input: $input) {
+			customerAccessToken {
+				accessToken
+				expiresAt
+			}
+			customerUserErrors {
+				message
 			}
 		}
 	}

@@ -1,10 +1,10 @@
-import { ICartProduct } from "interfaces";
+import { ICartProduct } from "../../interfaces";
 import { FC, useContext } from "react";
-import { CartContext } from "context/cart";
+import { CartContext } from "../../context";
 import Link from "next/link";
 import Image from "next/image";
-import { ItemCounter } from "components/ui";
-import { currency } from "utils";
+import { ItemCounter } from "../../components/ui";
+import { currency } from "../../utils";
 
 interface Props {
 	products?: ICartProduct[];

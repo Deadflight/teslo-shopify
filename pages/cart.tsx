@@ -1,6 +1,6 @@
-import { CartList, OrderSummary } from "components/cart";
-import { ShopLayout } from "components/layouts";
-import { CartContext } from "context";
+import { CartList, OrderSummary } from "../components/cart";
+import { ShopLayout } from "../components/layouts";
+import { CartContext } from "../context";
 import { useContext } from "react";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import Link from "next/link";

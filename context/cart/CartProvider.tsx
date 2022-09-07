@@ -1,4 +1,4 @@
-import { ICart, ICartProduct } from "interfaces";
+import { ICart, ICartProduct } from "../../interfaces";
 import { FC, ReactNode, useEffect, useReducer } from "react";
 import { CartContext, cartReducer } from "./";
 import Cookie from "js-cookie";
@@ -16,122 +16,6 @@ const CART_INITIAL_STATE: ICart = {
 	tax: 0,
 	total: 0,
 };
-
-// const CART_INITIAL_STATE: Cart = {
-//   // __typename?: 'Cart';
-//   /** An attribute associated with the cart. */
-//   // attribute?: Maybe<Attribute>;
-//   /** The attributes associated with the cart. Attributes are represented as key-value pairs. */
-//   attributes: [],
-//   /** Information about the buyer that is interacting with the cart. */
-//   buyerIdentity: {},
-//   /** The URL of the checkout for the cart. */
-//   checkoutUrl: '',
-//   /** The estimated costs that the buyer will pay at checkout. The costs are subject to change and changes will be reflected at checkout. The `cost` field uses the `buyerIdentity` field to determine [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-cart). */
-//   cost: {
-// 		checkoutChargeAmount: {
-// 			amount: '',
-// 			currencyCode: {
-// 				  Aed: 'AED',
-//   /** Afghan Afghani (AFN). */
-//   Afn: 'AFN',
-//   /** Albanian Lek (ALL). */
-//   All:'ALL',
-//   /** Armenian Dram (AMD). */
-//   Amd: 'AMD',
-//   /** Netherlands Antillean Guilder. */
-//   Ang: 'ANG',
-//   /** Angolan Kwanza (AOA). */
-//   Aoa: 'AOA',
-//   /** Argentine Pesos (ARS). */
-//   Ars: 'ARS',
-//   /** Australian Dollars (AUD). */
-//   Aud: 'AUD',
-//   /** Aruban Florin (AWG). */
-//   Awg: 'AWG',
-//   /** Azerbaijani Manat (AZN). */
-//   Azn: 'AZN',
-//   /** Bosnia and Herzegovina Convertible Mark (BAM). */
-//   Bam: 'BAM',
-//   /** Barbadian Dollar (BBD). */
-//   Bbd: 'BBD',
-//   /** Bangladesh Taka (BDT). */
-//   Bdt: 'BDT',
-//   /** Bulgarian Lev (BGN). */
-//   Bgn: 'BGN',
-//   /** Bahraini Dinar (BHD). */
-//   Bhd: 'BHD',
-//   /** Burundian Franc (BIF). */
-//   Bif: 'BIF',
-//   /** Bermudian Dollar (BMD). */
-//   Bmd: 'BMD',
-//   /** Brunei Dollar (BND). */
-//   Bnd: 'BND',
-//   /** Bolivian Boliviano (BOB). */
-//   Bob: 'BOB',
-//   /** Brazilian Real (BRL). */
-//   Brl: 'BRL',
-//   /** Bahamian Dollar (BSD). */
-//   Bsd: 'BSD',
-//   /** Bhutanese Ngultrum (BTN). */
-//   Btn: 'BTN',
-//   /** Botswana Pula (BWP). */
-//   Bwp: 'BWP',
-//   /** Belarusian Ruble (BYN). */
-//   Byn: 'BYN',
-// 			},
-// 		},
-// 		subtotalAmount: {
-// 			amount: '',
-// 			currencyCode: ,
-// 		},
-// 		subtotalAmountEstimated: false,
-// 		totalAmount: {
-// 			amount: '',
-// 			currencyCode: ''
-// 		}
-// 	},
-//   /** The date and time when the cart was created. */
-//   createdAt: "",
-//   /** The delivery groups available for the cart, based on the default address of the logged-in customer. */
-//   deliveryGroups: {
-// 		edges: [],
-// 		nodes: [],
-// 		pageInfo: {
-// 			hasNextPage: false,
-// 			hasPreviousPage: false,
-// 		}
-// 	},
-//   /** The discounts that have been applied to the entire cart. */
-//   discountAllocations: [],
-//   /**
-//    * The case-insensitive discount codes that the customer added at checkout.
-//    *
-//    */
-//   discountCodes: [],
-//   /**
-//    * The estimated costs that the buyer will pay at checkout. The estimated costs are subject to change and changes will be reflected at checkout. The `estimatedCost` field uses the `buyerIdentity` field to determine [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-cart).
-//    * @deprecated Use `cost` instead
-//    */
-//   // estimatedCost: CartEstimatedCost;
-//   /** A globally-unique identifier. */
-//   id: '',
-//   /** A list of lines containing information about the items the customer intends to purchase. */
-//   lines: {
-// 		edges: [],
-// 		nodes: [],
-// 		pageInfo: {
-// 			hasNextPage: false,
-// 			hasPreviousPage: false,
-// 		}
-// 	},
-//   /** A note that is associated with the cart. For example, the note can be a personalized message to the buyer. */
-//   // note?: Maybe<Scalars['String']>;
-//   /** The total number of items in the cart. */
-//   totalQuantity: 0,
-//   /** The date and time when the cart was updated. */
-//   updatedAt: '',
-// };
 
 export const CartProvider: FC<Props> = ({ children }) => {
 	const [state, dispatch] = useReducer(cartReducer, CART_INITIAL_STATE);
@@ -162,11 +46,12 @@ export const CartProvider: FC<Props> = ({ children }) => {
 		if (!state.isLoaded) return;
 
 		const numberOfItems = state.cart.reduce(
-			(prev, current) => current.quantity + prev,
+			(prev: number, current: ICartProduct) => current.quantity + prev,
 			0
 		);
 		const subTotal = state.cart.reduce(
-			(prev, current) => Number(current.price) * current.quantity + prev,
+			(prev: number, current: ICartProduct) =>
+				Number(current.price) * current.quantity + prev,
 			0
 		);
 		const taxRate = Number(process.env.NEXT_PUBLIC_TAX_RATE || 0);
@@ -190,7 +75,9 @@ export const CartProvider: FC<Props> = ({ children }) => {
 	}, [state.cart, state.isLoaded]);
 
 	const addProductToCart = async (product: ICartProduct) => {
-		const productInCart = state.cart.some((p) => p.id === product.id);
+		const productInCart = state.cart.some(
+			(p: ICartProduct) => p.id === product.id
+		);
 
 		if (!productInCart)
 			return dispatch({
@@ -199,7 +86,7 @@ export const CartProvider: FC<Props> = ({ children }) => {
 			});
 
 		const productInCartButDifferentSize = state.cart.some(
-			(p) => p.id === product.id && p.size === product.size
+			(p: ICartProduct) => p.id === product.id && p.size === product.size
 		);
 
 		if (!productInCartButDifferentSize)
@@ -209,7 +96,7 @@ export const CartProvider: FC<Props> = ({ children }) => {
 			});
 
 		// Acumulate
-		const updatedProducts = state.cart.map((p) => {
+		const updatedProducts = state.cart.map((p: ICartProduct) => {
 			if (p.id !== product.id) return p;
 			if (p.size !== product.size) return p;
 

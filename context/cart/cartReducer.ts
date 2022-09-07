@@ -1,4 +1,4 @@
-import { ICart, ICartProduct } from "interfaces";
+import { ICart, ICartProduct } from "../../interfaces";
 
 type CartActionType =
 	| {

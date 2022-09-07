@@ -1,8 +1,8 @@
 import { GetStaticProps, NextPage, GetStaticPaths } from "next";
-import { ShopLayout } from "components/layouts";
-import { sdkSWR } from "lib";
+import { ShopLayout } from "../../components/layouts";
+import { sdkSWR } from "../../lib";
 import Error from "next/error";
-import { ProductList } from "components/products";
+import { ProductList } from "../../components/products";
 
 interface Props {
 	gender: string;

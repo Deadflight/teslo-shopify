@@ -1,4 +1,4 @@
-import { UiContext, CartContext } from "context";
+import { UiContext, CartContext } from "../../context";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useState, useContext, useRef, useEffect } from "react";

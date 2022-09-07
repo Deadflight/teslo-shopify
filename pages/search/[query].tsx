@@ -1,5 +1,5 @@
-import { ShopLayout } from "components/layouts";
-import { ProductList } from "components/products";
+import { ShopLayout } from "../../components/layouts";
+import { ProductList } from "../../components/products";
 import { NextPage, GetServerSideProps } from "next";
 import Error from "next/error";
 import { sdkSWR } from "../../lib/shopify/client";
