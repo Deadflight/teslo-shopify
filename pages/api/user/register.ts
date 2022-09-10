@@ -1,6 +1,5 @@
-import { CustomerCreateMutation } from "../../../lib";
+import { sdkSWR, CustomerCreateMutation } from "../../../lib";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { sdkSWR, sdkAdminSWR } from "../../../lib/shopify/client";
 
 type Data =
 	| {
