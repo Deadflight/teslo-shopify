@@ -1,6 +1,5 @@
-import { CustomerCreateMutation } from "../../../lib";
+import { sdkSWR, CustomerCreateMutation } from "../../../lib";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { sdkSWR, sdkAdminSWR } from "../../../lib/shopify/client";
 
 type Data =
 	| {
@@ -15,6 +14,9 @@ export default function handler(
 	switch (req.method) {
 		case "POST":
 			return createCustomer(req, res);
+
+		default:
+			return res.status(500).json({ message: "Method Not Allowed" });
 	}
 }
 

@@ -4,7 +4,7 @@ import { ProductList } from "../components/products";
 import { sdkSWR } from "../lib";
 import Error from "next/error";
 
-const Home: NextPage = () => {
+const Home: NextPage = ({}) => {
 	const { data, error } = sdkSWR.useGetAllProducts([`/api/products`], {});
 
 	if (error) {

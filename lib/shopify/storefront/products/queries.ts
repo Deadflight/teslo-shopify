@@ -1,5 +1,5 @@
 import { gql } from "graphql-request";
-import { PRODUCT_FIELDS } from "./fragments";
+import { PRODUCT_FIELDS } from "./objects";
 
 export const GET_ALL_PRODUCTS = gql`
 	query getAllProducts {
@@ -53,15 +53,4 @@ export const SEARCH_PRODUCT = gql`
 		}
 	}
 	${PRODUCT_FIELDS}
-`;
-
-export const SEARCH_CUSTOMER = gql`
-	query searchCustomer($customerAccessToken: String!) {
-		customer(customerAccessToken: $customerAccessToken) {
-			firstName
-			lastName
-			email
-			id
-		}
-	}
 `;

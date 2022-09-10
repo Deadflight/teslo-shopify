@@ -1,5 +1,5 @@
 import { gql } from "graphql-request";
-import { CART_FIELDS } from "./fragments";
+import { CART_FIELDS } from "./objects";
 
 export const UPDATE_CARTLINES = gql`
 	mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
