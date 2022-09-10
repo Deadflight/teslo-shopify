@@ -22,16 +22,28 @@ export default NextAuth({
 				},
 			},
 			async authorize(credentials) {
-				const response = await sdkSWR.customerAccessTokenCreate({
-					input: {
-						email: credentials?.email!,
-						password: credentials?.password!,
-					},
+				const { customerAccessTokenCreate } =
+					await sdkSWR.customerAccessTokenCreate({
+						input: {
+							email: credentials?.email!,
+							password: credentials?.password!,
+						},
+					});
+
+				const { customer } = await sdkSWR.searchCustomer({
+					customerAccessToken:
+						customerAccessTokenCreate?.customerAccessToken?.accessToken!,
 				});
 
-				const stringJSON = JSON.stringify(response);
-				const responseJSON = JSON.parse(stringJSON);
-				return responseJSON;
+				const user = {
+					...customer,
+					acessToken:
+						customerAccessTokenCreate?.customerAccessToken?.accessToken!,
+				};
+
+				// const stringJSON = JSON.stringify(customer);
+				// const responseJSON = JSON.parse(stringJSON);
+				return user!;
 			},
 		}),
 	],
@@ -55,13 +67,9 @@ export default NextAuth({
 
 	callbacks: {
 		async jwt({ token, account, user }) {
-			//console.log({ token, account, user });
+			console.log("acount", { token, account, user });
 			if (account) {
-				const { customerAccessToken } = user?.customerAccessTokenCreate as {
-					customerAccessToken: { accessToken: string };
-				};
-
-				token.accessToken = customerAccessToken.accessToken;
+				token.accessToken = user?.accessToken;
 
 				switch (account.type) {
 					// case "oauth":
@@ -73,17 +81,9 @@ export default NextAuth({
 					// 	break;
 
 					case "credentials":
-						const response = await sdkSWR.searchCustomer({
-							customerAccessToken: token.accessToken as string,
-						});
-
-						const responseString = JSON.stringify(response);
-
-						const responseJSON = JSON.parse(responseString);
-
-						token.user = responseJSON?.customer;
-						token.name = responseJSON?.customer?.firstName;
-						token.email = responseJSON?.customer?.email;
+						token.user = user;
+						token.name = user?.firstName as string;
+						token.email = user?.email;
 
 						break;
 				}
@@ -93,7 +93,7 @@ export default NextAuth({
 		},
 
 		async session({ session, token, user }) {
-			console.log("session2", { session, token, user });
+			console.log("session", { session, token, user });
 			session.accessToken = token.accessToken;
 			session.user = token.user as any;
 
