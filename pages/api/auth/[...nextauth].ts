@@ -22,12 +22,16 @@ export default NextAuth({
 				},
 			},
 			async authorize(credentials) {
-				return await sdkSWR.customerAccessTokenCreate({
+				const response = await sdkSWR.customerAccessTokenCreate({
 					input: {
 						email: credentials?.email!,
 						password: credentials?.password!,
 					},
 				});
+
+				const stringJSON = JSON.stringify(response);
+				const responseJSON = JSON.parse(stringJSON);
+				return responseJSON;
 			},
 		}),
 	],
@@ -51,7 +55,7 @@ export default NextAuth({
 
 	callbacks: {
 		async jwt({ token, account, user }) {
-			// console.log({ token, account, user });
+			//console.log({ token, account, user });
 			if (account) {
 				const { customerAccessToken } = user?.customerAccessTokenCreate as {
 					customerAccessToken: { accessToken: string };
@@ -68,7 +72,7 @@ export default NextAuth({
 					// 	});
 					// 	break;
 
-					case "oauth":
+					case "credentials":
 						const { customer } = await sdkSWR.searchCustomer({
 							customerAccessToken: token.accessToken as string,
 						});
@@ -85,7 +89,7 @@ export default NextAuth({
 		},
 
 		async session({ session, token, user }) {
-			//console.log("session", { session, token, user });
+			console.log("session", { session, token, user });
 			session.accessToken = token.accessToken;
 			session.user = token.user as any;
 
