@@ -6584,22 +6584,6 @@ export enum WeightUnit {
   Pounds = 'POUNDS'
 }
 
-export type SeoFragment = { __typename?: 'SEO', description?: string | null, title?: string | null };
-
-export type ProductOptionFragment = { __typename?: 'ProductOption', id: string, name: string, values: Array<string> };
-
-export type MetafieldFragment = { __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null };
-
-export type ImageFragment = { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null };
-
-export type ProductPriceRangeFragment = { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } };
-
-export type ProductVariantFragment = { __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } };
-
-export type ProductFragment = { __typename?: 'Product', availableForSale: boolean, createdAt: any, description: string, descriptionHtml: any, handle: string, id: string, onlineStoreUrl?: any | null, productType: string, publishedAt: any, requiresSellingPlan: boolean, tags: Array<string>, title: string, totalInventory?: number | null, updatedAt: any, vendor: string, compareAtPriceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, featuredImage?: { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null } | null, metafields: Array<{ __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null } | null>, options: Array<{ __typename?: 'ProductOption', id: string, name: string, values: Array<string> }>, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null }> }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } };
-
-export type CartFragment = { __typename?: 'Cart', id: string, createdAt: any, updatedAt: any, checkoutUrl: any, totalQuantity: number, lines: { __typename?: 'CartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', amountPerQuantity: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', title: string, id: string, image?: { __typename?: 'Image', altText?: string | null, url: any, id?: string | null } | null, product: { __typename?: 'Product', id: string, title: string } }, sellingPlanAllocation?: { __typename?: 'SellingPlanAllocation', sellingPlan: { __typename?: 'SellingPlan', id: string, name: string }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', price: { __typename?: 'MoneyV2', amount: any }, compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any } }> } | null, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }> }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null }, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }>, buyerIdentity: { __typename?: 'CartBuyerIdentity', email?: string | null, phone?: string | null, countryCode?: CountryCode | null, customer?: { __typename?: 'Customer', id: string } | null } };
-
 export type CartLinesUpdateMutationVariables = Exact<{
   cartId: Scalars['ID'];
   lines: Array<CartLineUpdateInput> | CartLineUpdateInput;
@@ -6645,6 +6629,29 @@ export type CustomerAccessTokenCreateMutationVariables = Exact<{
 
 export type CustomerAccessTokenCreateMutation = { __typename?: 'Mutation', customerAccessTokenCreate?: { __typename?: 'CustomerAccessTokenCreatePayload', customerAccessToken?: { __typename?: 'CustomerAccessToken', accessToken: string, expiresAt: any } | null, customerUserErrors: Array<{ __typename?: 'CustomerUserError', message: string }> } | null };
 
+export type CartFragment = { __typename?: 'Cart', id: string, createdAt: any, updatedAt: any, checkoutUrl: any, totalQuantity: number, lines: { __typename?: 'CartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', amountPerQuantity: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', title: string, id: string, image?: { __typename?: 'Image', altText?: string | null, url: any, id?: string | null } | null, product: { __typename?: 'Product', id: string, title: string } }, sellingPlanAllocation?: { __typename?: 'SellingPlanAllocation', sellingPlan: { __typename?: 'SellingPlan', id: string, name: string }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', price: { __typename?: 'MoneyV2', amount: any }, compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any } }> } | null, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }> }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null }, attributes: Array<{ __typename?: 'Attribute', key: string, value?: string | null }>, buyerIdentity: { __typename?: 'CartBuyerIdentity', email?: string | null, phone?: string | null, countryCode?: CountryCode | null, customer?: { __typename?: 'Customer', id: string } | null } };
+
+export type SearchCustomerQueryVariables = Exact<{
+  customerAccessToken: Scalars['String'];
+}>;
+
+
+export type SearchCustomerQuery = { __typename?: 'QueryRoot', customer?: { __typename?: 'Customer', firstName?: string | null, lastName?: string | null, email?: string | null, id: string } | null };
+
+export type SeoFragment = { __typename?: 'SEO', description?: string | null, title?: string | null };
+
+export type ProductOptionFragment = { __typename?: 'ProductOption', id: string, name: string, values: Array<string> };
+
+export type MetafieldFragment = { __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null };
+
+export type ImageFragment = { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null };
+
+export type ProductPriceRangeFragment = { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } };
+
+export type ProductVariantFragment = { __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } };
+
+export type ProductFragment = { __typename?: 'Product', availableForSale: boolean, createdAt: any, description: string, descriptionHtml: any, handle: string, id: string, onlineStoreUrl?: any | null, productType: string, publishedAt: any, requiresSellingPlan: boolean, tags: Array<string>, title: string, totalInventory?: number | null, updatedAt: any, vendor: string, compareAtPriceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, featuredImage?: { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null } | null, metafields: Array<{ __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null } | null>, options: Array<{ __typename?: 'ProductOption', id: string, name: string, values: Array<string> }>, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null }> }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } };
+
 export type GetAllProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6676,13 +6683,92 @@ export type SearchProductQueryVariables = Exact<{
 
 export type SearchProductQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', availableForSale: boolean, createdAt: any, description: string, descriptionHtml: any, handle: string, id: string, onlineStoreUrl?: any | null, productType: string, publishedAt: any, requiresSellingPlan: boolean, tags: Array<string>, title: string, totalInventory?: number | null, updatedAt: any, vendor: string, compareAtPriceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, featuredImage?: { __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null } | null, metafields: Array<{ __typename?: 'Metafield', createdAt: any, description?: string | null, id: string, key: string, namespace: string, type: string, updatedAt: any, value: string, parentResource: { __typename: 'Article' } | { __typename: 'Blog' } | { __typename: 'Collection' } | { __typename: 'Customer' } | { __typename: 'Order' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Shop' }, reference?: { __typename: 'GenericFile' } | { __typename: 'MediaImage' } | { __typename: 'Page' } | { __typename: 'Product' } | { __typename: 'ProductVariant' } | { __typename: 'Video' } | null } | null>, options: Array<{ __typename?: 'ProductOption', id: string, name: string, values: Array<string> }>, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, seo: { __typename?: 'SEO', description?: string | null, title?: string | null }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', altText?: string | null, height?: number | null, id?: string | null, url: any, width?: number | null }> }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', availableForSale: boolean, id: string, title: string, quantityAvailable?: number | null, sellingPlanAllocations: { __typename?: 'SellingPlanAllocationConnection', nodes: Array<{ __typename?: 'SellingPlanAllocation', checkoutChargeAmount: { __typename?: 'MoneyV2', amount: any }, sellingPlan: { __typename?: 'SellingPlan', name: string, id: string }, remainingBalanceChargeAmount: { __typename?: 'MoneyV2', amount: any }, priceAdjustments: Array<{ __typename?: 'SellingPlanAllocationPriceAdjustment', compareAtPrice: { __typename?: 'MoneyV2', amount: any }, perDeliveryPrice: { __typename?: 'MoneyV2', amount: any }, price: { __typename?: 'MoneyV2', amount: any }, unitPrice?: { __typename?: 'MoneyV2', amount: any } | null }> }> }, priceV2: { __typename?: 'MoneyV2', amount: any } }> } }> } };
 
-export type SearchCustomerQueryVariables = Exact<{
-  customerAccessToken: Scalars['String'];
-}>;
-
-
-export type SearchCustomerQuery = { __typename?: 'QueryRoot', customer?: { __typename?: 'Customer', firstName?: string | null, lastName?: string | null, email?: string | null } | null };
-
+export const CartFragmentDoc = gql`
+    fragment Cart on Cart {
+  id
+  createdAt
+  updatedAt
+  checkoutUrl
+  totalQuantity
+  lines(first: 10) {
+    nodes {
+      id
+      quantity
+      cost {
+        amountPerQuantity {
+          amount
+        }
+      }
+      merchandise {
+        ... on ProductVariant {
+          image {
+            altText
+            url
+            id
+          }
+          title
+          id
+          product {
+            id
+            title
+          }
+        }
+      }
+      sellingPlanAllocation {
+        sellingPlan {
+          id
+          name
+        }
+        priceAdjustments {
+          price {
+            amount
+          }
+          compareAtPrice {
+            amount
+          }
+          perDeliveryPrice {
+            amount
+          }
+        }
+      }
+      attributes {
+        key
+        value
+      }
+    }
+  }
+  cost {
+    totalAmount {
+      amount
+      currencyCode
+    }
+    subtotalAmount {
+      amount
+      currencyCode
+    }
+    totalTaxAmount {
+      amount
+      currencyCode
+    }
+    totalDutyAmount {
+      amount
+      currencyCode
+    }
+  }
+  attributes {
+    key
+    value
+  }
+  buyerIdentity {
+    email
+    phone
+    customer {
+      id
+    }
+    countryCode
+  }
+}
+    `;
 export const ProductPriceRangeFragmentDoc = gql`
     fragment ProductPriceRange on ProductPriceRange {
   maxVariantPrice {
@@ -6827,92 +6913,6 @@ ${MetafieldFragmentDoc}
 ${ProductOptionFragmentDoc}
 ${SeoFragmentDoc}
 ${ProductVariantFragmentDoc}`;
-export const CartFragmentDoc = gql`
-    fragment Cart on Cart {
-  id
-  createdAt
-  updatedAt
-  checkoutUrl
-  totalQuantity
-  lines(first: 10) {
-    nodes {
-      id
-      quantity
-      cost {
-        amountPerQuantity {
-          amount
-        }
-      }
-      merchandise {
-        ... on ProductVariant {
-          image {
-            altText
-            url
-            id
-          }
-          title
-          id
-          product {
-            id
-            title
-          }
-        }
-      }
-      sellingPlanAllocation {
-        sellingPlan {
-          id
-          name
-        }
-        priceAdjustments {
-          price {
-            amount
-          }
-          compareAtPrice {
-            amount
-          }
-          perDeliveryPrice {
-            amount
-          }
-        }
-      }
-      attributes {
-        key
-        value
-      }
-    }
-  }
-  cost {
-    totalAmount {
-      amount
-      currencyCode
-    }
-    subtotalAmount {
-      amount
-      currencyCode
-    }
-    totalTaxAmount {
-      amount
-      currencyCode
-    }
-    totalDutyAmount {
-      amount
-      currencyCode
-    }
-  }
-  attributes {
-    key
-    value
-  }
-  buyerIdentity {
-    email
-    phone
-    customer {
-      id
-    }
-    countryCode
-  }
-}
-    `;
 export const CartLinesUpdateDocument = gql`
     mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
   cartLinesUpdate(cartId: $cartId, lines: $lines) {
@@ -6990,6 +6990,16 @@ export const CustomerAccessTokenCreateDocument = gql`
   }
 }
     `;
+export const SearchCustomerDocument = gql`
+    query searchCustomer($customerAccessToken: String!) {
+  customer(customerAccessToken: $customerAccessToken) {
+    firstName
+    lastName
+    email
+    id
+  }
+}
+    `;
 export const GetAllProductsDocument = gql`
     query getAllProducts {
   products(first: 50) {
@@ -7035,15 +7045,6 @@ export const SearchProductDocument = gql`
   }
 }
     ${ProductFragmentDoc}`;
-export const SearchCustomerDocument = gql`
-    query searchCustomer($customerAccessToken: String!) {
-  customer(customerAccessToken: $customerAccessToken) {
-    firstName
-    lastName
-    email
-  }
-}
-    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -7070,6 +7071,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     customerAccessTokenCreate(variables: CustomerAccessTokenCreateMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CustomerAccessTokenCreateMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CustomerAccessTokenCreateMutation>(CustomerAccessTokenCreateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'customerAccessTokenCreate', 'mutation');
     },
+    searchCustomer(variables: SearchCustomerQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchCustomerQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchCustomerQuery>(SearchCustomerDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchCustomer', 'query');
+    },
     getAllProducts(variables?: GetAllProductsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAllProductsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllProductsQuery>(GetAllProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllProducts', 'query');
     },
@@ -7084,9 +7088,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     searchProduct(variables: SearchProductQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchProductQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<SearchProductQuery>(SearchProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchProduct', 'query');
-    },
-    searchCustomer(variables: SearchCustomerQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchCustomerQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<SearchCustomerQuery>(SearchCustomerDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchCustomer', 'query');
     }
   };
 }
@@ -7095,6 +7096,9 @@ export function getSdkWithHooks(client: GraphQLClient, withWrapper: SdkFunctionW
   const sdk = getSdk(client, withWrapper);
   return {
     ...sdk,
+    useSearchCustomer(key: SWRKeyInterface, variables: SearchCustomerQueryVariables, config?: SWRConfigInterface<SearchCustomerQuery, ClientError>) {
+      return useSWR<SearchCustomerQuery, ClientError>(key, () => sdk.searchCustomer(variables), config);
+    },
     useGetAllProducts(key: SWRKeyInterface, variables?: GetAllProductsQueryVariables, config?: SWRConfigInterface<GetAllProductsQuery, ClientError>) {
       return useSWR<GetAllProductsQuery, ClientError>(key, () => sdk.getAllProducts(variables), config);
     },
@@ -7109,9 +7113,6 @@ export function getSdkWithHooks(client: GraphQLClient, withWrapper: SdkFunctionW
     },
     useSearchProduct(key: SWRKeyInterface, variables: SearchProductQueryVariables, config?: SWRConfigInterface<SearchProductQuery, ClientError>) {
       return useSWR<SearchProductQuery, ClientError>(key, () => sdk.searchProduct(variables), config);
-    },
-    useSearchCustomer(key: SWRKeyInterface, variables: SearchCustomerQueryVariables, config?: SWRConfigInterface<SearchCustomerQuery, ClientError>) {
-      return useSWR<SearchCustomerQuery, ClientError>(key, () => sdk.searchCustomer(variables), config);
     }
   };
 }
