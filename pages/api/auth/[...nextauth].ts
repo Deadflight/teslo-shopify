@@ -22,28 +22,34 @@ export default NextAuth({
 				},
 			},
 			async authorize(credentials) {
-				const { customerAccessTokenCreate } =
-					await sdkSWR.customerAccessTokenCreate({
-						input: {
-							email: credentials?.email!,
-							password: credentials?.password!,
-						},
-					});
+				// const { customerAccessTokenCreate } =
+				// 	await sdkSWR.customerAccessTokenCreate({
+				// 		input: {
+				// 			email: credentials?.email!,
+				// 			password: credentials?.password!,
+				// 		},
+				// 	});
 
-				const { customer } = await sdkSWR.searchCustomer({
-					customerAccessToken:
-						customerAccessTokenCreate?.customerAccessToken?.accessToken!,
-				});
+				// const { customer } = await sdkSWR.searchCustomer({
+				// 	customerAccessToken:
+				// 		customerAccessTokenCreate?.customerAccessToken?.accessToken!,
+				// });
+
+				// const user = {
+				// 	...customer,
+				// 	acessToken:
+				// 		customerAccessTokenCreate?.customerAccessToken?.accessToken!,
+				// };
+
+				// return user!;
 
 				const user = {
-					...customer,
-					acessToken:
-						customerAccessTokenCreate?.customerAccessToken?.accessToken!,
+					email: credentials?.email,
+					name: "Carlos",
+					accessToken: "XXXXXXXXXXXXXX",
 				};
 
-				// const stringJSON = JSON.stringify(customer);
-				// const responseJSON = JSON.parse(stringJSON);
-				return user!;
+				return user;
 			},
 		}),
 	],
@@ -82,7 +88,7 @@ export default NextAuth({
 
 					case "credentials":
 						token.user = user;
-						token.name = user?.firstName as string;
+						token.name = user?.name;
 						token.email = user?.email;
 
 						break;
