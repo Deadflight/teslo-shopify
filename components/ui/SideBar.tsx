@@ -131,7 +131,7 @@ export const SideBar = () => {
 			<aside
 				className={`${isSlideIn ? "animate-fade-in" : "animate-fade-out"}
 				${isSideMenuOpen ? "block" : "hidden"}
-				h-screen overflow-hidden backdrop-blur-sm fixed w-screen z-20 backdrop-brightness-50
+				h-screen overflow-hidden backdrop-blur-sm fixed w-screen z-30 backdrop-brightness-50
 				`}
 			>
 				<section
