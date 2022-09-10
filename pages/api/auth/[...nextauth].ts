@@ -22,16 +22,6 @@ export default NextAuth({
 				},
 			},
 			async authorize(credentials) {
-				// return { name: 'Juan', correo: 'juan@google.com', role: 'admin' };
-
-				// const { customerAccessTokenCreate } =
-				// 	await sdkSWR.customerAccessTokenCreate({
-				// 		input: {
-				// 			email: credentials?.email!,
-				// 			password: credentials?.password!,
-				// 		},
-				// 	});
-
 				return await sdkSWR.customerAccessTokenCreate({
 					input: {
 						email: credentials?.email!,
@@ -78,7 +68,7 @@ export default NextAuth({
 					// 	});
 					// 	break;
 
-					case "credentials":
+					case "oauth":
 						const { customer } = await sdkSWR.searchCustomer({
 							customerAccessToken: token.accessToken as string,
 						});
