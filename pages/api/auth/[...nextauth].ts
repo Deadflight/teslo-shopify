@@ -73,13 +73,17 @@ export default NextAuth({
 					// 	break;
 
 					case "credentials":
-						const { customer } = await sdkSWR.searchCustomer({
+						const response = await sdkSWR.searchCustomer({
 							customerAccessToken: token.accessToken as string,
 						});
 
-						token.user = customer;
-						token.name = customer?.firstName;
-						token.email = customer?.email;
+						const responseString = JSON.stringify(response);
+
+						const responseJSON = JSON.parse(responseString);
+
+						token.user = responseJSON?.customer;
+						token.name = responseJSON?.customer?.firstName;
+						token.email = responseJSON?.customer?.email;
 
 						break;
 				}
@@ -89,7 +93,7 @@ export default NextAuth({
 		},
 
 		async session({ session, token, user }) {
-			console.log("session", { session, token, user });
+			console.log("session2", { session, token, user });
 			session.accessToken = token.accessToken;
 			session.user = token.user as any;
 
