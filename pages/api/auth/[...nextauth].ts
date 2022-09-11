@@ -60,10 +60,10 @@ export default NextAuth({
 		newUser: "/auth/register",
 	},
 
-	// Callbacks
-	jwt: {
-		// secret: process.env.JWT_SECRET_SEED, // deprecated
-	},
+	// // Callbacks
+	// jwt: {
+	// 	// secret: process.env.JWT_SECRET_SEED, // deprecated
+	// },
 
 	session: {
 		maxAge: 2592000, /// 30d
