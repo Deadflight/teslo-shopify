@@ -6,12 +6,12 @@ import { SWRConfig } from "swr";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 	return (
-		<SWRConfig
-			value={{
-				fallbackData: pageProps.fallbackData,
-			}}
-		>
-			<SessionProvider>
+		<SessionProvider>
+			<SWRConfig
+				value={{
+					fallbackData: pageProps.fallbackData,
+				}}
+			>
 				<AuthProvider>
 					<CartProvider>
 						<UiProvider>
@@ -19,8 +19,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 						</UiProvider>
 					</CartProvider>
 				</AuthProvider>
-			</SessionProvider>
-		</SWRConfig>
+			</SWRConfig>
+		</SessionProvider>
 	);
 }
 
