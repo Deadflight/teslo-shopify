@@ -27,6 +27,7 @@ const LoginPage = () => {
 	const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
 		try {
 			setShowError(false);
+			console.log({ email, password });
 			await signIn("credentials", { email, password });
 		} catch (error) {
 			console.log(error);
