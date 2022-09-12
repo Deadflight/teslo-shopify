@@ -7,6 +7,7 @@ import { yupSchemas } from "../../utils";
 import { GetServerSideProps } from "next";
 import { getSession, signIn } from "next-auth/react";
 import { useState } from "react";
+import { AiOutlineLoading } from "react-icons/ai";
 
 type Inputs = {
 	email: string;
@@ -15,6 +16,7 @@ type Inputs = {
 
 const LoginPage = () => {
 	const [showError, setShowError] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const router = useRouter();
 	const {
 		register,
@@ -26,11 +28,14 @@ const LoginPage = () => {
 
 	const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
 		try {
+			setIsLoading(true);
 			setShowError(false);
 			console.log({ email, password });
 			await signIn("credentials", { email, password });
+			setIsLoading(false);
 		} catch (error) {
 			console.log(error);
+			setIsLoading(false);
 			setShowError(true);
 		}
 	};
@@ -70,9 +75,13 @@ const LoginPage = () => {
 					<button
 						type="submit"
 						aria-label="Login Button"
-						className="px-[22px] py-2 bg-blue-600 rounded-[10px] text-white font-medium text-[0.9rem] hover:bg-blue-700 duration-300"
+						className="px-[22px] py-2 bg-blue-600 rounded-[10px] items-center justify-center flex text-white font-medium text-[0.9rem] hover:bg-blue-700 duration-300"
 					>
-						Log In
+						{isLoading ? (
+							<AiOutlineLoading className="animate-spin text-white" size={20} />
+						) : (
+							"Log in"
+						)}
 					</button>
 					<span className="text-xs font-extralight text-red-500">
 						{showError && "Email or Password Wrong"}

@@ -29,8 +29,6 @@ export const authOptions: NextAuthOptions = {
 							},
 						});
 
-					console.log(customerAccessTokenCreate);
-
 					const { customer } = await sdkSWR.searchCustomer({
 						customerAccessToken:
 							customerAccessTokenCreate?.customerAccessToken?.accessToken!,
@@ -47,14 +45,6 @@ export const authOptions: NextAuthOptions = {
 					console.log(error);
 					return null;
 				}
-
-				// const user = {
-				// 	email: credentials?.email,
-				// 	name: "Carlos",
-				// 	accessToken: "XXXXXXXXXXXXXX",
-				// };
-
-				// return user;
 			},
 		}),
 	],
