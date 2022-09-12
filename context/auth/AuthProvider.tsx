@@ -1,4 +1,4 @@
-import { tesloApi } from "../../api";
+// import { tesloApi } from "../../api";
 import axios from "axios";
 import { IUser } from "../../interfaces";
 import Cookies from "js-cookie";
@@ -42,8 +42,8 @@ export const AuthProvider: FC<Props> = ({ children }) => {
 		password: string
 	) => {
 		try {
-			const { data } = await tesloApi.post<CustomerCreateMutation>(
-				"/user/register",
+			const { data } = await axios.post<CustomerCreateMutation>(
+				"/api/user/register",
 				{
 					firstName,
 					lastName,
@@ -58,6 +58,7 @@ export const AuthProvider: FC<Props> = ({ children }) => {
 				lastName,
 				email,
 			};
+
 			dispatch({ type: "[Auth] - Login", payload: user });
 			return {
 				hasError: false,
