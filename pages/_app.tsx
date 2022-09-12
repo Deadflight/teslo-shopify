@@ -1,10 +1,14 @@
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
 import { UiProvider, CartProvider, AuthProvider } from "../context";
 import { SessionProvider } from "next-auth/react";
 import { SWRConfig } from "swr";
+import { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+interface PageProps {
+	fallbackData: any;
+}
+
+function MyApp({ Component, pageProps }: AppProps<PageProps>) {
 	return (
 		<SessionProvider>
 			<SWRConfig
