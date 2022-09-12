@@ -20,28 +20,33 @@ export const authOptions: NextAuthOptions = {
 				},
 			},
 			async authorize(credentials) {
-				console.log("credentials", credentials);
+				try {
+					const { customerAccessTokenCreate } =
+						await sdkSWR.customerAccessTokenCreate({
+							input: {
+								email: credentials?.email!,
+								password: credentials?.password!,
+							},
+						});
 
-				const { customerAccessTokenCreate } =
-					await sdkSWR.customerAccessTokenCreate({
-						input: {
-							email: credentials?.email!,
-							password: credentials?.password!,
-						},
+					console.log(customerAccessTokenCreate);
+
+					const { customer } = await sdkSWR.searchCustomer({
+						customerAccessToken:
+							customerAccessTokenCreate?.customerAccessToken?.accessToken!,
 					});
 
-				const { customer } = await sdkSWR.searchCustomer({
-					customerAccessToken:
-						customerAccessTokenCreate?.customerAccessToken?.accessToken!,
-				});
+					const user = {
+						...customer,
+						acessToken:
+							customerAccessTokenCreate?.customerAccessToken?.accessToken!,
+					};
 
-				const user = {
-					...customer,
-					acessToken:
-						customerAccessTokenCreate?.customerAccessToken?.accessToken!,
-				};
-
-				return user!;
+					return user;
+				} catch (error) {
+					console.log(error);
+					return null;
+				}
 
 				// const user = {
 				// 	email: credentials?.email,
@@ -68,7 +73,6 @@ export const authOptions: NextAuthOptions = {
 
 	callbacks: {
 		async jwt({ token, account, user }) {
-			console.log("acount", { token, account, user });
 			if (account) {
 				token.accessToken = user?.accessToken;
 
@@ -84,7 +88,6 @@ export const authOptions: NextAuthOptions = {
 		},
 
 		async session({ session, token, user }) {
-			console.log("session", { session, token, user });
 			session.accessToken = token.accessToken;
 			session.user = token.user as any;
 			return session;

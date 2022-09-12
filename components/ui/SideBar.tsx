@@ -191,31 +191,27 @@ export const SideBar = () => {
 
 						{guestClientNavItems.map((item) => (
 							<li
-								className={` ${!isLoggedIn ? "" : "hidden"} sidebar-item`}
+								className={` ${
+									!isLoggedIn ? "" : "hidden"
+								} sidebar-item flex items-center space-x-10 border-none`}
 								key={item.name}
+								onClick={() => handlePush(item)}
 							>
-								<button
-									className="flex items-center space-x-10 border-none"
-									onClick={() => handlePush(item)}
-								>
-									{item.icon}
-									<p>{item.name}</p>
-								</button>
+								{item.icon}
+								<p>{item.name}</p>
 							</li>
 						))}
 
 						{clientNavItems.map((item) => (
 							<li
-								className={` ${isLoggedIn ? "" : "hidden"} sidebar-item`}
+								className={` ${
+									isLoggedIn ? "" : "hidden"
+								} sidebar-item flex items-center space-x-10 border-none`}
 								key={item.name}
+								onClick={() => handlePush(item)}
 							>
-								<button
-									className="flex items-center space-x-10 border-none"
-									onClick={() => handlePush(item)}
-								>
-									{item.icon}
-									<p>{item.name}</p>
-								</button>
+								{item.icon}
+								<p>{item.name}</p>
 							</li>
 						))}
 
