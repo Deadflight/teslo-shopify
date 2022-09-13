@@ -20,31 +20,27 @@ export const authOptions: NextAuthOptions = {
 				},
 			},
 			async authorize(credentials) {
-				try {
-					const { customerAccessTokenCreate } =
-						await sdkSWR.customerAccessTokenCreate({
-							input: {
-								email: credentials?.email!,
-								password: credentials?.password!,
-							},
-						});
-
-					const { customer } = await sdkSWR.searchCustomer({
-						customerAccessToken:
-							customerAccessTokenCreate?.customerAccessToken?.accessToken!,
+				const { customerAccessTokenCreate } =
+					await sdkSWR.customerAccessTokenCreate({
+						input: {
+							email: credentials?.email!,
+							password: credentials?.password!,
+						},
 					});
 
-					const user = {
-						...customer,
-						acessToken:
-							customerAccessTokenCreate?.customerAccessToken?.accessToken!,
-					};
+				if (!customerAccessTokenCreate?.customerAccessToken) return null;
 
-					return user;
-				} catch (error) {
-					console.log(error);
-					return null;
-				}
+				// const { customer } = await sdkSWR.searchCustomer({
+				// 	customerAccessToken:
+				// 		customerAccessTokenCreate?.customerAccessToken?.accessToken!,
+				// });
+
+				const user = {
+					acessToken:
+						customerAccessTokenCreate?.customerAccessToken?.accessToken!,
+				};
+
+				return user;
 			},
 		}),
 	],

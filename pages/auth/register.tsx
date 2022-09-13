@@ -128,13 +128,13 @@ const RegisterPage = () => {
 						<Link
 							href={
 								router.query.p
-									? `/auth/register?p=${router.query.p}`
+									? `/auth/register?callbackUrl=${router.query.callbackUrl}`
 									: "/auth/register"
 							}
 							passHref
 						>
 							<a className="underline decoration-slate-400">
-								Don&apos;t have an account?
+								Already have an account?
 							</a>
 						</Link>
 					</div>
@@ -154,12 +154,12 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
 	const session = await getSession({ req });
 
-	const { p = "/" } = query;
+	const { callbackUrl = "/" } = query;
 
 	if (session) {
 		return {
 			redirect: {
-				destination: p.toString(),
+				destination: callbackUrl.toString(),
 				permanent: false,
 			},
 		};
