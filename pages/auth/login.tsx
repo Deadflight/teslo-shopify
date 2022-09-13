@@ -30,7 +30,6 @@ const LoginPage = () => {
 		try {
 			setIsLoading(true);
 			setShowError(false);
-			console.log({ email, password });
 			await signIn("credentials", { email, password });
 			setIsLoading(false);
 		} catch (error) {
@@ -84,13 +83,13 @@ const LoginPage = () => {
 						)}
 					</button>
 					<span className="text-xs font-extralight text-red-500">
-						{showError && "Email or Password Wrong"}
+						{showError || (router.query.error && "Email or Password Wrong")}
 					</span>
 					<div className="flex justify-end">
 						<Link
 							href={
-								router.query.p
-									? `/auth/register?p=${router.query.p}`
+								router.query.callbackUrl
+									? `/auth/register?callbackUrl=${router.query.callbackUrl}`
 									: "/auth/register"
 							}
 							passHref
@@ -120,12 +119,12 @@ export const getServerSideProps: GetServerSideProps = async ({
 	const session = await getSession({ req });
 	// console.log({session});
 
-	const { p = "/" } = query;
+	const { callbackUrl = "/" } = query;
 
 	if (session) {
 		return {
 			redirect: {
-				destination: p.toString(),
+				destination: callbackUrl.toString(),
 				permanent: false,
 			},
 		};

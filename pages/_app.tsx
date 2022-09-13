@@ -3,14 +3,19 @@ import { UiProvider, CartProvider, AuthProvider } from "../context";
 import { SessionProvider } from "next-auth/react";
 import { SWRConfig } from "swr";
 import { AppProps } from "next/app";
+import { Session } from "next-auth";
 
 interface PageProps {
 	fallbackData: any;
+	session: Session;
 }
 
-function MyApp({ Component, pageProps }: AppProps<PageProps>) {
+function MyApp({
+	Component,
+	pageProps: { session, ...pageProps },
+}: AppProps<PageProps>) {
 	return (
-		<SessionProvider>
+		<SessionProvider session={session}>
 			<SWRConfig
 				value={{
 					fallbackData: pageProps.fallbackData,
